@@ -1,8 +1,3 @@
-<style type="text/css">
-    body {
-        background: red;
-    }
-</style>
 <template>
     <div>
 
@@ -19,3 +14,11 @@
         }
     }
 </script>
+
+<style lang="less" scoped>
+    div {
+        a{
+            background: red;
+        }
+    }
+</style>
