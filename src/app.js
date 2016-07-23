@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+var vueResource = require('vue-resource');
+var VueAsyncData = require('vue-async-data')
 
 import route from './config/route' //路由配置
 
@@ -10,6 +12,8 @@ import './css/common.less' //公共样式
 
 
 Vue.use(VueRouter)
+Vue.use(vueResource);
+Vue.use(VueAsyncData);
 
 var router = new VueRouter({
     history: true

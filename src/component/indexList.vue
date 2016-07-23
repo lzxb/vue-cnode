@@ -19,8 +19,19 @@
     export default {
         data() {
             return {
-                msg: '你好世界！'
+                data: [],
+                success: false
             }
+        },
+        asyncData(resolve, reject) {
+            console.log(this)
+            this.$http.get('https://cnodejs.org/api/v1/topics', {}, {
+                emulateJSON: true
+            }).then(function({data}) {
+                resolve(data)
+            }, function({data}) {
+                resolve(data)
+            });
         }
     }
 </script>
