@@ -9,12 +9,23 @@ loaders.push({
     exclude: 'node_modules',
     loader: 'babel?presets=es2015'
 })
+//处理 vue 文件
 loaders.push({
     test: /\.vue$/,
     exclude: 'node_modules',
     loader: 'vue'
 })
-
+//处理 less，css
+loaders.push({
+    test: /\.less|\.css/,
+    exclude: /^node_modules$/,
+    loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
+})
+loaders.push({
+    test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
+    exclude: /^node_modules$/,
+    loader: 'file-loader?name=[name].[ext]'
+})
 var plusgins = []
 plusgins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
     filename: '../index.html', //生成的html存放路径，相对于 path
@@ -32,6 +43,9 @@ module.exports = {
     module: {
         loaders: loaders
     },
-    plugins: plusgins
+    plugins: plusgins,
+    resolve: {
+        extensions: ['', '.js', '.vue'], //后缀名自动补全
+    }
 }
 
