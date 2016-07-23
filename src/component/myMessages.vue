@@ -5,7 +5,7 @@
     export default {
         data() {
             return {
-                msg: '你好世界！'
+                msg: '我的消息'
             }
         }
     }
