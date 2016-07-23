@@ -1,8 +1,4 @@
 <template>
-    <div class="box">
-
-        <a v-link="'/topic/122'">User</a>
-    </div>
     <div>{{msg}}</div>
 </template>
 <script>
@@ -16,7 +12,4 @@
 </script>
 
 <style lang="less" scoped>
-    .box {
-        background: red;
-    }
 </style>

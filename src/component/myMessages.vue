@@ -1,8 +1,3 @@
-<style type="text/css">
-    body {
-        background: red;
-    }
-</style>
 <template>
     <div>{{msg}}</div>
 </template>
@@ -10,8 +5,11 @@
     export default {
         data() {
             return {
-                msg: '详情'
+                msg: '你好世界！'
             }
         }
     }
 </script>
+
+<style lang="less" scoped>
+</style>
