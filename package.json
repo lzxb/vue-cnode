@@ -27,6 +27,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
+    "vue-async-data": "^1.0.2",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^8.5.3",
     "vue-style-loader": "^1.0.0",
@@ -36,6 +37,7 @@
   "dependencies": {
     "flex.css": "^1.0.3",
     "normalize.css": "^4.2.0",
+    "superagent": "^2.1.0",
     "vue": "^1.0.26",
     "vue-router": "^0.7.13"
   }
