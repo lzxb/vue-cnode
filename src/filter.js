@@ -1,10 +1,10 @@
 
- /**
-  * 格式化时间
-  * 
-  * @param {String} str
-  * @returns 格式化后的时间
-  */
+/**
+ * 格式化时间
+ * 
+ * @param {String} str
+ * @returns 格式化后的时间
+ */
 export const formatDate = (str) => {
     var date = new Date(str)
     var time = new Date().getTime() - date.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
@@ -26,4 +26,24 @@ export const formatDate = (str) => {
     } else {
         return parseInt(time / 31536000000) + '年前'
     }
+}
+
+
+/**
+ * 从字符串中获取图片地址
+ * 
+ * @param {String} content
+ */
+export const getTextImgUrl = (content) => {
+    var arr = []
+    content.replace(/src="(.*?)"/g, ($1, $2) => {
+        if (arr.length < 4) arr.push($2)
+
+        return $1
+    })
+    return arr;
+}
+
+export const length = (v) => {
+    return v.length
 }

@@ -11,11 +11,21 @@ const Tool = {}
  * @param {Function} [error=() => { }] 请求失败执行回调
  */
 Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
+    // ajax('GET', url).query(query).then((res) => {
+    //     success(res.body)
+    // }, (res) => {
+    //     error({ success: false })
+    // })
 
-    ajax('GET', url).query(query).then((res) => {
-        success(res.body)
-    }, (res) => {
-        error({ success: false })
+    ajax('GET', url).query(query).end((err, res) => {
+        if(err) {
+            return error({
+                error: true
+            })
+        } else {
+            success(res.body)
+        }
     })
+
 }
 export default Tool

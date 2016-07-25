@@ -13,6 +13,11 @@
                 </div>
             </div>
             <div class="tit">{{o.title}}</div>
+            <div class="images count-{{o.content | getTextImgUrl | length}}" flex="box:mean">
+                <div class="item" v-for="imgurl in o.content | getTextImgUrl">
+                    <div class="pic" :style="{backgroundImage: `url(${imgurl})`}"></div>
+                </div>
+            </div>
         </li>
     </ul>
 </template>
