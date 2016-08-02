@@ -41,7 +41,7 @@ export const getTextImgUrl = (content) => {
 
         return $1
     })
-    return arr;
+    return arr
 }
 
 export const length = (v) => {

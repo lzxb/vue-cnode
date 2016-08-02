@@ -1,5 +1,5 @@
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin'); //生成html
+var HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
 
 var loaders = []
 
@@ -26,8 +26,17 @@ loaders.push({
     exclude: /^node_modules$/,
     loader: 'file-loader?name=[name].[ext]'
 })
-var plusgins = []
-plusgins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+var plugins = []
+
+if (process.argv.indexOf('-p') > -1) { //生产环境
+    plugins.push(new webpack.DefinePlugin({ //编译成生产版本
+        'process.env': {
+            NODE_ENV: JSON.stringify('production')
+        }
+    }))
+}
+
+plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
     filename: '../index.html', //生成的html存放路径，相对于 path
     template: './src/template/index.html', //html模板路径
     hash: true    //为静态资源生成hash值
@@ -43,7 +52,7 @@ module.exports = {
     module: {
         loaders: loaders
     },
-    plugins: plusgins,
+    plugins: plugins,
     resolve: {
         extensions: ['', '.js', '.vue'], //后缀名自动补全
     }
