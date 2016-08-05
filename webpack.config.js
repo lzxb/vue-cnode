@@ -21,6 +21,13 @@ loaders.push({
     exclude: /^node_modules$/,
     loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
 })
+
+loaders.push({
+    test: /\.(png|jpg)$/,
+    exclude: /^node_modules$/,
+    loader: 'url?limit=20000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+})
+
 loaders.push({
     test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
     exclude: /^node_modules$/,

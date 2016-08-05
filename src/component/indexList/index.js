@@ -1,4 +1,5 @@
 import Tool from '../../Tool'
+import transparent from './transparent.png'
 
 export default {
     data() {
@@ -6,6 +7,7 @@ export default {
             data: [],
             success: false,
             error: false,
+            transparent,
             query: {
                 tab: 'all',
                 page: 1,

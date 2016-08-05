@@ -35,8 +35,17 @@
     .item {
         padding: 5px;
     }
-    .pic{
-        height: 80px;
+    .pic, img {
+        width: 100%;
+    }
+    .pic {
+        overflow: hidden;
+        border-radius: 5px;
+        border: 1px solid darken(@shallow, 5%);
+        background: @shallow;
+    }
+    img {
         background-size: cover;
+        background-position: center center;
     }
 }

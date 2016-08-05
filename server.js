@@ -11,12 +11,12 @@ var proxy = [{
 
 //启动服务
 var server = new WebpackDevServer(webpack(config), {
-    publicPath: './',
+    publicPath: config.output.publicPath,
     proxy: proxy
 })
 
 //将其他路由，全部返回index.html
 server.app.get('*', function (req, res) {
     res.sendFile(__dirname + '/index.html')
-})
+});
 server.listen(3000)
