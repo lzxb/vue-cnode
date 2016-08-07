@@ -1,9 +1,31 @@
 @import "../../css/config";
 .list {
     li {
+        position: relative;
         margin-bottom: 10px;
         box-shadow: 1px 1px darken(@shallow, 10%);
         background: #fff;
+    }
+    .typeicon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        height: 80px;
+        .icon {
+            padding: 20px 5px;
+        }
+        .iconfont {
+            display: block;
+            font-size: 34px;
+            transform: rotate(35deg);
+        }
+        .icon-jinghua {
+            color: @goodIconColor;
+        }
+        .icon-zhiding {
+            color: @topIconColor;
+        }
     }
     .user {
         padding: 10px;
@@ -47,5 +69,27 @@
     img {
         background-size: cover;
         background-position: center center;
+    }
+}
+
+.expand {
+    padding: 10px 0;
+    border-top: 1px solid darken(@shallow, 5%);
+    text-align: center;
+    .item {
+        padding: 0 10px;
+        text-align: center;
+        border-right: 1px solid darken(@shallow, 5%);
+        &:last-of-type {
+            border: none;
+        }
+        .iconfont {
+            color: #aaa;
+        }
+        .num {
+            padding-left: 3px;
+            font-size: 12px;
+            color: #aaa;
+        }
     }
 }
