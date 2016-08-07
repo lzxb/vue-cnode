@@ -46,3 +46,16 @@ export const getTextImgUrl = (content) => {
 export const length = (v) => {
     return v.length
 }
+
+export const tabName = (tab) => {
+    switch (tab) {
+        case 'share':
+            return '分享'
+        case 'ask':
+            return '问答'
+        case 'job':
+            return '招聘'
+        default:
+            return ''
+    }
+}

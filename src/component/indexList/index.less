@@ -43,8 +43,15 @@
             font-size: 16px;
         }
         .time {
+            line-height: 20px;
             font-size: 12px;
             color: darken(@shallow, 40%);
+        }
+        .tab {
+            padding-left: 5px;
+            line-height: 20px;
+            font-size: 12px;
+            color: @mainColor;
         }
     }
     .tit {
@@ -78,6 +85,7 @@
     text-align: center;
     .item {
         padding: 0 10px;
+        line-height: 20px;
         text-align: center;
         border-right: 1px solid darken(@shallow, 5%);
         &:last-of-type {
@@ -86,10 +94,21 @@
         .iconfont {
             color: #aaa;
         }
-        .num {
+        .num, .time {
             padding-left: 3px;
             font-size: 12px;
             color: #aaa;
+        }
+        .pic, img {
+            width: 16px;
+            height: 16px;
+            background: darken(@shallow, 10%);
+            background-size: cover;
+            background-position: center center;
+        }
+        .pic {
+            overflow: hidden;
+            border-radius: 50%;
         }
     }
 }
