@@ -1,10 +1,6 @@
 <style lang="less" scoped rel="stylesheet/less">
     @import "./index";
 </style>
-<script>
-    import index from './index'
-    export default index
-</script>
 <template>
     <ul class="list" v-cloak>
         <li v-for="o in data">
@@ -57,3 +53,7 @@
         </li>
     </ul>
 </template>
+<script>
+    import index from './index'
+    export default index
+</script>
