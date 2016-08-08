@@ -1,7 +1,7 @@
 export default {
     '/': { //首页
         component: (resolve) => {
-            require(['../component/indexList/index.vue'], resolve)
+            require(['../component/index.vue'], resolve)
         }
     },
     '/topic/create': { //创建主题

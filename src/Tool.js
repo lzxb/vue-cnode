@@ -20,9 +20,10 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
     ajax('GET', url).query(query).end((err, res) => {
         if(err) {
             return error({
-                error: true
+                load: - 1
             })
         } else {
+            res.body.load = 1;
             success(res.body)
         }
     })
