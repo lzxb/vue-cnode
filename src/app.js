@@ -12,7 +12,6 @@ import './css/common.less' //公共样式
 import './iconfont/iconfont.css'; //web字体图标
 
 Vue.use(VueRouter)
-Vue.use(VueAsyncData)
 Object.keys(filter).forEach(k => Vue.filter(k, filter[k])) //注册过滤器
 
 var router = new VueRouter({ //配置路由

@@ -120,7 +120,7 @@
 </style>
 <template>
     <ul class="list" v-cloak>
-        <li v-for="o in data">
+        <li v-for="o in data"  track-by="id">
             <div class="typeicon" flex v-if="o.top || o.good">
                 <div class="icon" v-if="o.top">
                     <i class="iconfont icon-zhiding"></i>
@@ -203,9 +203,7 @@ export default {
     },
     route: {
         data: function () {
-
             this.timer = setInterval(() => {
-
                 if(Tool.testMeet(this.$refs.load.$el) && this.dataBtn) {
                     this.dataBtn = false
                     this.loadState = 0
@@ -216,6 +214,7 @@ export default {
                         data.map((item) => this.data.push(item))
                         this.query.page++
                         this.dataBtn = true
+                        this.$router.go(`?tab=${this.query.tab}&page=${this.query.page}`)
                     }, () => {
                         this.loadState = -1
                         this.loadTip = '加载失败'

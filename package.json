@@ -37,11 +37,10 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "flex.css": "^1.0.3",
+    "flex.css": "^1.0.4",
     "normalize.css": "^4.2.0",
     "superagent": "^2.1.0",
     "vue": "^1.0.26",
-    "vue-async-data": "^1.0.2",
     "vue-router": "^0.7.13",
     "vuex": "^1.0.0-rc.2"
   }
