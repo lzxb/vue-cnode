@@ -21,7 +21,30 @@ body {
     color: #676767;
     background: @shallow;
 }
-
 [v-cloak] {
     display: none;
+}
+
+
+/*
+    全局公共头部
+*/
+
+.common-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    height: 50px;
+    margin-bottom: 5px;
+    line-height: 50px;
+    box-shadow: 0 0 5px darken(@shallow, 30%);
+    background: @shallow;
+    .icon {
+        width: 40px;
+    }
+    .title {
+        text-align: center;
+    }
 }

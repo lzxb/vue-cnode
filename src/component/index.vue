@@ -214,7 +214,6 @@ export default {
                         data.map((item) => this.data.push(item))
                         this.query.page++
                         this.dataBtn = true
-                        this.$router.go(`?tab=${this.query.tab}&page=${this.query.page}`)
                     }, () => {
                         this.loadState = -1
                         this.loadTip = '加载失败'

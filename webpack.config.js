@@ -50,7 +50,7 @@ plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HT
 }))
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/main.js',
     output: {
         publicPath: '/app/', //服务器的路径
         path: __dirname + '/app', //编译到app目录
