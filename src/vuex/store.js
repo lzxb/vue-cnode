@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Tool from '../Tool';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import Tool from '../Tool'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const store = new Vuex.Store({
 
@@ -20,4 +20,4 @@ const store = new Vuex.Store({
     }
 })
 
-export default store;
+export default store
