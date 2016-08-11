@@ -1,5 +1,5 @@
 <style lang="less" scoped rel="stylesheet/less">
-    @import "../css/config";
+    @import "../less/config";
     .list {
         li {
             position: relative;
@@ -197,12 +197,18 @@ export default {
         }
     },
     methods: {
-        loadNext: function () {
+        loadNext(){
             this.dataBtn = true
         }
     },
     route: {
-        data: function () {
+        data() {
+            this.query.page = 1
+            this.query.tab = this.$route.query.tab
+            this.data = []
+            //参数改变后，先清理掉原来的定时器
+            clearInterval(this.timer)
+            //使用定时器定时检测load组件是否在可视区
             this.timer = setInterval(() => {
                 if(Tool.testMeet(this.$refs.load.$el) && this.dataBtn) {
                     this.dataBtn = false
@@ -220,11 +226,11 @@ export default {
                         this.dataBtn = false
                     })
                 }
-
             }, 30)
-
-
         }
+    },
+    detached() {
+        clearInterval(this.timer)
     }
 }
 </script>

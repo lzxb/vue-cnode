@@ -1,5 +1,5 @@
 <style lang="less" scoped rel="stylesheet/less">
-    @import "../../css/config";
+    @import "../../less/config";
     .data-load {
         .msg {
             line-height: 70px;

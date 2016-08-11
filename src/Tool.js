@@ -1,5 +1,5 @@
 import ajax from 'superagent' //ajax 请求库
-
+import * as actions from './actions/'
 const Tool = {}
 
 /**
@@ -14,7 +14,7 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 
     ajax('GET', url).query(query).end((err, res) => {
         if (err) {
-            return error({});
+            return error({})
         } else {
             success(res.body)
         }
@@ -27,7 +27,7 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
  * 
  * @param {any} el 要检测的元素
  * @param {any} [meet={ top: 0, right: 0, bottom: 0, left: 0 }] 检测的条件
- * @returns
+ * @returns Boolean true在可视区， false不在可视区
  */
 Tool.testMeet = (el, meet = { top: 0, right: 0, bottom: 0, left: 0 }) => {
     var bcr = el.getBoundingClientRect() //取得元素在可视区的位置
@@ -43,5 +43,34 @@ Tool.testMeet = (el, meet = { top: 0, right: 0, bottom: 0, left: 0 }) => {
         return false
     }
 }
+
+/**
+ * 获取标题
+ * 
+ * @param {Object} route
+ */
+Tool.getTitle = (route) => {
+
+    if (typeof route.title == 'string') {
+        return route.title
+    } else if (Tool.isJson(route.title)) {
+        var {query, param, data} = route.title
+        if (typeof query == 'string') {
+            return data[route.query[query]]
+        } else if (typeof param == 'string') {
+            return data[route.param[query]]
+        }
+    }
+
+}
+
+Tool.isJson = (obj) => {
+    return (typeof obj === 'undefined' ? 'undefined' : typeof (obj)) == 'object' && Object.prototype.toString.call(obj).toLowerCase() === '[object object]' && !obj.length //true 是 false不是
+}
+Tool.isArray = (arr) => {
+    return Object.prototype.toString.call(arr).toLowerCase() === '[object array]' //true 是 false不是
+}
+
+export {actions}
 
 export default Tool
