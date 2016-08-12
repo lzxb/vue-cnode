@@ -111,15 +111,15 @@
                 <div class="icon" flex="main:center cross:center" v-on:click="sideBarShow">
                     <i class="iconfont icon-caidan"></i>
                 </div>
-                <div class="title">{{title}}</div>
+                <div class="title">{{title || '全部'}}</div>
                 <div class="icon" flex="main:center cross:center">
-                    <i class="iconfont icon-qudenglu"></i>
+                    <i class="iconfont icon-qudenglu" v-if="user.success !== true"></i>
                 </div>
             </header>
             <router-view></router-view>
         </div>
         <div class="side-bar">
-            <ul class="signin">
+            <ul class="signin" v-if="user.success !== true">
                 <li>
                     <a flex="box:first" v-link="'/signin'" v-on:click="sideBarHide">
                         <div class="icon" flex="main:center cross:center">
@@ -129,6 +129,9 @@
                     </a>
                 </li>
             </ul>
+            <div class="user" v-else>
+                
+            </div>
             <ul class="nav" v-for="o in menus">
                 <li v-for="d in o">
                     <a flex="box:first" v-link="d.link" v-on:click="sideBarHide">
@@ -157,7 +160,6 @@
             actions
         },
         data() {
-
             return {
                 menus,
                 title: Tool.getTitle(this.$route)

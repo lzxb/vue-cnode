@@ -10,3 +10,13 @@ export const sideBarShow = ({ dispatch }) => {
 export const sideBarHide = ({dispatch}) => {
     dispatch('sideBarHide')
 }
+/**
+ * 保存令牌
+ */
+export const signin = ({dispatch}, user) => {
+    dispatch('signin', user)
+}
+
+export const signout = ({dispatch}) => {
+    dispatch('signout')
+}

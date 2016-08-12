@@ -22,6 +22,18 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 
 }
 
+Tool.post = (url, body = {}, success = () => { }, error = () => { }) => {
+
+    ajax('POST', url).send(body).end((err, res) => {
+        if (err) {
+            return error({})
+        } else {
+            success(res.body)
+        }
+    })
+
+}
+
 /**
  * 检测元素是否在可视区
  * 
@@ -64,11 +76,51 @@ Tool.getTitle = (route) => {
 
 }
 
+/**
+ * 验证对象是否是json
+ * 
+ * @param {Object} obj
+ * @returns
+ */
 Tool.isJson = (obj) => {
     return (typeof obj === 'undefined' ? 'undefined' : typeof (obj)) == 'object' && Object.prototype.toString.call(obj).toLowerCase() === '[object object]' && !obj.length //true 是 false不是
 }
+/**
+ * 验证对象是否是数组
+ * 
+ * @param {Array} arr
+ * @returns
+ */
 Tool.isArray = (arr) => {
     return Object.prototype.toString.call(arr).toLowerCase() === '[object array]' //true 是 false不是
+}
+
+/**
+ * 本地数据存储或读取
+ * 
+ * @param {any} key
+ * @param {any} value
+ * @returns
+ */
+Tool.localItem = function (key, value) {
+    if (arguments.length == 1) {
+        return localStorage.getItem(key)
+    } else {
+        return localStorage.setItem(key, value)
+    }
+}
+
+/**
+ * 删除本地数据
+ * 
+ * @param {any} key
+ * @returns
+ */
+Tool.removeLocalItem = function (key) {
+    if (key) {
+        return localStorage.removeItem(key)
+    }
+    return localStorage.removeItem()
 }
 
 export {actions}
