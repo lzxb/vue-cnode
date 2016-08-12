@@ -113,13 +113,13 @@
                 </div>
                 <div class="title">{{title || '全部'}}</div>
                 <div class="icon" flex="main:center cross:center">
-                    <i class="iconfont icon-qudenglu" v-if="user.success !== true"></i>
+                    <i class="iconfont icon-qudenglu" v-if="!user.accesstoken"></i>
                 </div>
             </header>
             <router-view></router-view>
         </div>
         <div class="side-bar">
-            <ul class="signin" v-if="user.success !== true">
+            <ul class="signin" v-if="!user.accesstoken">
                 <li>
                     <a flex="box:first" v-link="'/signin'" v-on:click="sideBarHide">
                         <div class="icon" flex="main:center cross:center">
@@ -130,7 +130,7 @@
                 </li>
             </ul>
             <div class="user" v-else>
-                
+
             </div>
             <ul class="nav" v-for="o in menus">
                 <li v-for="d in o">
