@@ -1,5 +1,8 @@
 <style lang="less" scoped>
     @import "./less/config";
+    /*
+        侧边栏
+    */
     .app {
         @w: 240px;
         overflow-x: hidden;
@@ -85,7 +88,9 @@
             }
         }
     }
-    
+    /*
+        登录
+    */
     .signin {
         margin: 10px;
         padding: 10px;
@@ -101,6 +106,32 @@
             line-height: 39px;
             font-size: 16px;
             color: darken(@mainATagClolor, 5%);
+        }
+    }
+    /*
+        用户信息
+    */
+    .user{
+        .left {
+            padding: 10px 0;
+        }
+        .headimg {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: @mainTextColor
+        }
+        .text {
+            line-height: 28px;
+            font-size: 14px;
+        }
+        .iconfont {
+            padding:0 5px;
+            color: @mainTextColor;
+        }
+        .score {
+            font-size: 12px;
+            color: @mainTextColor;
         }
     }
 </style>
@@ -130,7 +161,18 @@
                 </li>
             </ul>
             <div class="user" v-else>
-
+                <a v-link="`/user/${user.loginname}`" flex="box:last">
+                    <div class="left" flex="dir:top cross:center">
+                        <div class="headimg">
+                            <img :src="user.avatar_url" alt="">
+                        </div>
+                        <div class="text">{{user.loginname}}</div>
+                        <div class="score">积分：{{user.score}}</div>
+                    </div>
+                    <div class="font" flex="cross:center">
+                        <i class="iconfont icon-jiantouright"></i>
+                    </div>
+                </a>
             </div>
             <ul class="nav" v-for="o in menus">
                 <li v-for="d in o">

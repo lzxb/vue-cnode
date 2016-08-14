@@ -58,7 +58,7 @@
         methods: {
             submit: function () {
                 if(this.submitState) return false
-                this.submitName = '正在登录'
+                this.submitName = '正在登录...'
                 this.submitState = true
 
                 var errorCB = () => {
