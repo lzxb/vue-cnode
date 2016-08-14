@@ -30,3 +30,78 @@ html, body, #main {
 [v-cloak] {
     display: none;
 }
+/*
+    侧边栏
+*/
+.app {
+    @w: 240px;
+    overflow-x: hidden;
+    height: 100%;
+    .wrap {
+        overflow: hidden;
+        min-height: 100%;
+        padding-top: 50px;
+        background: @shallow;
+        & > * {
+            transform: translateX(0);
+            transition: transform 0.2s ease-out;
+        }
+    }
+    .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        height: 50px;
+        margin-bottom: 5px;
+        line-height: 50px;
+        box-shadow: 0 0 5px darken(@shallow, 30%);
+        background: @shallow;
+        .icon {
+            width: 40px;
+        }
+        .title {
+            text-align: center;
+        }
+    }
+    .side-bar {
+        box-sizing: border-box;
+        position: fixed;
+        top: -200px;
+        left: -@w;
+        bottom: -200px;
+        z-index: 999;
+        width: @w;
+        padding: 200px 0;
+        border-right: 1px solid darken(@shallow, 5%);
+        background: #fff;
+        transform: translateX(0);
+        transition: transform 0.2s ease-out;
+    }
+    .side-bar-close {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: @w;
+        bottom: 0;
+        z-index: 999;
+        background: transparent;
+    }
+    &-side-bar-show {
+        overflow: hidden;
+        .wrap {
+            &>* {
+                transform: translateX(@w);
+            }
+        }
+        .side-bar {
+            transform: translateX(@w);
+        }
+        .side-bar-close {
+            display: block;
+        }
+    }
+}

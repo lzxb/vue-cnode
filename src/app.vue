@@ -3,71 +3,8 @@
     /*
         侧边栏
     */
-    .app {
-        @w: 240px;
-        overflow-x: hidden;
-        height: 100%;
-        .wrap {
-            overflow: hidden;
-            position: relative;
-            z-index: 10;
-            min-height: 100%;
-            padding-top: 50px;
-            background: @shallow;
-            transform: translateX(0);
-            transition: all 0.15s ease-out;
-        }
-        .header {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 99;
-            height: 50px;
-            margin-bottom: 5px;
-            line-height: 50px;
-            box-shadow: 0 0 5px darken(@shallow, 30%);
-            background: @shallow;
-            .icon {
-                width: 40px;
-            }
-            .title {
-                text-align: center;
-            }
-        }
-        .side-bar {
-            box-sizing: border-box;
-            position: fixed;
-            top: -200px;
-            left: 0;
-            bottom: -200px;
-            z-index: 1;
-            width: @w;
-            padding: 200px 0;
-            border-right: 1px solid darken(@shallow, 5%);
-            background: #fff;
-        }
-        .side-bar-close {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: @w;
-            bottom: 0;
-            z-index: 11;
-            background: transparent;
-        }
-        &-side-bar-show {
-            overflow: hidden;
-            .wrap {
-                transform: translateX(@w);
-            }
-            .side-bar-close {
-                display: block;
-            }
-        }
-    }
+    
+
     
     .nav {
         overflow: hidden;
@@ -91,6 +28,7 @@
     /*
         登录
     */
+    
     .signin {
         margin: 10px;
         padding: 10px;
@@ -111,7 +49,8 @@
     /*
         用户信息
     */
-    .user{
+    
+    .user {
         .left {
             padding: 10px 0;
         }
@@ -126,7 +65,7 @@
             font-size: 14px;
         }
         .iconfont {
-            padding:0 5px;
+            padding: 0 5px;
             color: @mainTextColor;
         }
         .score {

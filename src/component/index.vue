@@ -120,7 +120,7 @@
 </style>
 <template>
     <ul class="list" v-cloak>
-        <li v-for="o in data"  track-by="id">
+        <li v-for="o in data" track-by="id">
             <div class="typeicon" flex v-if="o.top || o.good">
                 <div class="icon" v-if="o.top">
                     <i class="iconfont icon-zhiding"></i>
@@ -183,15 +183,14 @@ export default {
     data() {
         return {
             loadState: 0,
-            loadTip: '正在加载中',
+            loadTip: '正在加载中...',
             dataBtn: true, //true允许加载数据， false不运行加载数据
             data: [],
-            success: false,
             transparent,
-            query: {
+            form: {
                 tab: 'all',
                 page: 1,
-                limit: 20,
+                limit: 10,
                 mdrender: true
             }
         }
@@ -203,9 +202,16 @@ export default {
     },
     route: {
         data() {
-            this.query.page = 1
-            this.query.tab = this.$route.query.tab
+            /**
+             * 地址栏参数改变，重置数据
+             */
+            this.loadState = 0
+            this.loadTip = '正在加载中...'
+            this.dataBtn = true
             this.data = []
+
+            this.form.page = 1
+            this.form.tab = this.$route.query.tab
             //参数改变后，先清理掉原来的定时器
             clearInterval(this.timer)
             //使用定时器定时检测load组件是否在可视区
@@ -214,11 +220,11 @@ export default {
                     this.dataBtn = false
                     this.loadState = 0
                     this.loadTip = '正在加载中...'
-                    Tool.get('/api/v1/topics', this.query, ({data}) => {
+                    Tool.get('/api/v1/topics', this.form, ({data}) => {
                         this.loadState = 1
                         this.loadTip = '上拉加载更多'
                         data.map((item) => this.data.push(item))
-                        this.query.page++
+                        this.form.page++
                         this.dataBtn = true
                     }, () => {
                         this.loadState = -1
