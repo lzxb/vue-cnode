@@ -1,5 +1,7 @@
 import ajax from 'superagent' //ajax 请求库
 import * as actions from './actions/'
+import * as config from './config/config'
+
 const Tool = {}
 
 /**
@@ -12,7 +14,7 @@ const Tool = {}
  */
 Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 
-    ajax('GET', url).query(query).end((err, res) => {
+    ajax('GET', config.target + url).query(query).end((err, res) => {
         if (err) {
             return error({})
         } else {
@@ -24,7 +26,7 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 
 Tool.post = (url, body = {}, success = () => { }, error = () => { }) => {
 
-    ajax('POST', url).send(body).end((err, res) => {
+    ajax('POST', config.target + url).send(body).end((err, res) => {
         if (err) {
             return error({})
         } else {
