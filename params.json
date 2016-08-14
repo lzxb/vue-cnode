@@ -1,0 +1,6 @@
+{
+  "name": "Vue-cnode",
+  "tagline": "基于vue重写cnode社区",
+  "body": "# vue-cnode\r\n基于vue + vue-router + vuex + ES6 + less + superagent + flex.css重写vue版cnode社区\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
