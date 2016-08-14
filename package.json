@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
-    "dist": "webpack --progress --colors -p",
-    "pages": "webpack --progress --colors -p -pages"
+    "dist": "webpack --progress --colors -p"
   },
   "repository": {
     "type": "git",

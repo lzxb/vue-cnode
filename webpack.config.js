@@ -46,6 +46,8 @@ if (process.argv.indexOf('-p') > -1) { //生产环境
             NODE_ENV: JSON.stringify('production')
         }
     }))
+    publicPath = '/vue-cnode/dist/'
+    path = __dirname + '/vue-cnode/dist/'
 }
 plugins.push(new ExtractTextPlugin('[name].css')); //css单独打包
 
@@ -55,10 +57,6 @@ plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HT
     hash: true    //为静态资源生成hash值
 }))
 
-if (process.argv.indexOf('-pages') > -1) { //发布到git pages
-    publicPath = '/vue-cnode/dist/'
-    path = __dirname + '/vue-cnode/dist/'
-}
 
 module.exports = {
     entry: './src/main.js',

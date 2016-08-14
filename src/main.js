@@ -16,7 +16,7 @@ Vue.use(VueRouter)
 Object.keys(filter).forEach(k => Vue.filter(k, filter[k])) //注册过滤器
 
 var router = new VueRouter({ //配置路由
-    history: true
+    history: process.env.NODE_ENV !== 'production'
 })
 
 router.map(route)
