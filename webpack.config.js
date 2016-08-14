@@ -1,7 +1,12 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
+var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
 
+var publicPath = '/dist/' //服务器路径
+var path = __dirname + '/dist/'
 var loaders = []
+
+
 
 // 将ES6代码转换成ES5
 loaders.push({
@@ -42,6 +47,7 @@ if (process.argv.indexOf('-p') > -1) { //生产环境
         }
     }))
 }
+plugins.push(new ExtractTextPlugin('[name].css')); //css单独打包
 
 plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
     filename: '../index.html', //生成的html存放路径，相对于 path
@@ -49,11 +55,16 @@ plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HT
     hash: true    //为静态资源生成hash值
 }))
 
+if (process.argv.indexOf('-pages') > -1) { //发布到git pages
+    publicPath = '/vue-cnode/dist/'
+    path = __dirname + '/vue-cnode/dist/'
+}
+
 module.exports = {
     entry: './src/main.js',
     output: {
-        publicPath: '/app/', //服务器的路径
-        path: __dirname + '/app', //编译到app目录
+        publicPath, //服务器的路径
+        path, //编译到app目录
         filename: '[name].js' //编译后的文件名
     },
     module: {
