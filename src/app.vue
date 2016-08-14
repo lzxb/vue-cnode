@@ -4,8 +4,6 @@
         侧边栏
     */
     
-
-    
     .nav {
         overflow: hidden;
         margin: 10px;
@@ -100,7 +98,7 @@
                 </li>
             </ul>
             <div class="user" v-else>
-                <a v-link="`/user/${user.loginname}`" flex="box:last">
+                <a v-link="`/user/${user.loginname}`" flex="box:last" v-on:click="sideBarHide">
                     <div class="left" flex="dir:top cross:center">
                         <div class="headimg">
                             <img :src="user.avatar_url" alt="">
