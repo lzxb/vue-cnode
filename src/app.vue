@@ -49,9 +49,7 @@
     */
     
     .user {
-        .left {
-            padding: 10px 0;
-        }
+        padding: 10px 10px 0 10px;
         .headimg {
             width: 50px;
             height: 50px;
@@ -59,8 +57,9 @@
             background: @mainTextColor
         }
         .text {
-            line-height: 28px;
-            font-size: 14px;
+            padding-left: 10px;
+            line-height: 50px;
+            font-size: 16px;
         }
         .iconfont {
             padding: 0 5px;
@@ -98,15 +97,12 @@
                 </li>
             </ul>
             <div class="user" v-else>
-                <a v-link="`/user/${user.loginname}`" flex="box:last" v-on:click="sideBarHide">
-                    <div class="left" flex="dir:top cross:center">
-                        <div class="headimg">
-                            <img :src="user.avatar_url" alt="">
-                        </div>
-                        <div class="text">{{user.loginname}}</div>
-                        <div class="score">积分：{{user.score}}</div>
+                <a v-link="`/user/${user.loginname}`" flex v-on:click="sideBarHide">
+                    <div class="headimg" flex-box="0">
+                        <img :src="user.avatar_url" alt="">
                     </div>
-                    <div class="font" flex="cross:center">
+                    <div class="text" flex-box="1">{{user.loginname}}</div>
+                    <div class="font" flex="cross:center" flex-box="0">
                         <i class="iconfont icon-jiantouright"></i>
                     </div>
                 </a>

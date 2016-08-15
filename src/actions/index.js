@@ -11,12 +11,14 @@ export const sideBarHide = ({dispatch}) => {
     dispatch('sideBarHide')
 }
 /**
- * 保存令牌
+ * 登录
  */
 export const signin = ({dispatch}, user) => {
     dispatch('signin', user)
 }
-
+/**
+ * 退出
+ */
 export const signout = ({dispatch}) => {
     dispatch('signout')
 }
