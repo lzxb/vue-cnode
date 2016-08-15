@@ -108,7 +108,7 @@
                 </a>
             </div>
             <ul class="nav" v-for="o in menus">
-                <li v-for="d in o">
+                <li v-for="d in o" v-if="d.auth ? user.loginname : true">
                     <a flex="box:first" v-link="d.link" v-on:click="sideBarHide">
                         <div class="icon" flex="main:center cross:center">
                             <i class="iconfont icon-{{d.icon}}"></i>
