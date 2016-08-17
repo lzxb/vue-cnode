@@ -18,6 +18,11 @@ a {
 }
 
 body {
+    font-size: 100%;
+    font-family: Helvetica, STHeiti, Droid Sans Fallback;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
     color: #676767;
     background: @shallow;
 }
@@ -30,9 +35,12 @@ html, body, #main {
 [v-cloak] {
     display: none;
 }
+
+
 /*
     侧边栏
 */
+
 .app {
     overflow: hidden;
     @w: 240px;

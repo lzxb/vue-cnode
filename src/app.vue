@@ -3,7 +3,7 @@
     /*
         侧边栏
     */
-    
+
     .nav {
         overflow: hidden;
         margin: 10px;
@@ -26,7 +26,7 @@
     /*
         登录
     */
-    
+
     .signin {
         margin: 10px;
         padding: 10px;
@@ -47,7 +47,7 @@
     /*
         用户信息
     */
-    
+
     .user {
         padding: 10px 10px 0 10px;
         .headimg {
@@ -137,11 +137,12 @@
         data() {
             return {
                 menus,
-                title: Tool.getTitle(this.$route)
+                title: Tool.getTitle(this.$route),
             }
         },
         route: {
             data() {
+                this.sideBarHide();
                 this.title = Tool.getTitle(this.$route)
             }
         }

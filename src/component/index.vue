@@ -60,7 +60,7 @@
             color: @mainStressColor;
         }
     }
-    
+
     .images {
         padding: 5px;
         .item {
@@ -81,7 +81,7 @@
             background-position: center center;
         }
     }
-    
+
     .expand {
         padding: 10px 0;
         border-top: 1px solid darken(@shallow, 5%);
@@ -143,30 +143,32 @@
                     </div>
                 </div>
             </div>
-            <div class="tit">{{o.title}}</div>
-            <div class="images count-{{o.content | getTextImgUrl | length}}" flex="box:mean">
-                <div class="item" v-for="imgurl in o.content | getTextImgUrl">
-                    <div class="pic">
-                        <img :src="transparent" :style="{backgroundImage: `url(${imgurl})`}" alt="">
+            <a v-link="`/topic/${o.id}`">
+                <div class="tit">{{o.title}}</div>
+                <div class="images count-{{o.content | getTextImgUrl | length}}" flex="box:mean">
+                    <div class="item" v-for="imgurl in o.content | getTextImgUrl">
+                        <div class="pic">
+                            <img :src="transparent" :style="{backgroundImage: `url(${imgurl})`}" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="expand" flex="box:mean">
-                <div class="item click" flex="main:center cross:center">
-                    <i class="iconfont icon-chakan"></i>
-                    <div class="num">{{o.visit_count > 0 ? o.visit_count : '暂无阅读'}}</div>
-                </div>
-                <div class="item reply" flex="main:center cross:center">
-                    <i class="iconfont icon-pinglun"></i>
-                    <div class="num">{{o.reply_count > 0 ? o.reply_count : '暂无评论'}}</div>
-                </div>
-                <div class="item last-reply" flex="main:center cross:center">
-                    <div class="pic">
-                        <img :src="transparent" alt="" :style="{backgroundImage: `url(${o.author.avatar_url})`}">
+                <div class="expand" flex="box:mean">
+                    <div class="item click" flex="main:center cross:center">
+                        <i class="iconfont icon-chakan"></i>
+                        <div class="num">{{o.visit_count > 0 ? o.visit_count : '暂无阅读'}}</div>
                     </div>
-                    <time class="time">{{o.last_reply_at | formatDate}}</time>
+                    <div class="item reply" flex="main:center cross:center">
+                        <i class="iconfont icon-pinglun"></i>
+                        <div class="num">{{o.reply_count > 0 ? o.reply_count : '暂无评论'}}</div>
+                    </div>
+                    <div class="item last-reply" flex="main:center cross:center">
+                        <div class="pic">
+                            <img :src="transparent" alt="" :style="{backgroundImage: `url(${o.author.avatar_url})`}">
+                        </div>
+                        <time class="time">{{o.last_reply_at | formatDate}}</time>
+                    </div>
                 </div>
-            </div>
+            </a>
         </li>
     </ul>
     <div v-on:click="loadNext">
@@ -177,7 +179,7 @@
 import Tool from '../Tool'
 import components from './common/'
 import transparent from '../images/transparent.png'
- 
+
 export default {
     components,
     data() {
@@ -201,7 +203,8 @@ export default {
         }
     },
     route: {
-        data() {
+        data(transition) {
+            console.log(transition)
             /**
              * 地址栏参数改变，重置数据
              */
