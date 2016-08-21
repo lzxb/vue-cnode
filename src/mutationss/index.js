@@ -49,9 +49,9 @@ const newPage = (name) => {
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
-    mutationss[`${name}GetError`] = (state) => { //获取页面数据失败
-        state[name].loadState = -1
-        state[name].loadTip = '加载失败'
+    mutationss[`${name}GetError`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
+        state[name].loadState = loadState
+        state[name].loadTip = loadTip
     }
     mutationss[`${name}Leave`] = (state) => { //离开页面，保存滚动条位置
         state[name].scrollX = window.scrollX

@@ -37,7 +37,7 @@
             }
         }
     }
-
+    
     .tab-nav {
         border-bottom: 1px solid @shallow;
         box-shadow: 0 0 5px darken(@shallow, 10%);
@@ -56,7 +56,7 @@
             }
         }
     }
-
+    
     .list {
         li {
             padding: 10px;
@@ -73,6 +73,7 @@
             }
             .main {
                 padding-left: 10px;
+                color: inherit;
                 .con {
                     padding: 0 5px;
                     line-height: 30px;
@@ -93,50 +94,94 @@
     }
 </style>
 <template>
-    <div>
+    <template v-if="state.loadState > 0">
         <div class="user" flex="dir:top cross:center">
             <div class="user-bg">
                 <img src="../images/user-bg.png" alt="">
             </div>
             <div class="headimg">
                 <div class="pic">
-                    <img src="https://avatars.githubusercontent.com/u/8424643?v=3&s=120" alt="">
+                    <img :src="state.view.avatar_url" alt="">
                 </div>
             </div>
-            <div class="name">1340641314</div>
+            <div class="name">{{state.view.loginname}}</div>
             <div class="score" flex="main:justify">
-                <div>积分：34345</div>
-                <div>注册于：一年前</div>
+                <div>积分：{{state.view.score}}</div>
+                <div>注册于：{{state.view.create_at | formatDate}}</div>
             </div>
         </div>
         <ul class="tab-nav" flex="box:mean">
-            <li class="on">回复</li>
-            <li>主题</li>
+            <li :class="{on: state.view.tabIndex == 0}" v-on:click="state.view.tabIndex = 0">回复</li>
+            <li :class="{on: state.view.tabIndex == 1}" v-on:click="state.view.tabIndex = 1">主题</li>
         </ul>
-        <ul class="list">
-            <li flex="box:first" v-for="o in 10">
+        <ul class="list" :style="{display: state.view.tabIndex == 0 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in state.view.recent_replies">
                 <div class="head">
                     <div class="pic">
-                        <img src="https://avatars.githubusercontent.com/u/8424643?v=3&s=120" alt="">
+                        <img :src="item.author.avatar_url" alt="">
                     </div>
                 </div>
-                <div class="main" flex="dir:top box:first">
+                <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
-                        <div class="name">狼族小狈{{$index}}</div>
-                        <time>一个月前</time>
+                        <div class="name">{{item.author.loginname}}</div>
+                        <time>{{item.last_reply_at | formatDate}}</time>
                     </div>
-                    <div class="con">表单表单表单表单表单表单表单表单表单表单表单表单</div>
-                </div>
+                    <div class="con">{{item.title}}</div>
+                </a>
             </li>
         </ul>
-    </div>
+        <ul class="list" :style="{display: state.view.tabIndex == 1 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in state.view.recent_topics">
+                <div class="head">
+                    <div class="pic">
+                        <img :src="item.author.avatar_url" alt="">
+                    </div>
+                </div>
+                <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
+                    <div class="line" flex="box:last">
+                        <div class="name">{{item.author.loginname}}</div>
+                        <time>{{item.last_reply_at | formatDate}}</time>
+                    </div>
+                    <div class="con">{{item.title}}</div>
+                </a>
+            </li>
+        </ul>
+    </template>
+    <load v-else :tip="state.loadTip" :state="state.loadState"></load>
 </template>
 <script>
+    import Tool from '../Tool'
+    import store from '../vuex/store'
+    import actions from '../actions/'
+    import components from './common/'
+
     export default {
-        data() {
-            return {
-                bg: '用户信息'
+        store,
+        vuex: {
+            getters: {
+                state: state => state.userView
+            },
+            actions
+        },
+        components,
+        route: {
+            data() {
+                var {loginname} = this.$route.params;
+                Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
+                    if(data) {
+                        data.tabIndex = this.state.view.tabIndex || 0;
+                        this.userViewSetView(data)
+                    } else {
+                        this.userViewGetError({loadTip: '用户不存在'})
+                    }
+                }, this.userViewGetError)
             }
+        },
+        ready: function () {
+            window.scrollTo(this.state.scrollX, this.state.scrollY) //还原滚动条位置
+        },
+        beforeDestroy: function () {
+            this.userViewLeave();
         }
     }
 </script>

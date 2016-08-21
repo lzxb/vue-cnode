@@ -33,8 +33,8 @@ const newPage = (name) => {
     actions[`${name}SetList`] = ({dispatch}, list) => { //存储页面列表信息
         dispatch(`${name}SetList`, list)
     }
-    actions[`${name}GetError`] = ({dispatch}) => { //获取页面数据失败
-        dispatch(`${name}GetError`)
+    actions[`${name}GetError`] = ({dispatch}, ...arg) => { //获取页面数据失败
+        dispatch(`${name}GetError`, ...arg)
     }
     actions[`${name}Leave`] = ({dispatch}) => { //离开页面，保存滚动条位置
         dispatch(`${name}Leave`)

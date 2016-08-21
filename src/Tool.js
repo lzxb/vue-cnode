@@ -14,10 +14,10 @@ const Tool = {}
 Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 
     ajax('GET', config.target + url).query(query).end((err, res) => {
-        if (err) {
-            return error({})
-        } else {
+        if (Tool.isJson(res.body)) {
             success(res.body)
+        } else {
+            error({})
         }
     })
 
@@ -26,10 +26,10 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
 Tool.post = (url, body = {}, success = () => { }, error = () => { }) => {
 
     ajax('POST', config.target + url).send(body).end((err, res) => {
-        if (err) {
-            return error({})
-        } else {
+        if (Tool.isJson(res.body)) {
             success(res.body)
+        } else {
+            error({})
         }
     })
 

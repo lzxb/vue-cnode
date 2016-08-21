@@ -47,34 +47,36 @@
     }
 </style>
 <template>
-    <div class="msg-box" v-if="state.loadState > 0">
-        <ul class="list">
-            <li flex="box:first" v-for="item in state.list">
-                <a class="user" href="#/user/albert">
-                    <div class="user-headimg" :style="{backgroundImage: `url(${item.author.avatar_url})`}"></div>
-                </a>
-                <div>
-                    <div class="name">{{item.author.loginname}}
-                        <time>{{item.create_at | formatDate}}</time>
-                    </div>
-                    <div flex="box:first">
-                        <div flex="cross:center">
-                            <div class="dian-true"></div>
+    <template v-if="state.loadState > 0">
+        <div class="msg-box">
+            <ul class="list">
+                <li flex="box:first" v-for="item in state.list">
+                    <a class="user" href="#/user/albert">
+                        <div class="user-headimg" :style="{backgroundImage: `url(${item.author.avatar_url})`}"></div>
+                    </a>
+                    <div>
+                        <div class="name">{{item.author.loginname}}
+                            <time>{{item.create_at | formatDate}}</time>
                         </div>
-                        <div v-if="item.type == 'at'">
-                            在话题
-                            <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
+                        <div flex="box:first">
+                            <div flex="cross:center">
+                                <div class="dian-true"></div>
+                            </div>
+                            <div v-if="item.type == 'at'">
+                                在话题
+                                <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
 
-                        </div>
-                        <div v-else>
-                            回复你了的话题
-                            <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
+                            </div>
+                            <div v-else>
+                                回复你了的话题
+                                <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+                </li>
+            </ul>
+        </div>
+    </template>
     <load v-else :tip="state.loadTip" :state="state.loadState"></load>
 </template>
 <script>

@@ -1,1 +1,1 @@
-export default ['myMessages']
+export default ['myMessages', 'userView']
