@@ -94,33 +94,33 @@
     }
 </style>
 <template>
-    <template v-if="state.loadState > 0">
+    <template v-if="loadState > 0">
         <div class="user" flex="dir:top cross:center">
             <div class="user-bg">
                 <img src="../images/user-bg.png" alt="">
             </div>
             <div class="headimg">
                 <div class="pic">
-                    <img :src="state.view.avatar_url" alt="">
+                    <img :src="view.avatar_url" alt="">
                 </div>
             </div>
-            <div class="name">{{state.view.loginname}}</div>
+            <div class="name">{{view.loginname}}</div>
             <div class="score" flex="main:justify">
-                <div>积分：{{state.view.score}}</div>
-                <div>注册于：{{state.view.create_at | formatDate}}</div>
+                <div>积分：{{view.score}}</div>
+                <div>注册于：{{view.create_at | formatDate}}</div>
             </div>
         </div>
         <ul class="tab-nav" flex="box:mean">
-            <li :class="{on: state.view.tabIndex == 0}" v-on:click="state.view.tabIndex = 0">回复</li>
-            <li :class="{on: state.view.tabIndex == 1}" v-on:click="state.view.tabIndex = 1">主题</li>
+            <li :class="{on: view.tabIndex == 0}" v-on:click="view.tabIndex = 0">回复</li>
+            <li :class="{on: view.tabIndex == 1}" v-on:click="view.tabIndex = 1">主题</li>
         </ul>
-        <ul class="list" :style="{display: state.view.tabIndex == 0 ? 'block' : 'none'}">
-            <li flex="box:first" v-for="item in state.view.recent_replies">
-                <div class="head">
+        <ul class="list" :style="{display: view.tabIndex == 0 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in view.recent_replies">
+                <a class="head" v-link="`/user/${item.author.loginname}`">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
                     </div>
-                </div>
+                </a>
                 <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
                         <div class="name">{{item.author.loginname}}</div>
@@ -130,13 +130,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="list" :style="{display: state.view.tabIndex == 1 ? 'block' : 'none'}">
-            <li flex="box:first" v-for="item in state.view.recent_topics">
-                <div class="head">
+        <ul class="list" :style="{display: view.tabIndex == 1 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in view.recent_topics">
+                <a class="head" v-link="`/user/${item.author.loginname}`">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
                     </div>
-                </div>
+                </a>
                 <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
                         <div class="name">{{item.author.loginname}}</div>
@@ -147,7 +147,7 @@
             </li>
         </ul>
     </template>
-    <load v-else :tip="state.loadTip" :state="state.loadState"></load>
+    <load v-else :tip="loadTip" :state="loadState"></load>
 </template>
 <script>
     import Tool from '../Tool'
@@ -164,12 +164,15 @@
             actions
         },
         components,
+        data: function () {
+            return this.state;
+        },
         route: {
             data() {
                 var {loginname} = this.$route.params;
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
-                        data.tabIndex = this.state.view.tabIndex || 0;
+                        data.tabIndex = this.view.tabIndex || 0;
                         this.userViewSetView(data)
                     } else {
                         this.userViewGetError({loadTip: '用户不存在'})
@@ -178,7 +181,7 @@
             }
         },
         ready: function () {
-            window.scrollTo(this.state.scrollX, this.state.scrollY) //还原滚动条位置
+            window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
         },
         beforeDestroy: function () {
             this.userViewLeave();

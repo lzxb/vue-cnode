@@ -47,11 +47,11 @@
     }
 </style>
 <template>
-    <template v-if="state.loadState > 0">
+    <template v-if="loadState > 0">
         <div class="msg-box">
             <ul class="list">
-                <li flex="box:first" v-for="item in state.list">
-                    <a class="user" href="#/user/albert">
+                <li flex="box:first" v-for="item in list">
+                    <a class="user" v-link="`/user/${item.author.loginname}`">
                         <div class="user-headimg" :style="{backgroundImage: `url(${item.author.avatar_url})`}"></div>
                     </a>
                     <div>
@@ -77,7 +77,7 @@
             </ul>
         </div>
     </template>
-    <load v-else :tip="state.loadTip" :state="state.loadState"></load>
+    <load v-else :tip="loadTip" :state="loadState"></load>
 </template>
 <script>
     import Tool from '../Tool'
@@ -95,6 +95,9 @@
             actions
         },
         components,
+        data: function () {
+            return this.state;
+        },
         route: {
             data() {
                 var {accesstoken} = this.user
@@ -106,7 +109,7 @@
             }
         },
         ready: function () {
-            window.scrollTo(this.state.scrollX, this.state.scrollY) //还原滚动条位置
+            window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
         },
         beforeDestroy: function () {
             this.myMessagesLeave();
