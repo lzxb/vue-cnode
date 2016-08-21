@@ -39,8 +39,15 @@ mutationss.signout = (state) => {
 }
 
 const newPage = (name) => {
-    mutationss[`${name}GetSuccess`] = (state, data) => { //获取页面数据成功
-        state[name].data = data
+    mutationss[`${name}SetView`] = (state, view) => { //获取页面数据成功
+        state[name].view = view
+        state[name].loadState = 1
+        state[name].loadTip = '加载成功'
+    }
+    mutationss[`${name}SetList`] = (state, list) => { //获取页面数据成功
+        state[name].list = list
+        state[name].loadState = 1
+        state[name].loadTip = '加载成功'
     }
     mutationss[`${name}GetError`] = (state) => { //获取页面数据失败
         state[name].loadState = -1

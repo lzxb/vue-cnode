@@ -27,8 +27,11 @@ actions.signout = ({dispatch}) => {
 }
 
 const newPage = (name) => {
-    actions[`${name}GetSuccess`] = ({dispatch}, data) => { //获取页面数据成功
-        dispatch(`${name}GetError`, data)
+    actions[`${name}SetView`] = ({dispatch}, view) => { //存储页面信息
+        dispatch(`${name}SetView`, view)
+    }
+    actions[`${name}SetList`] = ({dispatch}, list) => { //存储页面列表信息
+        dispatch(`${name}SetList`, list)
     }
     actions[`${name}GetError`] = ({dispatch}) => { //获取页面数据失败
         dispatch(`${name}GetError`)

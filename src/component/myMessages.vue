@@ -47,7 +47,7 @@
     }
 </style>
 <template>
-    <div class="msg-box" v-if="state.loadState">
+    <div class="msg-box" v-if="state.loadState > 0">
         <ul class="list">
             <li flex="box:first" v-for="item in state.list">
                 <a class="user" href="#/user/albert">
@@ -80,6 +80,7 @@
 <script>
     import Tool from '../Tool'
     import store from '../vuex/store'
+    import actions from '../actions/'
     import components from './common/'
 
     export default {
@@ -88,30 +89,25 @@
             getters: {
                 user: state => state.user,
                 state: state => state.myMessages
-            }
+            },
+            actions
         },
         components,
         route: {
             data() {
-                console.log(this)
                 var {accesstoken} = this.user
                 Tool.get('/api/v1/messages', {mdrender: false, accesstoken}, ({data}) => {
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
-                    this.state.list = hasnot_read_messages
-                    this.state.loadState = 1
-                    this.state.loadTip = '加载成功'
-                }, () => {
-                    this.state.loadState = -1
-                    this.state.loadTip = '加载失败'
-                })
+                    this.myMessagesSetList(hasnot_read_messages)
+                }, this.myMessagesGetError)
             }
         },
         ready: function () {
             window.scrollTo(this.state.scrollX, this.state.scrollY) //还原滚动条位置
         },
         beforeDestroy: function () {
-            this.$store.dispatch('myMessagesLeave')
+            this.myMessagesLeave();
         }
     }
 </script>
