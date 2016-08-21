@@ -151,40 +151,27 @@
 </template>
 <script>
     import Tool from '../Tool'
-    import store from '../vuex/store'
-    import actions from '../actions/'
-    import components from './common/'
-
+    import mixins from '../mixins'
+    
     export default {
-        store,
+        mixins: [mixins],
         vuex: {
             getters: {
                 state: state => state.userView
-            },
-            actions
-        },
-        components,
-        data: function () {
-            return this.state;
+            }
         },
         route: {
             data() {
-                var {loginname} = this.$route.params;
+                var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
-                        data.tabIndex = this.view.tabIndex || 0;
+                        data.tabIndex = this.view.tabIndex || 0
                         this.userViewSetView(data)
                     } else {
                         this.userViewGetError({loadTip: '用户不存在'})
                     }
                 }, this.userViewGetError)
             }
-        },
-        ready: function () {
-            window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
-        },
-        beforeDestroy: function () {
-            this.userViewLeave();
         }
     }
 </script>

@@ -16,6 +16,14 @@ const newPage = (name) => {
         scrollX: 0, //滚动条X坐标
         scrollY: 0 //滚动条Y坐标
     }
+    var defaults = {};
+
+    for (let k in states[name]) {
+        defaults[k] = states[name][k]
+    }
+
+
+    states[name].defaults = defaults;
 }
 
 

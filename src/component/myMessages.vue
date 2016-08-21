@@ -81,22 +81,14 @@
 </template>
 <script>
     import Tool from '../Tool'
-    import store from '../vuex/store'
-    import actions from '../actions/'
-    import components from './common/'
+    import mixins from '../mixins'
 
     export default {
-        store,
+        mixins: [mixins],
         vuex: {
             getters: {
-                user: state => state.user,
                 state: state => state.myMessages
             },
-            actions
-        },
-        components,
-        data: function () {
-            return this.state;
         },
         route: {
             data() {
@@ -107,12 +99,6 @@
                     this.myMessagesSetList(hasnot_read_messages)
                 }, this.myMessagesGetError)
             }
-        },
-        ready: function () {
-            window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
-        },
-        beforeDestroy: function () {
-            this.myMessagesLeave();
         }
     }
 </script>
