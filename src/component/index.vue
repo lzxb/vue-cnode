@@ -119,34 +119,34 @@
     }
 </style>
 <template>
-    <ul class="list" v-cloak>
-        <li v-for="o in data" track-by="id">
-            <div class="typeicon" flex v-if="o.top || o.good">
-                <div class="icon" v-if="o.top">
+    <ul class="list">
+        <li v-for="item in data" track-by="id">
+            <div class="typeicon" flex v-if="item.top || item.good">
+                <div class="icon" v-if="item.top">
                     <i class="iconfont icon-zhiding"></i>
                 </div>
-                <div class="icon" v-if="o.good">
+                <div class="icon" v-if="item.good">
                     <i class="iconfont icon-jinghua"></i>
                 </div>
             </div>
             <div class="user" flex="box:first">
                 <div class="headimg">
                     <div class="pic">
-                        <img :src="o.author.avatar_url" alt="">
+                        <img :src="item.author.avatar_url" alt="">
                     </div>
                 </div>
                 <div class="box">
-                    <div class="name">{{o.author.loginname}}</div>
+                    <div class="name">{{item.author.loginname}}</div>
                     <div flex>
-                        <time class="time">发表于{{o.create_at | formatDate}}</time>
-                        <a class="tab" v-link="`/?tab=${o.tab}`" v-if="o.tab">#{{o.tab | tabName}}#</a>
+                        <time class="time">发表于{{item.create_at | formatDate}}</time>
+                        <a class="tab" v-link="`/?tab=${item.tab}`" v-if="item.tab">#{{item.tab | tabName}}#</a>
                     </div>
                 </div>
             </div>
-            <a v-link="`/topic/${o.id}`">
-                <div class="tit">{{o.title}}</div>
-                <div class="images count-{{o.content | getTextImgUrl | length}}" flex="box:mean">
-                    <div class="item" v-for="imgurl in o.content | getTextImgUrl">
+            <a v-link="`/topic/${item.id}`">
+                <div class="tit">{{item.title}}</div>
+                <div class="images count-{{item.content | getTextImgUrl | length}}" flex="box:mean">
+                    <div class="item" v-for="imgurl in item.content | getTextImgUrl">
                         <div class="pic">
                             <img :src="transparent" :style="{backgroundImage: `url(${imgurl})`}" alt="">
                         </div>
@@ -155,17 +155,17 @@
                 <div class="expand" flex="box:mean">
                     <div class="item click" flex="main:center cross:center">
                         <i class="iconfont icon-chakan"></i>
-                        <div class="num">{{o.visit_count > 0 ? o.visit_count : '暂无阅读'}}</div>
+                        <div class="num">{{item.visit_count > 0 ? item.visit_count : '暂无阅读'}}</div>
                     </div>
                     <div class="item reply" flex="main:center cross:center">
                         <i class="iconfont icon-pinglun"></i>
-                        <div class="num">{{o.reply_count > 0 ? o.reply_count : '暂无评论'}}</div>
+                        <div class="num">{{item.reply_count > 0 ? item.reply_count : '暂无评论'}}</div>
                     </div>
                     <div class="item last-reply" flex="main:center cross:center">
                         <div class="pic">
-                            <img :src="transparent" alt="" :style="{backgroundImage: `url(${o.author.avatar_url})`}">
+                            <img :src="transparent" alt="" :style="{backgroundImage: `url(${item.author.avatar_url})`}">
                         </div>
-                        <time class="time">{{o.last_reply_at | formatDate}}</time>
+                        <time class="time">{{item.last_reply_at | formatDate}}</time>
                     </div>
                 </div>
             </a>

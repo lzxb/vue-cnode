@@ -122,7 +122,8 @@
     </div>
 </template>
 <script>
-    import Tool, {actions} from './Tool'
+    import Tool from './Tool'
+    import actions from './actions/'
     import store from './vuex/store'
     import menus from './config/menus'
     export default {

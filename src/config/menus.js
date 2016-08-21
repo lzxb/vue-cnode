@@ -32,7 +32,7 @@ export default [
             title: '消息',
             icon: 'xiaoxi',
             link: '/my/messages',
-            auth: false
+            auth: true
         },
         {
             title: '关于',

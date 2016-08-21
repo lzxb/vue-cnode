@@ -1,5 +1,4 @@
 import ajax from 'superagent' //ajax 请求库
-import * as actions from './actions/'
 import * as config from './config/config'
 
 const Tool = {}
@@ -124,7 +123,4 @@ Tool.removeLocalItem = function (key) {
     }
     return localStorage.removeItem()
 }
-
-export {actions}
-
 export default Tool
