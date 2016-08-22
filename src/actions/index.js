@@ -5,47 +5,47 @@ export default (...arg) => {
     /**
      * 显示菜单
      */
-    actions.sideBarShow = ({ dispatch }) => {
-        dispatch('sideBarShow')
+    actions.SIDE_BAR_SHOW = ({ dispatch }) => {
+        dispatch('SIDE_BAR_SHOW')
     }
     /**
      * 隐藏菜单
      */
-    actions.sideBarHide = ({dispatch}) => {
-        dispatch('sideBarHide')
+    actions.SIDE_BAR_HIDE = ({dispatch}) => {
+        dispatch('SIDE_BAR_HIDE')
     }
     /**
      * 登录
      */
-    actions.signin = ({dispatch}, user) => {
-        dispatch('signin', user)
+    actions.SIGNIN = ({dispatch}, user) => {
+        dispatch('SIGNIN', user)
     }
     /**
      * 退出
      */
-    actions.signout = ({dispatch}) => {
-        dispatch('signout')
+    actions.SIGNOUT = ({dispatch}) => {
+        dispatch('SIGNOUT')
     }
 
     const newPage = (name) => {
         if (!name) return
-        actions.SetView = ({dispatch}, view) => { //存储页面信息
-            dispatch(`${name}SetView`, view)
+        actions.SET_VIEW = ({dispatch}, view) => { //存储页面信息
+            dispatch(`${name}SET_VIEW`, view)
         }
-        actions.SetList = ({dispatch}, list) => { //存储页面列表信息
-            dispatch(`${name}SetList`, list)
+        actions.SET_LIST = ({dispatch}, list) => { //存储页面列表信息
+            dispatch(`${name}SET_LIST`, list)
         }
-        actions.SetPath = function ({dispatch}, path) { //离开页面，保存滚动条位置
-            dispatch(`${name}SetPath`, path)
+        actions.SET_PATH = function ({dispatch}, path) { //离开页面，保存滚动条位置
+            dispatch(`${name}SET_PATH`, path)
         }
-        actions.GetError = ({dispatch}, ...arg) => { //获取页面数据失败
-            dispatch(`${name}GetError`, ...arg)
+        actions.PAGE_ERROR = ({dispatch}, ...arg) => { //获取页面数据失败
+            dispatch(`${name}PAGE_ERROR`, ...arg)
         }
-        actions.Leave = ({dispatch}) => { //离开页面，保存滚动条位置
-            dispatch(`${name}Leave`)
+        actions.LEAVE = ({dispatch}) => { //离开页面，保存滚动条位置
+            dispatch(`${name}LEAVE`)
         }
-        actions.ReSet = ({dispatch}) => { //重置组件状态
-            dispatch(`${name}ReSet`)
+        actions.RESET = ({dispatch}) => { //重置组件状态
+            dispatch(`${name}RESET`)
         }
     }
     newPage(...arg) //创建页面对应的action

@@ -15,7 +15,7 @@ export default function (name = '') {
         },
         created() {
             if (this.state.path && this.state.path != this.$route.path) { //让用户后退时，还原状态
-                this.ReSet() //重置页面状态
+                this.RESET() //重置页面状态
             }
         },
         data() {
@@ -25,7 +25,7 @@ export default function (name = '') {
             window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
         },
         beforeDestroy() {
-            this.Leave() //记录滚动条位置
+            this.LEAVE() //记录滚动条位置
         }
     }
 }

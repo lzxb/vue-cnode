@@ -68,7 +68,7 @@
                     if(res.success) {
                         return Tool.get(`/api/v1/user/${res.loginname}`, {}, ({data}) => {
                             data.accesstoken = this.from.accesstoken;
-                            this.signin(data)
+                            this.SIGNIN(data)
                             this.$router.go('/')
                         }, errorCB)
                     }

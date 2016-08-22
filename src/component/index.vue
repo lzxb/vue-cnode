@@ -204,7 +204,6 @@ export default {
     },
     route: {
         data(transition) {
-            console.log(transition)
             /**
              * 地址栏参数改变，重置数据
              */

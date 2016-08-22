@@ -75,7 +75,7 @@
     <div class="app" :class="{'app-side-bar-show': sideBar}">
         <div class="wrap">
             <header class="header" flex="box:justify">
-                <div class="icon" flex="main:center cross:center" v-on:click="sideBarShow">
+                <div class="icon" flex="main:center cross:center" v-on:click="SIDE_BAR_SHOW">
                     <i class="iconfont icon-caidan"></i>
                 </div>
                 <div class="title">{{title || '全部'}}</div>
@@ -88,7 +88,7 @@
         <div class="side-bar">
             <ul class="signin" v-if="!user.accesstoken">
                 <li>
-                    <a flex="box:first" v-link="'/signin'" v-on:click="sideBarHide">
+                    <a flex="box:first" v-link="'/signin'" v-on:click="SIDE_BAR_HIDE">
                         <div class="icon" flex="main:center cross:center">
                             <i class="iconfont icon-qudenglu"></i>
                         </div>
@@ -97,7 +97,7 @@
                 </li>
             </ul>
             <div class="user" v-else>
-                <a v-link="`/user/${user.loginname}`" flex v-on:click="sideBarHide">
+                <a v-link="`/user/${user.loginname}`" flex v-on:click="SIDE_BAR_HIDE">
                     <div class="headimg" flex-box="0">
                         <img :src="user.avatar_url" alt="">
                     </div>
@@ -109,7 +109,7 @@
             </div>
             <ul class="nav" v-for="o in menus">
                 <li v-for="d in o" v-if="d.auth ? user.loginname : true">
-                    <a flex="box:first" v-link="d.link" v-on:click="sideBarHide">
+                    <a flex="box:first" v-link="d.link" v-on:click="SIDE_BAR_HIDE">
                         <div class="icon" flex="main:center cross:center">
                             <i class="iconfont icon-{{d.icon}}"></i>
                         </div>
@@ -118,7 +118,7 @@
                 </li>
             </ul>
         </div>
-        <div class="side-bar-close" v-on:click="sideBarHide"></div>
+        <div class="side-bar-close" v-on:click="SIDE_BAR_HIDE"></div>
     </div>
 </template>
 <script>
@@ -143,7 +143,7 @@
         },
         route: {
             data() {
-                this.sideBarHide();
+                this.SIDE_BAR_HIDE();
                 this.title = Tool.getTitle(this.$route)
             }
         }

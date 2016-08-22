@@ -90,9 +90,9 @@
                 Tool.get('/api/v1/messages', {mdrender: false, accesstoken}, ({data}) => {
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
-                    this.SetList(hasnot_read_messages)
-                    this.SetPath(this.$route.path)
-                }, this.GetError)
+                    this.SET_LIST(hasnot_read_messages)
+                    this.SET_PATH(this.$route.path)
+                }, this.PAGE_ERROR)
             }
         }
     }

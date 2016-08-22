@@ -8,7 +8,7 @@ var mutationss = {}
  * 
  * @param {Object} state
  */
-mutationss.sideBarShow = (state) => {
+mutationss.SIDE_BAR_SHOW = (state) => {
     state.sideBar = true //显示菜单
 }
 /**
@@ -16,7 +16,7 @@ mutationss.sideBarShow = (state) => {
  * 
  * @param {Object} state
  */
-mutationss.sideBarHide = (state) => {
+mutationss.SIDE_BAR_HIDE = (state) => {
     state.sideBar = false //关闭菜单
 }
 /**
@@ -25,7 +25,7 @@ mutationss.sideBarHide = (state) => {
  * @param {Object} state
  * @param {Object} user
  */
-mutationss.signin = (state, user) => {
+mutationss.SIGNIN = (state, user) => {
     state.user = user
     Tool.localItem('user', JSON.stringify(user))
 }
@@ -34,40 +34,40 @@ mutationss.signin = (state, user) => {
  * 
  * @param {Object} state
  */
-mutationss.signout = (state) => {
+mutationss.SIGNOUT = (state) => {
     state.user = {}
     Tool.removeLocalItem('user')
 }
 
 const newPage = (name) => {
 
-    mutationss[`${name}SetView`] = (state, view) => { //获取页面数据成功
+    mutationss[`${name}SET_VIEW`] = (state, view) => { //获取页面数据成功
         state[name].view = view
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
 
-    mutationss[`${name}SetList`] = (state, list) => { //获取页面数据成功
+    mutationss[`${name}SET_LIST`] = (state, list) => { //获取页面数据成功
         state[name].list = list
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
 
-    mutationss[`${name}GetError`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
+    mutationss[`${name}PAGE_ERROR`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
         state[name].loadState = loadState
         state[name].loadTip = loadTip
     }
 
-    mutationss[`${name}Leave`] = (state) => { //离开页面，保存滚动条位置
+    mutationss[`${name}LEAVE`] = (state) => { //离开页面，保存滚动条位置
         state[name].scrollX = window.scrollX
         state[name].scrollY = window.scrollY
     }
 
-    mutationss[`${name}SetPath`] = (state, path = '') => { //设置状态状态是在那个路径使用
+    mutationss[`${name}SET_PATH`] = (state, path = '') => { //设置状态状态是在那个路径使用
         state[name].path = path
     }
 
-    mutationss[`${name}ReSet`] = (state) => { //重置组件状态
+    mutationss[`${name}RESET`] = (state) => { //重置组件状态
         var newState = pageState()
 
         for (let k in newState) {
@@ -76,7 +76,7 @@ const newPage = (name) => {
 
     }
 
-    mutationss[`${name}SetViewKey`] = (state, view) => {
+    mutationss[`${name}SET_VIEW_KEY`] = (state, view) => {
         for (let k in view) {
             state[name].view[k] = view[k]
         }

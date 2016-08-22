@@ -159,7 +159,7 @@
         vuex: {
             actions: {
                 setIndex({dispatch}, index) {
-                    dispatch(`${NAME}SetViewKey`, {tabIndex: index}) //更新当前组件状态的索引
+                    dispatch(`${NAME}SET_VIEW_KEY`, {tabIndex: index}) //更新当前组件状态的索引
                 }
             }
         },
@@ -169,12 +169,12 @@
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
                         data.tabIndex = this.view.tabIndex || 0
-                        this.SetView(data)
-                        this.SetPath(this.$route.path) //设置组件状态路径，才会显示页面
+                        this.SET_VIEW(data)
+                        this.SET_PATH(this.$route.path) //设置组件状态路径，才会显示页面
                     } else {
-                        this.GetError({loadTip: '用户不存在'})
+                        this.PAGE_ERROR({loadTip: '用户不存在'})
                     }
-                }, this.GetError)
+                }, this.PAGE_ERROR)
             }
         }
     }

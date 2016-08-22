@@ -11,8 +11,8 @@
             text-align: center;
             border-radius: 5px;
             font-size: 14px;
-            color: @mainStressColor;
-            background: #fff;
+            color: #fff;
+            background: @topIconColor;
         }
     }
 </style>
@@ -32,7 +32,7 @@
         mixins: [mixins('signout')],
         methods: {
             go() {
-                this.signout();
+                this.SIGNOUT();
                 this.$router.go('/')
             }
         }
