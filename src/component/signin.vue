@@ -39,13 +39,11 @@
     </div>
 </template>
 <script>
-    import Tool,{actions} from '../Tool'
-    import components from './common/'
+    import Tool from '../Tool'
+    import mixins from '../mixins'
 
     export default {
-        vuex: {
-            actions
-        },
+        mixins: [mixins('signin')],
         data() {
             return {
                 from: {
@@ -56,7 +54,7 @@
             }
         },
         methods: {
-            submit: function () {
+            submit() {
                 if(this.submitState) return false
                 this.submitName = '正在登录...'
                 this.submitState = true

@@ -1,6 +1,7 @@
+import Tool from '../Tool'
 import pages from '../config/pages'
-
-var mutationss = {};
+import pageState from '../states/page'
+var mutationss = {}
 
 /**
  * 显示菜单
@@ -57,9 +58,21 @@ const newPage = (name) => {
         state[name].scrollX = window.scrollX
         state[name].scrollY = window.scrollY
     }
+    mutationss[`${name}SetPath`] = (state, path = '') => { //设置状态状态是在那个路径使用
+        state[name].path = path
+    }
+
+    mutationss[`${name}ReSet`] = (state) => { //重置组件状态
+        var newState = pageState()
+
+        for (let k in newState) {
+            state[name][k] = newState[k]
+        }
+
+    }
 }
 
-pages.map((item) => newPage(item)) //创建页面对应的mutations
+pages.map((item) => newPage(item)) //创建页面对应的mutationss
 
-export default mutationss;
+export default mutationss
 

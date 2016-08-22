@@ -133,7 +133,7 @@
                 sideBar: state => state.sideBar,
                 user: state => state.user
             },
-            actions
+            actions: actions()
         },
         data() {
             return {

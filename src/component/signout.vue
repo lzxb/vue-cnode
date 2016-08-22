@@ -25,18 +25,11 @@
     </div>
 </template>
 <script>
-    import Tool,{actions} from '../Tool'
-    import components from './common/'
+    import Tool from '../Tool'
+    import mixins from '../mixins'
 
     export default {
-        vuex: {
-            actions
-        },
-        data() {
-            return {
-                msg: '退出'
-            }
-        },
+        mixins: [mixins('signout')],
         methods: {
             go() {
                 this.signout();

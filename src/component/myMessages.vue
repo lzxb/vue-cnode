@@ -82,22 +82,17 @@
 <script>
     import Tool from '../Tool'
     import mixins from '../mixins'
-
     export default {
-        mixins: [mixins],
-        vuex: {
-            getters: {
-                state: state => state.myMessages
-            },
-        },
+        mixins: [mixins('myMessages')],
         route: {
             data() {
                 var {accesstoken} = this.user
                 Tool.get('/api/v1/messages', {mdrender: false, accesstoken}, ({data}) => {
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
-                    this.myMessagesSetList(hasnot_read_messages)
-                }, this.myMessagesGetError)
+                    this.SetList(hasnot_read_messages)
+                    this.SetPath(this.$route.path)
+                }, this.GetError)
             }
         }
     }

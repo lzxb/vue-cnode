@@ -111,7 +111,7 @@
             </div>
         </div>
         <ul class="tab-nav" flex="box:mean">
-            <li :class="{on: view.tabIndex == 0}" v-on:click="view.tabIndex = 0">回复</li>
+            <li :class="{on: view.tabIndex == 0}" v-on:click="ReSet">回复</li>
             <li :class="{on: view.tabIndex == 1}" v-on:click="view.tabIndex = 1">主题</li>
         </ul>
         <ul class="list" :style="{display: view.tabIndex == 0 ? 'block' : 'none'}">
@@ -152,25 +152,20 @@
 <script>
     import Tool from '../Tool'
     import mixins from '../mixins'
-    
     export default {
-        mixins: [mixins],
-        vuex: {
-            getters: {
-                state: state => state.userView
-            }
-        },
+        mixins: [mixins('userView')],
         route: {
             data() {
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
                         data.tabIndex = this.view.tabIndex || 0
-                        this.userViewSetView(data)
+                        this.SetView(data)
+                        this.SetPath(this.$route.path) //设置组件状态路径，才会显示页面
                     } else {
-                        this.userViewGetError({loadTip: '用户不存在'})
+                        this.GetError({loadTip: '用户不存在'})
                     }
-                }, this.userViewGetError)
+                }, this.GetError)
             }
         }
     }

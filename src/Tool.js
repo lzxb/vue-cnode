@@ -1,5 +1,7 @@
 import ajax from 'superagent' //ajax 请求库
 import * as config from './config/config'
+import objectAssign from 'object-assign'
+export {objectAssign}
 
 const Tool = {}
 

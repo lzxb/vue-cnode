@@ -40,6 +40,7 @@
   "dependencies": {
     "flex.css": "^1.0.4",
     "normalize.css": "^4.2.0",
+    "object-assign": "^4.1.0",
     "superagent": "^2.1.0",
     "vue": "^1.0.26",
     "vue-router": "^0.7.13",
