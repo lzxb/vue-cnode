@@ -111,8 +111,8 @@
             </div>
         </div>
         <ul class="tab-nav" flex="box:mean">
-            <li :class="{on: view.tabIndex == 0}" v-on:click="ReSet">回复</li>
-            <li :class="{on: view.tabIndex == 1}" v-on:click="view.tabIndex = 1">主题</li>
+            <li :class="{on: view.tabIndex == 0}" v-on:click="setIndex(0)">回复</li>
+            <li :class="{on: view.tabIndex == 1}" v-on:click="setIndex(1)">主题</li>
         </ul>
         <ul class="list" :style="{display: view.tabIndex == 0 ? 'block' : 'none'}">
             <li flex="box:first" v-for="item in view.recent_replies">
@@ -150,10 +150,19 @@
     <load v-else :tip="loadTip" :state="loadState"></load>
 </template>
 <script>
+    const NAME = 'userView'
     import Tool from '../Tool'
     import mixins from '../mixins'
+
     export default {
-        mixins: [mixins('userView')],
+        mixins: [mixins(NAME)],
+        vuex: {
+            actions: {
+                setIndex({dispatch}, index) {
+                    dispatch(`${NAME}SetViewKey`, {tabIndex: index}) //更新当前组件状态的索引
+                }
+            }
+        },
         route: {
             data() {
                 var {loginname} = this.$route.params

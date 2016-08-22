@@ -40,24 +40,29 @@ mutationss.signout = (state) => {
 }
 
 const newPage = (name) => {
+
     mutationss[`${name}SetView`] = (state, view) => { //获取页面数据成功
         state[name].view = view
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
+
     mutationss[`${name}SetList`] = (state, list) => { //获取页面数据成功
         state[name].list = list
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
+
     mutationss[`${name}GetError`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
         state[name].loadState = loadState
         state[name].loadTip = loadTip
     }
+
     mutationss[`${name}Leave`] = (state) => { //离开页面，保存滚动条位置
         state[name].scrollX = window.scrollX
         state[name].scrollY = window.scrollY
     }
+
     mutationss[`${name}SetPath`] = (state, path = '') => { //设置状态状态是在那个路径使用
         state[name].path = path
     }
@@ -67,6 +72,13 @@ const newPage = (name) => {
 
         for (let k in newState) {
             state[name][k] = newState[k]
+        }
+
+    }
+
+    mutationss[`${name}SetViewKey`] = (state, view) => {
+        for (let k in view) {
+            state[name].view[k] = view[k]
         }
 
     }
