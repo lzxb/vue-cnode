@@ -53,7 +53,7 @@ const newPage = (name) => {
         state[name].loadTip = '加载成功'
     }
 
-    mutationss[`${name}PAGE_ERROR`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
+    mutationss[`${name}GET_DATA_ERROR`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败
         state[name].loadState = loadState
         state[name].loadTip = loadTip
     }

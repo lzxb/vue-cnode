@@ -13,6 +13,7 @@ export default (...arg) => {
      */
     actions.SIDE_BAR_HIDE = ({dispatch}) => {
         dispatch('SIDE_BAR_HIDE')
+        window.scrollTo(0, 0)
     }
     /**
      * 登录
@@ -35,8 +36,8 @@ export default (...arg) => {
         actions.SET_LIST = ({dispatch}, list) => { //存储页面列表信息
             dispatch(`${name}SET_LIST`, list)
         }
-        actions.PAGE_ERROR = ({dispatch}, ...arg) => { //获取页面数据失败
-            dispatch(`${name}PAGE_ERROR`, ...arg)
+        actions.GET_DATA_ERROR = ({dispatch}, ...arg) => { //获取页面数据失败
+            dispatch(`${name}GET_DATA_ERROR`, ...arg)
         }
         actions.LEAVE = ({dispatch}) => { //离开页面，保存滚动条位置
             dispatch(`${name}LEAVE`)

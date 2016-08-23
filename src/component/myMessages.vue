@@ -91,7 +91,7 @@
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
                     this.SET_LIST(hasnot_read_messages)
-                }, this.PAGE_ERROR)
+                }, this.GET_DATA_ERROR)
             }
         }
     }

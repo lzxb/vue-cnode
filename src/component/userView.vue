@@ -21,6 +21,10 @@
                 height: 80px;
                 margin: 2px;
                 border-radius: 50%;
+                img {
+                    width: 100%;
+                    height: 200%;
+                }
             }
         }
         .name {
@@ -171,9 +175,9 @@
                         data.tabIndex = this.view.tabIndex || 0
                         this.SET_VIEW(data)
                     } else {
-                        this.PAGE_ERROR({loadTip: '用户不存在'})
+                        this.GET_DATA_ERROR({loadTip: '用户不存在'})
                     }
-                }, this.PAGE_ERROR)
+                }, this.GET_DATA_ERROR)
             }
         }
     }

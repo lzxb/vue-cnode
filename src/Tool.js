@@ -13,7 +13,7 @@ const Tool = {}
  * @param {Function} [success=() => { }] 请求成功执行回调
  * @param {Function} [error=() => { }] 请求失败执行回调
  */
-Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
+Tool.get = (url, query = {}, success = () => { }, error = () => { }, end = () => {}) => {
 
     ajax('GET', config.target + url).query(query).end((err, res) => {
         if (Tool.isJson(res.body)) {
@@ -21,11 +21,12 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }) => {
         } else {
             error({})
         }
+         end(res.body)
     })
-
+   
 }
 
-Tool.post = (url, body = {}, success = () => { }, error = () => { }) => {
+Tool.post = (url, body = {}, success = () => { }, error = () => { }, end= () => {}) => {
 
     ajax('POST', config.target + url).send(body).end((err, res) => {
         if (Tool.isJson(res.body)) {
@@ -33,6 +34,7 @@ Tool.post = (url, body = {}, success = () => { }, error = () => { }) => {
         } else {
             error({})
         }
+        end(res.body)
     })
 
 }

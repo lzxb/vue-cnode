@@ -21,8 +21,10 @@ export default function (name = '') {
         data() {
             return this.state
         },
-        ready() {
-            window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
+        route: {
+            data() {
+                window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置
+            }
         },
         beforeDestroy() {
             this.LEAVE() //记录滚动条位置
