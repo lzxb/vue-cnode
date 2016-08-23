@@ -63,17 +63,13 @@ const newPage = (name) => {
         state[name].scrollY = window.scrollY
     }
 
-    mutationss[`${name}SET_PATH`] = (state, path = '') => { //设置状态状态是在那个路径使用
-        state[name].path = path
-    }
-
-    mutationss[`${name}RESET`] = (state) => { //重置组件状态
+    mutationss[`${name}RESET`] = (state, path = '') => { //重置组件状态
         var newState = pageState()
 
         for (let k in newState) {
-            state[name][k] = newState[k]
+            if(k != 'path') state[name][k] = newState[k]
         }
-
+        state[name].path = path //设置当前组件使用的路径
     }
 
     mutationss[`${name}SET_VIEW_KEY`] = (state, view) => {

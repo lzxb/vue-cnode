@@ -14,8 +14,8 @@ export default function (name = '') {
             actions: actions(name)
         },
         created() {
-            if (this.state.path && this.state.path != this.$route.path) { //让用户后退时，还原状态
-                this.RESET() //重置页面状态
+            if (this.state.path != this.$route.path) { //判断当前组件路径和state路径是否一致，否则重置
+                this.RESET(this.$route.path) //重置当前页面路径状态
             }
         },
         data() {

@@ -170,7 +170,6 @@
                     if(data) {
                         data.tabIndex = this.view.tabIndex || 0
                         this.SET_VIEW(data)
-                        this.SET_PATH(this.$route.path) //设置组件状态路径，才会显示页面
                     } else {
                         this.PAGE_ERROR({loadTip: '用户不存在'})
                     }

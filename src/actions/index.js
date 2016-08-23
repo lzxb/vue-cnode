@@ -35,17 +35,14 @@ export default (...arg) => {
         actions.SET_LIST = ({dispatch}, list) => { //存储页面列表信息
             dispatch(`${name}SET_LIST`, list)
         }
-        actions.SET_PATH = function ({dispatch}, path) { //离开页面，保存滚动条位置
-            dispatch(`${name}SET_PATH`, path)
-        }
         actions.PAGE_ERROR = ({dispatch}, ...arg) => { //获取页面数据失败
             dispatch(`${name}PAGE_ERROR`, ...arg)
         }
         actions.LEAVE = ({dispatch}) => { //离开页面，保存滚动条位置
             dispatch(`${name}LEAVE`)
         }
-        actions.RESET = ({dispatch}) => { //重置组件状态
-            dispatch(`${name}RESET`)
+        actions.RESET = ({dispatch}, ...arg) => { //重置组件状态
+            dispatch(`${name}RESET`, ...arg)
         }
     }
     newPage(...arg) //创建页面对应的action
