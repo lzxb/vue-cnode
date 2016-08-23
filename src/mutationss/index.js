@@ -42,16 +42,22 @@ mutationss.SIGNOUT = (state) => {
 
 const newPage = (name) => {
 
-    mutationss[`${name}SET_VIEW`] = (state, view) => { //获取页面数据成功
+    mutationss[`${name}GET_DATA_VIEW`] = (state, view) => { //获取页面数据成功
         state[name].view = view
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
 
-    mutationss[`${name}SET_LIST`] = (state, list) => { //获取页面数据成功
+    mutationss[`${name}GET_DATA_LIST`] = (state, list) => { //获取页面数据成功
         state[name].list = list
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
+    }
+    
+    mutationss[`${name}PULL_PAGE_LIST_PUSH`] = (state, list) => { //
+        list.map(item => state[name].list.push(item))
+        state[name].loadState = 1
+        state[name].loadTip = '上拉加载更多'
     }
 
     mutationss[`${name}GET_DATA_ERROR`] = (state, {loadTip = '加载失败', loadState = -1}) => { //获取页面数据失败

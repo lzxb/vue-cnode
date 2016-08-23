@@ -93,7 +93,7 @@
                 Tool.get('/api/v1/messages', {mdrender: false, accesstoken}, ({data}) => {
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
-                    this.SET_LIST(hasnot_read_messages)
+                    this.GET_DATA_LIST(hasnot_read_messages)
                 }, this.GET_DATA_ERROR)
             }
         }

@@ -174,7 +174,7 @@
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
-                        this.SET_VIEW(data)
+                        this.GET_DATA_VIEW(data)
                     } else {
                         this.GET_DATA_ERROR({loadTip: '用户不存在'})
                     }

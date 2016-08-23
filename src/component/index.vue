@@ -60,7 +60,7 @@
             color: @mainStressColor;
         }
     }
-
+    
     .images {
         padding: 5px;
         .item {
@@ -81,7 +81,7 @@
             background-position: center center;
         }
     }
-
+    
     .expand {
         padding: 10px 0;
         border-top: 1px solid darken(@shallow, 5%);
@@ -120,7 +120,7 @@
 </style>
 <template>
     <ul class="list">
-        <li v-for="item in data" track-by="id">
+        <li v-for="item in list" track-by="id">
             <div class="typeicon" flex v-if="item.top || item.good">
                 <div class="icon" v-if="item.top">
                     <i class="iconfont icon-zhiding"></i>
@@ -180,7 +180,6 @@ const NAME = 'index'
 import Tool from '../Tool'
 import mixins from '../mixins'
 
-
 var initQuery = () => {
     return {
         tab: 'all',
@@ -190,9 +189,29 @@ var initQuery = () => {
     }
 }
 
-var query = initQuery()
-
 export default {
-    mixins: [mixins(NAME)]
+    mixins: [mixins(NAME)],
+    created() {
+        if(!this.state.query) {
+            this.ADD_CUSTOM_KEY({query: initQuery()}) //添加自定义字段
+        }
+    },
+    data() {
+        return this.state
+    },
+    route: {
+        data() {
+            this.SET_CUSTOM_KEY({query: initQuery()})
+        }
+    },
+    methods: {
+        loadNext() {
+        },
+        getList() {
+            Tool.get('/api/v1/topics', this.state.query, ({data}) => {
+                
+            }, this.GET_DATA_ERROR)
+        }
+    }
 }
 </script>
