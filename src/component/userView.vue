@@ -167,6 +167,14 @@
                 }
             }
         },
+        created() {
+            if(!this.state.view.tabIndex) { //当属性不存在时，给其设置默认值
+                this.setIndex(0)
+            }
+        },
+        data() {
+            return this.state
+        },
         route: {
             data() {
                 var {loginname} = this.$route.params

@@ -18,9 +18,6 @@ export default function (name = '') {
                 this.RESET(this.$route.path) //重置当前页面路径状态
             }
         },
-        data() {
-            return this.state
-        },
         route: {
             data() {
                 window.scrollTo(this.scrollX, this.scrollY) //还原滚动条位置

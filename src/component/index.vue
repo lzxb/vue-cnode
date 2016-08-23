@@ -163,7 +163,7 @@
                     </div>
                     <div class="item last-reply" flex="main:center cross:center">
                         <div class="pic">
-                            <img :src="transparent" alt="" :style="{backgroundImage: `url(${item.author.avatar_url})`}">
+                            <img src="../images/transparent.png" alt="" :style="{backgroundImage: `url(${item.author.avatar_url})`}">
                         </div>
                         <time class="time">{{item.last_reply_at | formatDate}}</time>
                     </div>
@@ -176,69 +176,23 @@
     </div>
 </template>
 <script>
+const NAME = 'index'
 import Tool from '../Tool'
-import components from './common/'
-import transparent from '../images/transparent.png'
+import mixins from '../mixins'
+
+
+var initQuery = () => {
+    return {
+        tab: 'all',
+        page: 1,
+        limit: 10,
+        mdrender: 10
+    }
+}
+
+var query = initQuery()
 
 export default {
-    components,
-    data() {
-        return {
-            loadState: 0,
-            loadTip: '正在加载中...',
-            dataBtn: true, //true允许加载数据， false不运行加载数据
-            data: [],
-            transparent,
-            form: {
-                tab: 'all',
-                page: 1,
-                limit: 10,
-                mdrender: true
-            }
-        }
-    },
-    methods: {
-        loadNext(){
-            this.dataBtn = true
-        }
-    },
-    route: {
-        data(transition) {
-            /**
-             * 地址栏参数改变，重置数据
-             */
-            this.loadState = 0
-            this.loadTip = '正在加载中...'
-            this.dataBtn = true
-            this.data = []
-
-            this.form.page = 1
-            this.form.tab = this.$route.query.tab
-            //参数改变后，先清理掉原来的定时器
-            clearInterval(this.timer)
-            //使用定时器定时检测load组件是否在可视区
-            this.timer = setInterval(() => {
-                if(Tool.testMeet(this.$refs.load.$el) && this.dataBtn) {
-                    this.dataBtn = false
-                    this.loadState = 0
-                    this.loadTip = '正在加载中...'
-                    Tool.get('/api/v1/topics', this.form, ({data}) => {
-                        this.loadState = 1
-                        this.loadTip = '上拉加载更多'
-                        data.map((item) => this.data.push(item))
-                        this.form.page++
-                        this.dataBtn = true
-                    }, () => {
-                        this.loadState = -1
-                        this.loadTip = '加载失败'
-                        this.dataBtn = false
-                    })
-                }
-            }, 30)
-        }
-    },
-    detached() {
-        clearInterval(this.timer)
-    }
+    mixins: [mixins(NAME)]
 }
 </script>

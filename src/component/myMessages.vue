@@ -84,6 +84,9 @@
     import mixins from '../mixins'
     export default {
         mixins: [mixins('myMessages')],
+        data() {
+            return this.state
+        },
         route: {
             data() {
                 var {accesstoken} = this.user
