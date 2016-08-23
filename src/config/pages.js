@@ -12,6 +12,8 @@ export default [
 export const actions = [
     'GET_DATA_VIEW', //存储页面信息
     'GET_DATA_LIST', //存储列表信息
+    'PULL_PAGE_LIST_PUSH', //拉取页面列表数据，分页使用
+    'GET_DATA_START', //正在获取数据
     'GET_DATA_ERROR', //页面加载失败
     'LEAVE', //页面离开，存储滚动条位置
     'RESET', //重置页面状态

@@ -13,7 +13,6 @@ export default (...arg) => {
      */
     action.SIDE_BAR_HIDE = ({dispatch}) => {
         dispatch('SIDE_BAR_HIDE')
-        window.scrollTo(0, 0)
     }
     /**
      * 登录
@@ -31,7 +30,7 @@ export default (...arg) => {
     const newPage = (name) => { //设置页面行为
         if (!name) return
         for(let i=0;i<actions.length;i++) {
-            action[actions[i]] = ({dispatch}, ...arg) => { //存储页面信息
+            action[actions[i]] = ({dispatch}, ...arg) => {
                 dispatch(`${name}${actions[i]}`, ...arg)
             }  
         }

@@ -120,7 +120,7 @@
 </style>
 <template>
     <ul class="list">
-        <li v-for="item in list" track-by="id">
+        <li v-for="item in list" track-by="$index">
             <div class="typeicon" flex v-if="item.top || item.good">
                 <div class="icon" v-if="item.top">
                     <i class="iconfont icon-zhiding"></i>
@@ -171,8 +171,8 @@
             </a>
         </li>
     </ul>
-    <div v-on:click="loadNext">
-        <load v-ref:load :tip="loadTip" :state="loadState"></load>
+    <div v-on:click="loadNext" v-el:load>
+        <load :tip="loadTip" :state="loadState"></load>
     </div>
 </template>
 <script>
@@ -180,20 +180,11 @@ const NAME = 'index'
 import Tool from '../Tool'
 import mixins from '../mixins'
 
-var initQuery = () => {
-    return {
-        tab: 'all',
-        page: 1,
-        limit: 10,
-        mdrender: 10
-    }
-}
-
 export default {
     mixins: [mixins(NAME)],
     created() {
-        if(!this.state.query) {
-            this.ADD_CUSTOM_KEY({query: initQuery()}) //添加自定义字段
+        if(!this.state.page) {
+            this.ADD_CUSTOM_KEY({page: 1}) //添加自定义字段
         }
     },
     data() {
@@ -201,16 +192,30 @@ export default {
     },
     route: {
         data() {
-            this.SET_CUSTOM_KEY({query: initQuery()})
+            this.getList()
+        },
+        canReuse() {
+            this.SET_CUSTOM_KEY({page: 1})
         }
     },
     methods: {
         loadNext() {
+            this.getList()
         },
         getList() {
-            Tool.get('/api/v1/topics', this.state.query, ({data}) => {
-                
-            }, this.GET_DATA_ERROR)
+            var meet = Tool.testMeet(this.$els.load)
+            if(this.getAjax) return false //请求未结束，防止重复请求
+            this.GET_DATA_START()
+            var {page = 1} = this.state
+            var {tab = ''} = this.$route.query
+            var limit = 10
+            var mdrender = false
+            this.getAjax = Tool.get('/api/v1/topics', {page, tab, limit, mdrender}, ({data: list}) => {
+                this.PULL_PAGE_LIST_PUSH(list)
+                this.SET_CUSTOM_KEY({page: page + 1})
+            }, this.GET_DATA_ERROR, () => {
+                delete this.getAjax
+            })
         }
     }
 }

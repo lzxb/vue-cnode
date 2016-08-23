@@ -15,7 +15,7 @@ const Tool = {}
  */
 Tool.get = (url, query = {}, success = () => { }, error = () => { }, end = () => {}) => {
 
-    ajax('GET', config.target + url).query(query).end((err, res) => {
+    return ajax('GET', config.target + url).query(query).end((err, res) => {
         if (Tool.isJson(res.body)) {
             success(res.body)
         } else {
@@ -28,7 +28,7 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }, end = () =>
 
 Tool.post = (url, body = {}, success = () => { }, error = () => { }, end= () => {}) => {
 
-    ajax('POST', config.target + url).send(body).end((err, res) => {
+    return ajax('POST', config.target + url).send(body).end((err, res) => {
         if (Tool.isJson(res.body)) {
             success(res.body)
         } else {
