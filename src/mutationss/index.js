@@ -1,4 +1,5 @@
 import Tool from '../Tool'
+import Vue from 'vue'
 import pages from '../config/pages'
 import pageState from '../states/page'
 var mutationss = {}
@@ -67,16 +68,22 @@ const newPage = (name) => {
         var newState = pageState()
 
         for (let k in newState) {
-            if(k != 'path') state[name][k] = newState[k]
+            if (k != 'path') state[name][k] = newState[k]
         }
         state[name].path = path //设置当前组件使用的路径
     }
 
-    mutationss[`${name}SET_VIEW_KEY`] = (state, view) => {
-        for (let k in view) {
-            state[name].view[k] = view[k]
+    mutationss[`${name}ADD_CUSTOM_KEY`] = (state, data = {}) => { //添加字段
+        for (let k in data) {
+            Vue.set(state[name], k, data[k])
         }
 
+    }
+
+    mutationss[`${name}SET_CUSTOM_KEY`] = (state, data = {}) => { //设置字段值
+        for (let k in data) {
+            state[name][k] = data[k]
+        }
     }
 }
 

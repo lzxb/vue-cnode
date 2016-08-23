@@ -115,11 +115,11 @@
             </div>
         </div>
         <ul class="tab-nav" flex="box:mean">
-            <li :class="{on: view.tabIndex == 0}" v-on:click="setIndex(0)">回复</li>
-            <li :class="{on: view.tabIndex == 1}" v-on:click="setIndex(1)">主题</li>
+            <li :class="{on: state.tabIndex == 0}" v-on:click="setIndex(0)">回复</li>
+            <li :class="{on: state.tabIndex == 1}" v-on:click="setIndex(1)">主题</li>
         </ul>
-        <ul class="list" :style="{display: view.tabIndex == 0 ? 'block' : 'none'}">
-            <li flex="box:first" v-for="item in view.recent_replies">
+        <ul class="list" :style="{display: state.tabIndex == 0 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in view.recent_replies" track-by="id">
                 <a class="head" v-link="`/user/${item.author.loginname}`">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
@@ -134,8 +134,8 @@
                 </a>
             </li>
         </ul>
-        <ul class="list" :style="{display: view.tabIndex == 1 ? 'block' : 'none'}">
-            <li flex="box:first" v-for="item in view.recent_topics">
+        <ul class="list" :style="{display: state.tabIndex == 1 ? 'block' : 'none'}">
+            <li flex="box:first" v-for="item in view.recent_topics" track-by="id">
                 <a class="head" v-link="`/user/${item.author.loginname}`">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
@@ -160,16 +160,9 @@
 
     export default {
         mixins: [mixins(NAME)],
-        vuex: {
-            actions: {
-                setIndex({dispatch}, index) {
-                    dispatch(`${NAME}SET_VIEW_KEY`, {tabIndex: index}) //更新当前组件状态的索引
-                }
-            }
-        },
         created() {
-            if(!this.state.view.tabIndex) { //当属性不存在时，给其设置默认值
-                this.setIndex(0)
+            if(!this.state.tabIndex) {
+                this.ADD_CUSTOM_KEY({tabIndex: 0}) //添加自定义字段
             }
         },
         data() {
@@ -177,15 +170,20 @@
         },
         route: {
             data() {
+                this.SET_CUSTOM_KEY({tabIndex: 0}) //切换访问的用户时，重新将选项卡设置为回复
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
-                        data.tabIndex = this.view.tabIndex || 0
                         this.SET_VIEW(data)
                     } else {
                         this.GET_DATA_ERROR({loadTip: '用户不存在'})
                     }
                 }, this.GET_DATA_ERROR)
+            }
+        },
+        methods: {
+            setIndex(tabIndex) {
+                this.SET_CUSTOM_KEY({tabIndex})
             }
         }
     }
