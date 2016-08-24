@@ -14,8 +14,9 @@ const Tool = {}
  * @param {Function} [error=() => { }] 请求失败执行回调
  */
 Tool.get = (url, query = {}, success = () => { }, error = () => { }, end = () => {}) => {
-
-    return ajax('GET', config.target + url).query(query).end((err, res) => {
+    var bool = true //true允许回调方法，false不再执行回调
+    ajax('GET', config.target + url).query(query).end((err, res) => {
+        if(!bool) return //防止继续执行回调
         if (Tool.isJson(res.body)) {
             success(res.body)
         } else {
@@ -23,12 +24,15 @@ Tool.get = (url, query = {}, success = () => { }, error = () => { }, end = () =>
         }
          end(res.body)
     })
-   
+   return () => {
+       bool = false
+   }
 }
 
 Tool.post = (url, body = {}, success = () => { }, error = () => { }, end= () => {}) => {
-
-    return ajax('POST', config.target + url).send(body).end((err, res) => {
+    var bool = true //true允许回调方法，false不再执行回调
+    ajax('POST', config.target + url).send(body).end((err, res) => {
+        if(!bool) return //防止继续执行回调
         if (Tool.isJson(res.body)) {
             success(res.body)
         } else {
@@ -36,7 +40,9 @@ Tool.post = (url, body = {}, success = () => { }, error = () => { }, end= () => 
         }
         end(res.body)
     })
-
+    return () => {
+        bool = false
+    }
 }
 
 /**

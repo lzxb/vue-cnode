@@ -191,11 +191,17 @@ export default {
         return this.state
     },
     route: {
-        data() {
-            this.getList()
-        },
+        data({to, from}) {
+            if(from.title != '主题详情') { //防止从详情页面返回，自动拉取数据
+                this.getList()
+            }
+        },  
         canReuse() {
             this.SET_CUSTOM_KEY({page: 1})
+            this.$nextTick(() => {
+                if(this.breakAjax) this.breakAjax() //中断之前的请求，防止执行回调方法
+                delete this.breakAjax //清除掉上个页面的ajax请求
+            })
         }
     },
     methods: {
@@ -203,18 +209,18 @@ export default {
             this.getList()
         },
         getList() {
-            var meet = Tool.testMeet(this.$els.load)
-            if(this.getAjax) return false //请求未结束，防止重复请求
+            if(this.breakAjax) return false //请求未结束，防止重复请求
             this.GET_DATA_START()
             var {page = 1} = this.state
             var {tab = ''} = this.$route.query
             var limit = 10
             var mdrender = false
-            this.getAjax = Tool.get('/api/v1/topics', {page, tab, limit, mdrender}, ({data: list}) => {
+
+            this.breakAjax = Tool.get('/api/v1/topics', {page, tab, limit, mdrender}, ({data: list}) => {
                 this.PULL_PAGE_LIST_PUSH(list)
                 this.SET_CUSTOM_KEY({page: page + 1})
             }, this.GET_DATA_ERROR, () => {
-                delete this.getAjax
+                delete this.breakAjax
             })
         }
     }
