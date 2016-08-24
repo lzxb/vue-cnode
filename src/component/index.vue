@@ -188,8 +188,8 @@ store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
 export default {
     mixins: [mixins(NAME)],
     route: {
-        data({from}) {
-            if(from.title != '主题详情') { //防止从详情页面返回，自动拉取数据
+        data() {
+            if(this.page <= 1) { //自动下载第一页数据
                 this.getList()
             }
         },  
