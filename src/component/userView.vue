@@ -150,29 +150,25 @@
                 </a>
             </li>
         </ul>
+        :{{test}}
     </template>
     <load v-else :tip="loadTip" :state="loadState"></load>
+        
 </template>
 <script>
     const NAME = 'userView'
     import Tool from '../Tool'
     import mixins from '../mixins'
+    import store from '../vuex/store'
+
+    store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
+        tabIndex: 0 //添加tab选项卡字段
+    })
 
     export default {
         mixins: [mixins(NAME)],
-        created() {
-            if(!this.state.tabIndex) {
-                this.ADD_CUSTOM_KEY({tabIndex: 0}) //添加自定义字段
-            }
-        },
-        data() {
-            return this.state
-        },
         route: {
             data({from}) {
-                if (from.title != '主题详情') {
-                    this.SET_CUSTOM_KEY({tabIndex: 0})
-                }
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {

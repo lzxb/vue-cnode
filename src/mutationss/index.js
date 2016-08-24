@@ -1,4 +1,4 @@
-import Tool from '../Tool'
+import Tool, {objectAssign} from '../Tool'
 import Vue from 'vue'
 import pages from '../config/pages'
 import pageState from '../states/page'
@@ -41,6 +41,8 @@ mutationss.SIGNOUT = (state) => {
 }
 
 const newPage = (name) => {
+    
+    var myState = {} //存储用户自定义字段
 
     mutationss[`${name}GET_DATA_VIEW`] = (state, view = {}) => { //获取页面数据成功
         state[name].view = view
@@ -53,7 +55,7 @@ const newPage = (name) => {
         state[name].loadState = 1
         state[name].loadTip = '加载成功'
     }
-    
+
     mutationss[`${name}PULL_PAGE_LIST_PUSH`] = (state, list = []) => { //获取列表数据
         list.map(item => state[name].list.push(item))
         state[name].loadState = 1
@@ -76,16 +78,22 @@ const newPage = (name) => {
     }
 
     mutationss[`${name}RESET`] = (state, path = '') => { //重置组件状态
-        var newState = pageState()
+        var page = pageState()
 
-        for (let k in newState) {
-            if (k != 'path') state[name][k] = newState[k]
+        for (let k in page) {
+            if (k != 'path') state[name][k] = page[k] //重置页面默认字段
         }
+
+        for(let k in myState) {
+            state[name][k] = myState[k] //重置用户自定义字段
+        }
+
         state[name].path = path //设置当前组件使用的路径
     }
 
     mutationss[`${name}ADD_CUSTOM_KEY`] = (state, data = {}) => { //添加字段
         for (let k in data) {
+            myState[k] = data[k]
             Vue.set(state[name], k, data[k])
         }
 

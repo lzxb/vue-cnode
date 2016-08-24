@@ -17,6 +17,5 @@ export const actions = [
     'GET_DATA_ERROR', //页面加载失败
     'LEAVE', //页面离开，存储滚动条位置
     'RESET', //重置页面状态
-    'ADD_CUSTOM_KEY', //添加自定义字段
     'SET_CUSTOM_KEY', //设置自定义字段
 ]

@@ -179,29 +179,25 @@
 const NAME = 'index'
 import Tool from '../Tool'
 import mixins from '../mixins'
+import store from '../vuex/store'
+
+store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
+    page: 1 //加载到第几页
+})
 
 export default {
     mixins: [mixins(NAME)],
-    created() {
-        if(!this.state.page) {
-            this.ADD_CUSTOM_KEY({page: 1}) //添加自定义字段
-        }
-    },
-    data() {
-        return this.state
-    },
     route: {
         data({from}) {
             if(from.title != '主题详情') { //防止从详情页面返回，自动拉取数据
                 this.getList()
             }
         },  
-        canReuse() {
-            this.SET_CUSTOM_KEY({page: 1})
-            this.$nextTick(() => {
-                if(this.breakAjax) this.breakAjax() //中断之前的请求，防止执行回调方法
-                delete this.breakAjax //清除掉上个页面的ajax请求
-            })
+        canReuse({to}) {
+            this.RESET(to.path)
+            if(this.breakAjax) this.breakAjax() //中断之前的请求，防止执行回调方法
+            delete this.breakAjax //清除掉上个页面的ajax请求
+            return true
         }
     },
     methods: {
