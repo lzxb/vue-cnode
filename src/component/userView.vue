@@ -170,10 +170,9 @@
         },
         route: {
             data({from}) {
-
-                if(from.title != '主题详情')
-
-                this.SET_CUSTOM_KEY({tabIndex: 0}) //切换访问的用户时，重新将选项卡设置为回复
+                if (from.title != '主题详情') {
+                    this.SET_CUSTOM_KEY({tabIndex: 0})
+                }
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
