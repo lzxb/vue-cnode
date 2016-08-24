@@ -150,7 +150,6 @@
                 </a>
             </li>
         </ul>
-        :{{test}}
     </template>
     <load v-else :tip="loadTip" :state="loadState"></load>
         
@@ -168,7 +167,7 @@
     export default {
         mixins: [mixins(NAME)],
         route: {
-            data({from}) {
+            data() {
                 var {loginname} = this.$route.params
                 Tool.get(`/api/v1/user/${loginname}`, {}, ({data}) => {
                     if(data) {
@@ -177,7 +176,11 @@
                         this.GET_DATA_ERROR({loadTip: '用户不存在'})
                     }
                 }, this.GET_DATA_ERROR)
-            }
+            },
+            // canReuse({to, from}) {
+            //     this.RESET(to.path)
+            //     return false
+            // }
         },
         methods: {
             setIndex(tabIndex) {
