@@ -191,7 +191,7 @@ export default {
         return this.state
     },
     route: {
-        data({to, from}) {
+        data({from}) {
             if(from.title != '主题详情') { //防止从详情页面返回，自动拉取数据
                 this.getList()
             }
