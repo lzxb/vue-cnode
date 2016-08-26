@@ -6,6 +6,9 @@
             margin-bottom: 25px;
             box-shadow: 1px 1px 6px #b5b5b5;
             background: #fff;
+            a {
+                display: block;
+            }
         }
         .typeicon {
             position: absolute;
@@ -121,29 +124,29 @@
 <template>
     <ul class="list">
         <li v-for="item in list" track-by="$index">
-            <div class="typeicon" flex v-if="item.top || item.good">
-                <div class="icon" v-if="item.top">
-                    <i class="iconfont icon-zhiding"></i>
-                </div>
-                <div class="icon" v-if="item.good">
-                    <i class="iconfont icon-jinghua"></i>
-                </div>
-            </div>
-            <div class="user" flex="box:first">
-                <div class="headimg">
-                    <div class="pic">
-                        <img :src="item.author.avatar_url" alt="">
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">{{item.author.loginname}}</div>
-                    <div flex>
-                        <time class="time">发表于{{item.create_at | formatDate}}</time>
-                        <a class="tab" v-link="`/?tab=${item.tab}`" v-if="item.tab">#{{item.tab | tabName}}#</a>
-                    </div>
-                </div>
-            </div>
             <a v-link="`/topic/${item.id}`">
+                <div class="typeicon" flex v-if="item.top || item.good">
+                    <div class="icon" v-if="item.top">
+                        <i class="iconfont icon-zhiding"></i>
+                    </div>
+                    <div class="icon" v-if="item.good">
+                        <i class="iconfont icon-jinghua"></i>
+                    </div>
+                </div>
+                <div class="user" flex="box:first">
+                    <div class="headimg">
+                        <div class="pic">
+                            <img :src="item.author.avatar_url" alt="">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="name">{{item.author.loginname}}</div>
+                        <div flex>
+                            <time class="time">发表于{{item.create_at | formatDate}}</time>
+                            <div class="tab" v-if="item.tab">#{{item.tab | tabName}}#</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="tit">{{item.title}}</div>
                 <div class="images count-{{item.content | getTextImgUrl | length}}" flex="box:mean">
                     <div class="item" v-for="imgurl in item.content | getTextImgUrl">

@@ -8,6 +8,7 @@ import app from './app.vue'
 
 import 'normalize.css' //重置浏览器默认样式
 import 'flex.css' //flex布局
+import 'github-markdown-css' //markdown样式
 import './less/common.less' //公共样式
 import './iconfont/iconfont.css' //web字体图标
 

@@ -6,6 +6,7 @@ export default [
     'signout', //退出登录
     'myMessages', //我的消息
     'userView', //用户资料
+    'topic', //主题详情
 ]
 
 //创建每个页面的action

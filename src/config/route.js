@@ -20,7 +20,7 @@ export default {
                 }
             },
             '/topic/:id': {
-                title: '主题详情',
+                title: '详情',
                 component: (resolve) => {
                     require(['../component/topic.vue'], resolve)
                 }
