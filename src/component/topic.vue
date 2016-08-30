@@ -68,6 +68,50 @@
             }
         }
     }
+    
+    .re-list {
+        li {
+            padding: 10px;
+            border-bottom: 1px solid @shallow;
+        }
+        .headimg {
+            padding-right: 10px;
+            .pic {
+                overflow: hidden;
+                display: block;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: @shallow;
+            }
+        }
+        time {
+            padding-left: 10px;
+            font-size: 12px;
+        }
+        .num {
+            font-size: 13px;
+        }
+        .content {
+            padding: 10px 0;
+            font-size: 13px;
+            font-family: inherit;
+            color: inherit;
+        }
+        .bottom {
+            .icon {
+                position: relative;
+                padding: 5px 10px;
+                &.count {
+                    color: @mainATagClolor;
+                }
+                em {
+                    font-size: 13px;
+                    font-style: normal;
+                }
+            }
+        }
+    }
 </style>
 <template>
     <template v-if="loadState > 0">
@@ -98,6 +142,37 @@
             </div>
             <div class="tit">{{view.title}}</div>
             <article class="markdown-body article">{{{view.content}}}</article>
+            <div class="re-tit">回复<em>{{view.replies.length}}</em></div>
+            <ul class="re-list">
+                <li flex="box:first" v-for="item in view.replies">
+                    <div class="headimg">
+                        <a class="pic" href="#">
+                            <img :src="item.author.avatar_url" alt="">
+                        </a>
+                    </div>
+                    <div class="bd">
+                        <div flex>
+                            <a flex-box="0" href="#">{{item.author.loginname}}</a>
+                            <time flex-box="1">{{item.create_at | formatDate}}</time>
+                            <div flex-box="0" class="num">#{{$index + 1}}</div>
+                        </div>
+                        <div class="content markdown-body">{{{item.content}}}</div>
+                        <div class="bottom" flex="dir:right cross:center">
+                            <div class="icon" :class="{count: item.ups.length}">
+                                <i class="iconfont icon-dianzan"></i>
+                                <em v-if="item.ups.length">{{item.ups.length}}</em>
+                            </div>
+                            <div class="icon">
+                                <i class="iconfont icon-huifu"></i>
+                            </div>
+                        </div>
+                        <div class="reply-box" style="display: none;">
+                            <div class="text"><textarea placeholder="@liygheart"></textarea></div>
+                            <div flex="main:right"><button class="btn">回复</button></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </template>
     <load v-else :tip="loadTip" :state="loadState"></load>
