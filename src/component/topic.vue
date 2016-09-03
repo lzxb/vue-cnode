@@ -69,6 +69,17 @@
         }
     }
     
+    .re-tit {
+        padding: 5px 10px;
+        line-height: 28px;
+        border-top: 1px solid darken(@shallow, 10%);
+        border-bottom: 2px solid @mainATagClolor;
+        background: @shallow;
+        em {
+            font-style: normal;
+        }
+    }
+    
     .re-list {
         li {
             padding: 10px;
@@ -111,6 +122,38 @@
                 }
             }
         }
+        .reply-box {
+            display: none;
+            .text {
+                padding: 5px 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                border: 1px solid @shallow;
+                textarea {
+                    box-sizing: border-box;
+                    width: 100%;
+                    line-height: 24px;
+                    border: none;
+                    font-size: 13px;
+                    resize: none;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+            .btn {
+                padding: 5px 30px;
+                line-height: 24px;
+                border-radius: 5px;
+                border: 1px solid darken(@mainATagClolor, 10%);
+                font-size: 14px;
+                color: #fff;
+                background: @mainATagClolor;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
     }
 </style>
 <template>
@@ -142,7 +185,7 @@
             </div>
             <div class="tit">{{view.title}}</div>
             <article class="markdown-body article">{{{view.content}}}</article>
-            <div class="re-tit">回复<em>{{view.replies.length}}</em></div>
+            <div class="re-tit" v-if="view.replies.length">共<em>{{view.replies.length}}条回复</em></div>
             <ul class="re-list">
                 <li flex="box:first" v-for="item in view.replies">
                     <div class="headimg">
@@ -166,7 +209,7 @@
                                 <i class="iconfont icon-huifu"></i>
                             </div>
                         </div>
-                        <div class="reply-box" style="display: none;">
+                        <div class="reply-box">
                             <div class="text"><textarea placeholder="@liygheart"></textarea></div>
                             <div flex="main:right"><button class="btn">回复</button></div>
                         </div>
