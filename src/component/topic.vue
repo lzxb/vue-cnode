@@ -272,15 +272,14 @@
             testThing: function (ups) { //验证是否点赞
                 return ups.indexOf(this.user.id || '') > -1
             },
-            toggleThing: function (item) {
+            toggleThing: function (item) { //点赞
 
                 if(!this.user.loginname) {
                     return this.$router.go('/signin') //未登录，先去登录
                 }
                 var index = this.view.replies.indexOf(item)
-                var {id} = item
                 this.$store.dispatch(`${NAME}SET_THING_STATE`, index, this.user.id)
-                Tool.post(`/api/v1/reply/${id}/ups`, {accesstoken: this.user.accesstoken})
+                Tool.post(`/api/v1/reply/${item.id}/ups`, {accesstoken: this.user.accesstoken})
             }
         }
     }
