@@ -66,11 +66,10 @@
 
                 Tool.post('/api/v1/accesstoken ', this.from, (res) => {
                     if(res.success) {
-                        return Tool.get(`/api/v1/user/${res.loginname}`, {}, ({data}) => {
-                            data.accesstoken = this.from.accesstoken;
-                            this.SIGNIN(data)
-                            this.$router.go('/')
-                        }, errorCB)
+                        res.accesstoken = this.from.accesstoken;
+                        delete res.success
+                        this.SIGNIN(res)
+                        history.go(-1)
                     }
                     errorCB()
 

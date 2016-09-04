@@ -33,7 +33,7 @@ Tool.post = (url, body = {}, success = () => { }, error = () => { }, end= () => 
     var bool = true //true允许回调方法，false不再执行回调
     ajax('POST', config.target + url).send(body).end((err, res = {}) => {
         if(!bool) return //防止继续执行回调
-        if (res.body && ool.isJson(res.body)) {
+        if (res.body && Tool.isJson(res.body)) {
             success(res.body)
         } else {
             error({})

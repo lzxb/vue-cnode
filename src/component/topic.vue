@@ -122,38 +122,46 @@
                 }
             }
         }
-        .reply-box {
-            display: none;
-            .text {
-                padding: 5px 10px;
-                margin-bottom: 10px;
-                border-radius: 5px;
-                border: 1px solid @shallow;
-                textarea {
-                    box-sizing: border-box;
-                    width: 100%;
-                    line-height: 24px;
-                    border: none;
-                    font-size: 13px;
-                    resize: none;
-                    &:focus {
-                        outline: none;
-                    }
-                }
-            }
-            .btn {
-                padding: 5px 30px;
+    }
+    
+    .reply-box {
+        display: none;
+        &.true {
+            display: block;
+        }
+        .text {
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid @shallow;
+            textarea {
+                box-sizing: border-box;
+                width: 100%;
                 line-height: 24px;
-                border-radius: 5px;
-                border: 1px solid darken(@mainATagClolor, 10%);
-                font-size: 14px;
-                color: #fff;
-                background: @mainATagClolor;
+                border: none;
+                font-size: 13px;
+                resize: none;
                 &:focus {
                     outline: none;
                 }
             }
         }
+        .btn {
+            padding: 5px 30px;
+            line-height: 24px;
+            border-radius: 5px;
+            border: 1px solid darken(@mainATagClolor, 10%);
+            font-size: 14px;
+            color: #fff;
+            background: @mainATagClolor;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    
+    .re-topic {
+        padding: 20px 10px;
     }
 </style>
 <template>
@@ -201,12 +209,12 @@
                         </div>
                         <div class="content markdown-body">{{{item.content}}}</div>
                         <div class="bottom" flex="dir:right cross:center">
-                            <div class="icon" :class="{count: item.ups.length}">
-                                <i class="iconfont icon-dianzan"></i>
-                                <em v-if="item.ups.length">{{item.ups.length}}</em>
-                            </div>
                             <div class="icon">
                                 <i class="iconfont icon-huifu"></i>
+                            </div>
+                            <div class="icon" :class="{count: testThing(item.ups)}" v-on:click="toggleThing(item)">
+                                <i class="iconfont icon-dianzan"></i>
+                                <em v-if="item.ups.length">{{item.ups.length}}</em>
                             </div>
                         </div>
                         <div class="reply-box">
@@ -216,6 +224,12 @@
                     </div>
                 </li>
             </ul>
+            <div class="re-topic">
+                <div class="reply-box true">
+                    <div class="text"><textarea placeholder="回复支持Markdown语法,请注意标记代码"></textarea></div>
+                    <div flex="main:right"><button class="btn">回复</button></div>
+                </div>
+            </div>
         </div>
     </template>
     <load v-else :tip="loadTip" :state="loadState"></load>
@@ -225,6 +239,20 @@
     const NAME = 'topic'
     import Tool from '../Tool'
     import mixins from '../mixins'
+    import store from '../vuex/store'
+
+    /**
+     * 更新点赞状态
+     */
+    store._mutations[`${NAME}SET_THING_STATE`] = function (state, index, id) { //设置点赞的状态
+        var {ups} = state[NAME].view.replies[index]
+        var index = ups.indexOf(id)
+        if(index > -1) {
+            ups.splice(index, 1)
+        } else {
+            ups.push(id)
+        }
+    }
 
     export default {
         mixins: [mixins(NAME)],
@@ -241,6 +269,19 @@
             },
         },
         methods: {
+            testThing: function (ups) { //验证是否点赞
+                return ups.indexOf(this.user.id || '') > -1
+            },
+            toggleThing: function (item) {
+
+                if(!this.user.loginname) {
+                    return this.$router.go('/signin') //未登录，先去登录
+                }
+                var index = this.view.replies.indexOf(item)
+                var {id} = item
+                this.$store.dispatch(`${NAME}SET_THING_STATE`, index, this.user.id)
+                Tool.post(`/api/v1/reply/${id}/ups`, {accesstoken: this.user.accesstoken})
+            }
         }
     }
 </script>
