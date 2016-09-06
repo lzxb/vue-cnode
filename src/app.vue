@@ -79,9 +79,9 @@
                     <i class="iconfont icon-caidan"></i>
                 </div>
                 <div class="title">{{title || '全部'}}</div>
-                <div class="icon" flex="main:center cross:center">
+                <a class="icon" flex="main:center cross:center" v-link="'/signin'">
                     <i class="iconfont icon-qudenglu" v-if="!user.accesstoken"></i>
-                </div>
+                </a>
             </header>
             <router-view></router-view>
         </div>

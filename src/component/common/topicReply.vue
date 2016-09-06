@@ -30,27 +30,68 @@
                 outline: none;
             }
         }
+        .msg {
+            padding: 5px 10px;
+            line-height: 26px;
+            color: red;
+        }
     }
 </style>
 <template>
     <div class="reply-box">
-        <div class="text"><textarea placeholder="@liygheart"></textarea></div>
-        <div flex="main:right"><button class="btn" v-on:click="submitRe(item)">回复</button></div>
+        <div class="text"><textarea :placeholder="placeholder" v-model="content"></textarea></div>
+        <div flex="main:right">
+            <div class="msg">{{error_msg}}</div>
+            <div flex-box="0">
+                <button class="btn" v-on:click="submit(item)">{{btnname}}</button>
+            </div>
+        </div>
     </div>
 </template>
 <script>
+    import Tool from '../../Tool'
     export default {
         props: {
-            state: {
-                type: Number, //参数类型是数字
-                default: 0, //0是正在加载中，1是加载成功， -1是加载失败
-                validator: function (val) {
-                    return [-1, 0, 1].indexOf(val) > -1
-                }
-            },
-            tip: {
+            placeholder: { //输入框提示内容
                 type: String,
-                default : '正在加载中'
+                default: ''
+            },
+            reply_id: { //回复id
+                type: String,
+                default: ''
+            },
+            topic_id: { //主题id
+                type: String,
+                required: true
+            },
+            accesstoken: { //用户验证
+                type: String,
+                required: true
+            }
+        },
+        data: function () {
+            return {
+                content: '',
+                btnname: '回复',
+                error_msg: ''
+            }
+        },
+        methods: {
+            submit: function () {
+                this.btnname = '回复中...'
+                this.error_msg = ''
+                var {reply_id, topic_id, accesstoken, content} = this
+                
+                var text = content += '\n\r<br><br>来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
+                Tool.post(`/api/v1//topic/${topic_id}/replies`, {reply_id, accesstoken, content: text}, ({success, error_msg}) => {
+                    this.content = ''
+                    this.btnname = '回复'
+                    if(!success) {
+                        this.error_msg = error_msg
+                    }
+                }, () => {
+                    this.btnname = '回复失败'
+                })
             }
         }
     }

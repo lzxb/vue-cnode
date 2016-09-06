@@ -181,12 +181,12 @@
                                 <em v-if="item.ups.length">{{item.ups.length}}</em>
                             </div>
                         </div>
-                        <topic-reply v-if="item.editState"></topic-reply>
+                        <topic-reply v-if="item.editState" :topic_id="view.id" :reply_id="item.id" :accesstoken="user.accesstoken" :placeholder="`@${item.author.loginname}`"></topic-reply>
                     </div>
                 </li>
             </ul>
-            <div class="re-topic">
-                <topic-reply></topic-reply>
+            <div class="re-topic" v-if="user.accesstoken">
+                <topic-reply :accesstoken="user.accesstoken" :topic_id="view.id"></topic-reply>
             </div>
         </div>
     </template>
@@ -224,6 +224,11 @@
         mixins: [mixins(NAME)],
         route: {
             data() { 
+                this.getData()
+            },
+        },
+        methods: {
+            getData: function (callback = () => {}) {
                 var {id} = this.$route.params
                 Tool.get(`/api/v1/topic/${id}`, {}, ({data}) => {
                     if(data) {
@@ -231,10 +236,8 @@
                     } else {
                         this.GET_DATA_ERROR({loadTip: '主题不存在'})
                     }
-                }, this.GET_DATA_ERROR)
+                }, this.GET_DATA_ERROR, callback)
             },
-        },
-        methods: {
             testThing: function (ups) { //验证是否点赞
                 return ups.indexOf(this.user.id || '') > -1
             },
@@ -252,6 +255,11 @@
                     return this.$router.go('/signin') //未登录，先去登录
                 }
                 this.$store.dispatch(`${NAME}RE_TA_EDIT`, index)
+            }
+        },
+        events: {
+            reGo: function (callback) {
+                this.getData(callback)
             }
         }
     }
