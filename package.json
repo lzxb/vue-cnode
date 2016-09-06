@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1340641314/vue-cnode.git"
+    "url": "git+https://github.com/lzxb/vue-cnode.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/1340641314/vue-cnode/issues"
+    "url": "https://github.com/lzxb/vue-cnode/issues"
   },
-  "homepage": "https://github.com/1340641314/vue-cnode#readme",
+  "homepage": "https://github.com/lzxb/vue-cnode#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel-loader": "^6.2.4",

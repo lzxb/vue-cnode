@@ -124,42 +124,6 @@
         }
     }
     
-    .reply-box {
-        display: none;
-        &.true {
-            display: block;
-        }
-        .text {
-            padding: 5px 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid @shallow;
-            textarea {
-                box-sizing: border-box;
-                width: 100%;
-                line-height: 24px;
-                border: none;
-                font-size: 13px;
-                resize: none;
-                &:focus {
-                    outline: none;
-                }
-            }
-        }
-        .btn {
-            padding: 5px 30px;
-            line-height: 24px;
-            border-radius: 5px;
-            border: 1px solid darken(@mainATagClolor, 10%);
-            font-size: 14px;
-            color: #fff;
-            background: @mainATagClolor;
-            &:focus {
-                outline: none;
-            }
-        }
-    }
-    
     .re-topic {
         padding: 20px 10px;
     }
@@ -209,7 +173,7 @@
                         </div>
                         <div class="content markdown-body">{{{item.content}}}</div>
                         <div class="bottom" flex="dir:right cross:center">
-                            <div class="icon">
+                            <div class="icon" v-on:click="reTa($index)">
                                 <i class="iconfont icon-huifu"></i>
                             </div>
                             <div class="icon" :class="{count: testThing(item.ups)}" v-on:click="toggleThing(item)">
@@ -217,18 +181,12 @@
                                 <em v-if="item.ups.length">{{item.ups.length}}</em>
                             </div>
                         </div>
-                        <div class="reply-box">
-                            <div class="text"><textarea placeholder="@liygheart"></textarea></div>
-                            <div flex="main:right"><button class="btn">回复</button></div>
-                        </div>
+                        <topic-reply v-if="item.editState"></topic-reply>
                     </div>
                 </li>
             </ul>
             <div class="re-topic">
-                <div class="reply-box true">
-                    <div class="text"><textarea placeholder="回复支持Markdown语法,请注意标记代码"></textarea></div>
-                    <div flex="main:right"><button class="btn">回复</button></div>
-                </div>
+                <topic-reply></topic-reply>
             </div>
         </div>
     </template>
@@ -237,6 +195,7 @@
 </template>
 <script>
     const NAME = 'topic'
+    import Vue from 'vue'
     import Tool from '../Tool'
     import mixins from '../mixins'
     import store from '../vuex/store'
@@ -252,6 +211,13 @@
         } else {
             ups.push(id)
         }
+    }
+    /**
+     * 显示回复TA
+     */
+    store._mutations[`${NAME}RE_TA_EDIT`] = function (state, index) { //显示回复框
+        var item = state[NAME].view.replies[index]
+        Vue.set(item, 'editState', !item.editState)
     }
 
     export default {
@@ -280,6 +246,12 @@
                 var index = this.view.replies.indexOf(item)
                 this.$store.dispatch(`${NAME}SET_THING_STATE`, index, this.user.id)
                 Tool.post(`/api/v1/reply/${item.id}/ups`, {accesstoken: this.user.accesstoken})
+            },
+            reTa: function (index) {
+                if(!this.user.loginname) {
+                    return this.$router.go('/signin') //未登录，先去登录
+                }
+                this.$store.dispatch(`${NAME}RE_TA_EDIT`, index)
             }
         }
     }
