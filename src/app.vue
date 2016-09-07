@@ -3,7 +3,7 @@
     /*
         侧边栏
     */
-
+    
     .nav {
         overflow: hidden;
         margin: 10px;
@@ -26,7 +26,7 @@
     /*
         登录
     */
-
+    
     .signin {
         margin: 10px;
         padding: 10px;
@@ -47,7 +47,7 @@
     /*
         用户信息
     */
-
+    
     .user {
         padding: 10px 10px 0 10px;
         .headimg {
@@ -79,8 +79,11 @@
                     <i class="iconfont icon-caidan"></i>
                 </div>
                 <div class="title">{{title || '全部'}}</div>
-                <a class="icon" flex="main:center cross:center" v-link="'/signin'">
-                    <i class="iconfont icon-qudenglu" v-if="!user.accesstoken"></i>
+                <a class="icon" flex="main:center cross:center" v-link="'/signin'" v-if="!user.accesstoken">
+                    <i class="iconfont icon-qudenglu"></i>
+                </a>
+                <a class="icon" flex="main:center cross:center" v-link="'/topic/create'" v-else>
+                    <i class="iconfont icon-fabiao"></i>
                 </a>
             </header>
             <router-view></router-view>
@@ -145,6 +148,11 @@
             data() {
                 this.SIDE_BAR_HIDE();
                 this.title = Tool.getTitle(this.$route)
+            }
+        },
+        events: {
+            'header-right-click': function () {
+
             }
         }
     }
