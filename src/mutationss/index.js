@@ -1,4 +1,4 @@
-import Tool, {objectAssign} from '../Tool'
+import Tool from '../Tool'
 import Vue from 'vue'
 import pages from '../config/pages'
 import pageState from '../states/page'

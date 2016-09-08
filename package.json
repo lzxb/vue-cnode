@@ -37,10 +37,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "flex.css": "^1.0.6",
+    "flex.css": "^1.0.9",
     "github-markdown-css": "^2.4.0",
     "normalize.css": "^4.2.0",
-    "object-assign": "^4.1.0",
     "superagent": "^2.1.0",
     "vue": "^1.0.26",
     "vue-router": "^0.7.13",
