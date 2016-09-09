@@ -129,6 +129,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <template v-if="loadState > 0">
         <div class="topic">
             <div class="user-view">

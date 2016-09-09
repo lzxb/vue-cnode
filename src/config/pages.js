@@ -8,6 +8,7 @@ export default [
     'userView', //用户资料
     'topicCreate', //创建主题
     'topic', //主题详情
+    'about' //关于
 ]
 
 //创建每个页面的action

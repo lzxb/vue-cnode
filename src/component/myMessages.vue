@@ -47,6 +47,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <template v-if="loadState > 0">
         <div class="msg-box">
             <ul class="list">
@@ -80,10 +81,11 @@
     <load v-else :tip="loadTip" :state="loadState"></load>
 </template>
 <script>
+    const NAME = 'myMessages'
     import Tool from '../Tool'
     import mixins from '../mixins'
     export default {
-        mixins: [mixins('myMessages')],
+        mixins: [mixins(NAME)],
         route: {
             data() {
                 var {accesstoken} = this.user

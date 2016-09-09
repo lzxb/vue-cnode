@@ -17,6 +17,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <div>
         <div class="msg">确定要退出登录吗？</div>
         <div class="submit">
@@ -25,11 +26,12 @@
     </div>
 </template>
 <script>
+    const NAME = 'signout'
     import Tool from '../Tool'
     import mixins from '../mixins'
 
     export default {
-        mixins: [mixins('signout')],
+        mixins: [mixins(NAME)],
         methods: {
             go() {
                 this.SIGNOUT();

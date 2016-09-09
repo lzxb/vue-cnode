@@ -13,6 +13,12 @@ export default function (name = '') {
             },
             actions: actions(name)
         },
+        props: {
+            title: {
+                type: String,
+                default: '全部'
+            }
+        },
         created() {
             if (this.state.path != this.$route.path) { //判断当前组件路径和state路径是否一致，否则重置
                 this.RESET(this.$route.path) //重置当前页面路径状态

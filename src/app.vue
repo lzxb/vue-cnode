@@ -74,19 +74,7 @@
 <template>
     <div class="app" :class="{'app-side-bar-show': sideBar}">
         <div class="wrap">
-            <header class="header" flex="box:justify">
-                <div class="icon" flex="main:center cross:center" v-on:click="SIDE_BAR_SHOW">
-                    <i class="iconfont icon-caidan"></i>
-                </div>
-                <div class="title">{{title || '全部'}}</div>
-                <a class="icon" flex="main:center cross:center" v-link="'/signin'" v-if="!user.accesstoken">
-                    <i class="iconfont icon-qudenglu"></i>
-                </a>
-                <a class="icon" flex="main:center cross:center" v-link="'/topic/create'" v-else>
-                    <i class="iconfont icon-fabiao"></i>
-                </a>
-            </header>
-            <router-view></router-view>
+            <router-view :title="title"></router-view>
         </div>
         <div class="side-bar">
             <ul class="signin" v-if="!user.accesstoken">

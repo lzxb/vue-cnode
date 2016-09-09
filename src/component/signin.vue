@@ -31,6 +31,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <div class="accesstoken">
         <input type="text" placeholder="Access Token" v-model="from.accesstoken">
     </div>
@@ -39,11 +40,12 @@
     </div>
 </template>
 <script>
+    const NAME = 'signin'
     import Tool from '../Tool'
     import mixins from '../mixins'
 
     export default {
-        mixins: [mixins('signin')],
+        mixins: [mixins(NAME)],
         data() {
             return {
                 from: {

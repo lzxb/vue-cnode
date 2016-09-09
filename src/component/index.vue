@@ -122,6 +122,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <ul class="list">
         <li v-for="item in list" track-by="$index">
             <a v-link="`/topic/${item.id}`">
@@ -179,49 +180,49 @@
     </div>
 </template>
 <script>
-const NAME = 'index'
-import Tool from '../Tool'
-import mixins from '../mixins'
-import store from '../vuex/store'
+    const NAME = 'index'
+    import Tool from '../Tool'
+    import mixins from '../mixins'
+    import store from '../vuex/store'
 
-store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
-    page: 1 //加载到第几页
-})
+    store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
+        page: 1 //加载到第几页
+    })
 
-export default {
-    mixins: [mixins(NAME)],
-    route: {
-        data() {
-            if(this.page <= 1) { //自动下载第一页数据
-                this.getList()
+    export default {
+        mixins: [mixins(NAME)],
+        route: {
+            data() {
+                if(this.page <= 1) { //自动下载第一页数据
+                    this.getList()
+                }
+            },  
+            canReuse({to}) {
+                this.RESET(to.path)
+                if(this.breakAjax) this.breakAjax() //中断之前的请求，防止执行回调方法
+                delete this.breakAjax //清除掉上个页面的ajax请求
+                return true
             }
-        },  
-        canReuse({to}) {
-            this.RESET(to.path)
-            if(this.breakAjax) this.breakAjax() //中断之前的请求，防止执行回调方法
-            delete this.breakAjax //清除掉上个页面的ajax请求
-            return true
-        }
-    },
-    methods: {
-        loadNext() {
-            this.getList()
         },
-        getList() {
-            if(this.breakAjax) return false //请求未结束，防止重复请求
-            this.GET_DATA_START()
-            var {page = 1} = this.state
-            var {tab = ''} = this.$route.query
-            var limit = 10
-            var mdrender = false
+        methods: {
+            loadNext() {
+                this.getList()
+            },
+            getList() {
+                if(this.breakAjax) return false //请求未结束，防止重复请求
+                this.GET_DATA_START()
+                var {page = 1} = this.state
+                var {tab = ''} = this.$route.query
+                var limit = 10
+                var mdrender = false
 
-            this.breakAjax = Tool.get('/api/v1/topics', {page, tab, limit, mdrender}, ({data: list}) => {
-                this.PULL_PAGE_LIST_PUSH(list)
-                this.SET_CUSTOM_KEY({page: page + 1})
-            }, this.GET_DATA_ERROR, () => {
-                delete this.breakAjax
-            })
+                this.breakAjax = Tool.get('/api/v1/topics', {page, tab, limit, mdrender}, ({data: list}) => {
+                    this.PULL_PAGE_LIST_PUSH(list)
+                    this.SET_CUSTOM_KEY({page: page + 1})
+                }, this.GET_DATA_ERROR, () => {
+                    delete this.breakAjax
+                })
+            }
         }
     }
-}
 </script>

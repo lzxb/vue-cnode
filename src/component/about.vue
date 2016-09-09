@@ -15,6 +15,7 @@
     }
 </style>
 <template>
+    <v-header :title="title"></v-header>
     <dl class="about">
         <dt class="tit">关于项目</dt>
         <dd>该项目是基于cnodejs社区的api，采用vue + vue-router + flex.css + ES6 + webpack + vuex 重写的webapp</dd>
@@ -33,11 +34,10 @@
     </dl>
 </template>
 <script>
+    const NAME = 'about'
+    import mixins from '../mixins'
+
     export default {
-        data() {
-            return {
-                msg: '关于'
-            }
-        }
+        mixins: [mixins(NAME)],
     }
 </script>
