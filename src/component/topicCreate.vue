@@ -53,12 +53,16 @@
             background: @mainATagClolor;
         }
     }
+    .error-msg {
+        padding: 10px;
+        color: red;
+    }
 </style>
 <template>
     <v-header :title="title"></v-header>
     <div class="topic-create">
         <div class="item">
-            <select name="tab">
+            <select v-model="from.tab">
                 <option value="">请选择发表类型</option>
                 <option value="share">分享</option>
                 <option value="ask">问答</option>
@@ -66,13 +70,14 @@
              </select>
         </div>
         <div class="item">
-            <input type="text" placeholder="标题字数 10 字以上" value="">
+            <input type="text" placeholder="标题字数 10 字以上" v-model="from.title">
         </div>
         <div class="item">
-            <textarea placeholder="内容字数 30 字以上"></textarea>
+            <textarea placeholder="内容字数 30 字以上" v-model="from.content"></textarea>
         </div>
-        <div class="submit">
-            <div class="btn">发表主题</div>
+        <div class="error-msg" v-if="errorMsg">{{errorMsg}}</div>
+        <div class="submit" v-on:click="submit">
+            <div class="btn">{{submitName}}</div>
         </div>
     </div>
 </template>
@@ -86,14 +91,45 @@
         data() {
             return {
                 from: {
-                    accesstoken: ''
+                    title: '', //标题
+                    tab: '', //发表的板块
+                    content: '', //内容
+                    accesstoken: this.user.accesstoken
                 },
-                submitName: '登录',
-                submitState: false, //true正在提交， false未提交
+                submitName: '发表主题',
+                errorMsg: ''
             }
         },
         methods: {
             submit() {
+                // 验证
+                var {title, content, tab} = this.from
+                if (title === '') {
+                    return this.errorMsg = '标题不能为空';
+                } else if (title.length < 5 || title.length > 100) {
+                    return this.errorMsg = '标题字数太多或太少';
+                } else if (!tab) {
+                    return this.errorMsg = '必须选择一个版块';
+                } else if (content === '') {
+                    return this.errorMsg = '内容不可为空';
+                }
+                // end 验证
+                console.log
+                if(this.breakAjax) return
+                this.breakAjax = Tool.post('/api/v1//topics', this.from, ({topic_id, error_msg}) => {
+
+                    if(topic_id) {
+                        this.$router.go(`/topic/${topic_id}`)
+                    } else {
+                        this.errorMsg = error_msg
+                        this.submitName = '发表主题'
+                    }
+
+                    delete this.breakAjax
+                }, () => {
+                    delete this.breakAjax
+                    this.submitName = '发表失败'
+                })
             }
         }
     }

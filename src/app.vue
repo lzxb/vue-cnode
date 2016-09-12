@@ -137,11 +137,6 @@
                 this.SIDE_BAR_HIDE();
                 this.title = Tool.getTitle(this.$route)
             }
-        },
-        events: {
-            'header-right-click': function () {
-
-            }
         }
     }
 </script>
