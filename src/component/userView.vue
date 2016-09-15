@@ -98,7 +98,6 @@
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <template v-if="loadState > 0">
         <div class="user" flex="dir:top cross:center">
             <div class="user-bg">

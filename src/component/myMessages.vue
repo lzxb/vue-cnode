@@ -1,8 +1,9 @@
 <style lang="less" scoped>
-@import "../less/config";
+    @import "../less/config";
     .msg-box {
         .list {
             li {
+                position: relative;
                 padding: 10px;
                 border-bottom: 1px solid #eee;
                 background: #fff;
@@ -22,15 +23,17 @@
                 .content {
                     padding: 5px 0;
                 }
-                .dian-true {
-                    display: none;
-                }
-                .dian-false {
-                    width: 8px;
-                    height: 8px;
-                    margin-right: 5px;
-                    border-radius: 50%;
-                    background: red;
+                .weidu {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    z-index: 1;
+                    width: auto;
+                    text-align: right;
+                    .iconfont {
+                        font-size: 60px;
+                        color: @mainATagClolor;
+                    }
                 }
             }
         }
@@ -51,11 +54,9 @@
         margin-top: 10px;
         border-radius: 5px;
         background: #eee;
-        a{}
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <template v-if="loadState > 0">
         <div class="msg-box">
             <ul class="list">
@@ -67,23 +68,19 @@
                         <div class="name">{{item.author.loginname}}
                             <time>{{item.create_at | formatDate}}</time>
                         </div>
-                        <div flex="box:first">
-                            <div flex="cross:center">
-                                <div class="dian-true"></div>
-                            </div>
-                            <div>
-                                <div v-if="item.type == 'at'">
-                                    在话题
-                                    <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
+                        <div v-if="item.type == 'at'">
+                            在话题
+                            <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
 
-                                </div>
-                                <div v-else>
-                                    回复你了的话题
-                                    <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
-                                </div>
-                                <div class="markdown-body">{{{item.reply.content}}}</div>
-                            </div>
                         </div>
+                        <div v-else>
+                            回复你了的话题
+                            <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
+                        </div>
+                        <div class="markdown-body">{{{item.reply.content}}}</div>
+                    </div>
+                    <div class="weidu" v-if="$index < user.msgNum">
+                        <i class="iconfont icon-weidu"></i>
                     </div>
                 </li>
             </ul>

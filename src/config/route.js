@@ -57,7 +57,7 @@ export default {
                 }
             },
             '/about': {
-                auth: true,
+                auth: false,
                 title: '关于',
                 component: (resolve) => {
                     require(['../component/about.vue'], resolve)

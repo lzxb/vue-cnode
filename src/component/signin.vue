@@ -31,7 +31,6 @@
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <div class="accesstoken">
         <input type="text" placeholder="Access Token" v-model="from.accesstoken">
     </div>
@@ -70,6 +69,7 @@
                     if(res.success) {
                         res.accesstoken = this.from.accesstoken;
                         delete res.success
+                        res.msgNum = 0 //设置默认的消息数量
                         this.SIGNIN(res)
                         history.go(-1)
                     }

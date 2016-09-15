@@ -59,7 +59,6 @@
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <div class="topic-create">
         <div class="item">
             <select v-model="from.tab">

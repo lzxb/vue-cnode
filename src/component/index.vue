@@ -122,7 +122,6 @@
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <ul class="list">
         <li v-for="item in list" track-by="$index">
             <a v-link="`/topic/${item.id}`">

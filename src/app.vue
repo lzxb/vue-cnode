@@ -19,7 +19,18 @@
                 color: @mainStressColor;
             }
             .tit {
+                position: relative;
                 color: lighten(@mainATagClolor, 5%);
+            }
+            .num {
+                position: absolute;
+                top: 0;
+                left: 35px;
+                z-index: 1;
+                border-radius: 50%;
+                color: red;
+                line-height: 20px;
+                font-size: 12px;
             }
         }
     }
@@ -74,7 +85,8 @@
 <template>
     <div class="app" :class="{'app-side-bar-show': sideBar}">
         <div class="wrap">
-            <router-view :title="title"></router-view>
+            <v-header :title="title"></v-header>
+            <router-view></router-view>
         </div>
         <div class="side-bar">
             <ul class="signin" v-if="!user.accesstoken">
@@ -104,7 +116,10 @@
                         <div class="icon" flex="main:center cross:center">
                             <i class="iconfont icon-{{d.icon}}"></i>
                         </div>
-                        <div class="tit">{{d.title}}</div>
+                        <div class="tit">
+                            {{d.title}}
+                            <div class="num" v-if="d.link == '/my/messages' && user.msgNum">+{{user.msgNum}}</div>
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -117,7 +132,9 @@
     import actions from './actions/'
     import store from './vuex/store'
     import menus from './config/menus'
+    import components from './component/common/'
     export default {
+        components,
         store,
         vuex: {
             getters: {
@@ -129,13 +146,19 @@
         data() {
             return {
                 menus,
-                title: Tool.getTitle(this.$route),
+                title: Tool.getTitle(this.$route)
             }
         },
         route: {
             data() {
                 this.SIDE_BAR_HIDE();
                 this.title = Tool.getTitle(this.$route)
+                var {accesstoken} = this.user
+                if (accesstoken) {
+                    Tool.get('/api/v1/message/count', {accesstoken}, ({data}) => {
+                        this.user.msgNum = data
+                    })
+                }
             }
         }
     }

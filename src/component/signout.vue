@@ -17,7 +17,6 @@
     }
 </style>
 <template>
-    <v-header :title="title"></v-header>
     <div>
         <div class="msg">确定要退出登录吗？</div>
         <div class="submit">
