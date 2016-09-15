@@ -1,5 +1,5 @@
 <style lang="less" scoped>
-    @import "../less/config";
+@import "../less/config";
     .msg-box {
         .list {
             li {
@@ -45,6 +45,14 @@
         background-size: cover;
         background-color: #eee;
     }
+    
+    .markdown-body {
+        padding: 5px;
+        margin-top: 10px;
+        border-radius: 5px;
+        background: #eee;
+        a{}
+    }
 </style>
 <template>
     <v-header :title="title"></v-header>
@@ -63,14 +71,17 @@
                             <div flex="cross:center">
                                 <div class="dian-true"></div>
                             </div>
-                            <div v-if="item.type == 'at'">
-                                在话题
-                                <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
+                            <div>
+                                <div v-if="item.type == 'at'">
+                                    在话题
+                                    <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a> 中 @了你
 
-                            </div>
-                            <div v-else>
-                                回复你了的话题
-                                <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
+                                </div>
+                                <div v-else>
+                                    回复你了的话题
+                                    <a v-link="`/topic/${item.topic.id}`">{{item.topic.title}}</a>
+                                </div>
+                                <div class="markdown-body">{{{item.reply.content}}}</div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +100,7 @@
         route: {
             data() {
                 var {accesstoken} = this.user
-                Tool.get('/api/v1/messages', {mdrender: false, accesstoken}, ({data}) => {
+                Tool.get('/api/v1/messages', {mdrender: true, accesstoken}, ({data}) => {
                     var {hasnot_read_messages, has_read_messages} = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
                     this.GET_DATA_LIST(hasnot_read_messages)
