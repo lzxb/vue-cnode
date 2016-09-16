@@ -124,7 +124,7 @@
 <template>
     <ul class="list">
         <li v-for="item in list" track-by="$index">
-            <a v-link="`/topic/${item.id}`">
+            <a v-link="'/topic/' + item.id">
                 <div class="typeicon" flex v-if="item.top || item.good">
                     <div class="icon" v-if="item.top">
                         <i class="iconfont icon-zhiding"></i>
@@ -151,7 +151,7 @@
                 <div class="images count-{{item.content | getTextImgUrl | length}}" flex="box:mean">
                     <div class="item" v-for="imgurl in item.content | getTextImgUrl">
                         <div class="pic">
-                            <img :src="transparent" :style="{backgroundImage: `url(${imgurl})`}" alt="">
+                            <img :src="transparent" :style="{backgroundImage: 'url(' + imgurl + ')'}" alt="">
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="item last-reply" flex="main:center cross:center">
                         <div class="pic">
-                            <img src="../images/transparent.png" alt="" :style="{backgroundImage: `url(${item.author.avatar_url})`}">
+                            <img src="../images/transparent.png" alt="" :style="{backgroundImage: 'url(' + item.author.avatar_url + ')'}">
                         </div>
                         <time class="time">{{item.last_reply_at | formatDate}}</time>
                     </div>

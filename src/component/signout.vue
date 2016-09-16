@@ -1,11 +1,8 @@
 <style lang="less" scoped>
     @import "../less/config";
-    .msg {
-        padding: 80px;
-        text-align: center;
-    }
     .submit {
         padding: 0 20px;
+        margin-top: 180px;
         .btn {
             line-height: 38px;
             text-align: center;
@@ -17,11 +14,8 @@
     }
 </style>
 <template>
-    <div>
-        <div class="msg">确定要退出登录吗？</div>
-        <div class="submit">
-            <div class="btn" v-on:click="go">确定</div>
-        </div>
+    <div class="submit">
+        <div class="btn" v-on:click="go">确定要退出登录吗？</div>
     </div>
 </template>
 <script>

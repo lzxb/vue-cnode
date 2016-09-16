@@ -161,13 +161,13 @@
             <ul class="re-list">
                 <li flex="box:first" v-for="item in view.replies">
                     <div class="headimg">
-                        <a class="pic" href="#">
+                        <a class="pic" v-link="'/user/' + item.author.loginname">
                             <img :src="item.author.avatar_url" alt="">
                         </a>
                     </div>
                     <div class="bd">
                         <div flex>
-                            <a flex-box="0" href="#">{{item.author.loginname}}</a>
+                            <a flex-box="0" v-link="'/user/' + item.author.loginname">{{item.author.loginname}}</a>
                             <time flex-box="1">{{item.create_at | formatDate}}</time>
                             <div flex-box="0" class="num">#{{$index + 1}}</div>
                         </div>
