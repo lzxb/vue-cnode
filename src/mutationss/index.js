@@ -2,52 +2,31 @@ import Tool from '../Tool'
 import Vue from 'vue'
 import pages from '../config/pages'
 import pageState from '../states/page'
-var mutationss = {}
 
-/**
- * 显示菜单
- * 
- * @param {Object} state
- */
-mutationss.SIDE_BAR_SHOW = (state) => {
-    state.sideBar = true //显示菜单
+
+var mutationss = {
+    SIDE_BAR_SHOW(state) {
+        state.sideBar = true //显示菜单
+    },
+    SIDE_BAR_HIDE(state) {
+        state.sideBar = false //关闭菜单
+    },
+    SIGNIN(state, user) {
+        state.user = user
+        Tool.localItem('user', JSON.stringify(user))
+    },
+    SIGNOUT(state) {
+        state.user = {}
+        Tool.removeLocalItem('user')
+    },
+    MSG_NUM(state, msgNum) {
+        state.user.msgNum = msgNum
+    }
 }
-/**
- * 关闭菜单
- * 
- * @param {Object} state
- */
-mutationss.SIDE_BAR_HIDE = (state) => {
-    state.sideBar = false //关闭菜单
-}
-/**
- * 登录成功
- * 
- * @param {Object} state
- * @param {Object} user
- */
-mutationss.SIGNIN = (state, user) => {
-    state.user = user
-    Tool.localItem('user', JSON.stringify(user))
-}
-/**
- * 退出登录
- * 
- * @param {Object} state
- */
-mutationss.SIGNOUT = (state) => {
-    state.user = {}
-    Tool.removeLocalItem('user')
-}
-/**
- * 更新用户的消息数量
- */
-mutationss.MSG_NUM = (state, msgNum) => {
-    state.user.msgNum = msgNum
-}
+
 
 const newPage = (name) => {
-    
+
     var myState = {} //存储用户自定义字段
 
     mutationss[`${name}GET_DATA_VIEW`] = (state, view = {}) => { //获取页面数据成功
@@ -90,8 +69,8 @@ const newPage = (name) => {
             if (k != 'path') state[name][k] = page[k] //重置页面默认字段
         }
 
-        for(let k in myState) {
-            state[name][k] = myState[k] //重置用户自定义字段
+        for (let k in myState) {
+            state[name][k] = myState[k] //重置自定义字段
         }
 
         state[name].path = path //设置当前组件使用的路径
@@ -99,7 +78,7 @@ const newPage = (name) => {
 
     mutationss[`${name}ADD_CUSTOM_KEY`] = (state, data = {}) => { //添加字段
         for (let k in data) {
-            myState[k] = data[k]
+            myState[k] = data[k] //添加自定义字段
             Vue.set(state[name], k, data[k])
         }
 
