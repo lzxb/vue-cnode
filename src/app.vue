@@ -156,7 +156,7 @@
                 var {accesstoken} = this.user
                 if (accesstoken) {
                     Tool.get('/api/v1/message/count', {accesstoken}, ({data}) => {
-                        this.user.msgNum = data
+                        this.MSG_NUM(data)
                     })
                 }
             }

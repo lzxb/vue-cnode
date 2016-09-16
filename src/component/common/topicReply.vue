@@ -67,9 +67,12 @@
             accesstoken: { //用户验证
                 type: String,
                 required: true
+            },
+            success: {
+                type: Function //回复成功后执行回调
             }
         },
-        data: function () {
+        data() {
             return {
                 content: '',
                 btnname: '回复',
@@ -77,7 +80,7 @@
             }
         },
         methods: {
-            submit: function () {
+            submit() {
                 this.btnname = '回复中...'
                 this.error_msg = ''
                 var {reply_id, topic_id, accesstoken, content} = this
@@ -86,7 +89,9 @@
                 Tool.post(`/api/v1//topic/${topic_id}/replies`, {reply_id, accesstoken, content: text}, ({success, error_msg}) => {
                     this.content = ''
                     this.btnname = '回复'
-                    if(!success) {
+                    if(success) {
+                        this.success()
+                    } else {
                         this.error_msg = error_msg
                     }
                 }, () => {

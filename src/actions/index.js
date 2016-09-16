@@ -26,6 +26,12 @@ export default (...arg) => {
     action.SIGNOUT = ({dispatch}) => {
         dispatch('SIGNOUT')
     }
+    /**
+     * 更新用户的消息数量
+     */
+    action.MSG_NUM = ({dispatch}, ...arg) => {
+        dispatch('MSG_NUM', ...arg)
+    }
 
     const newPage = (name) => { //设置页面行为
         if (!name) return

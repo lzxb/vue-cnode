@@ -176,17 +176,33 @@
                             <div class="icon" v-on:click="reTa($index)">
                                 <i class="iconfont icon-huifu"></i>
                             </div>
-                            <div class="icon" :class="{count: testThing(item.ups)}" v-on:click="toggleThing(item)">
+                            <div class="icon" 
+                                :class="{count: testThing(item.ups)}" 
+                                v-on:click="toggleThing(item)" 
+                                v-if="item.author.loginname !== user.loginname"
+                            >
                                 <i class="iconfont icon-dianzan"></i>
                                 <em v-if="item.ups.length">{{item.ups.length}}</em>
                             </div>
                         </div>
-                        <topic-reply v-if="item.editState" :topic_id="view.id" :reply_id="item.id" :accesstoken="user.accesstoken" :placeholder="`@${item.author.loginname}`"></topic-reply>
+                        <topic-reply 
+                            v-if="item.editState" 
+                            :topic_id="view.id" 
+                            :reply_id="item.id" 
+                            :accesstoken="user.accesstoken" 
+                            :placeholder="`@${item.author.loginname}`"
+                            :success="getData"
+                            ></topic-reply>
                     </div>
                 </li>
             </ul>
             <div class="re-topic" v-if="user.accesstoken">
-                <topic-reply :accesstoken="user.accesstoken" :topic_id="view.id"></topic-reply>
+                <topic-reply 
+                    :accesstoken="user.accesstoken" 
+                    :topic_id="view.id"
+                    :success="getData"
+                >
+                </topic-reply>
             </div>
         </div>
     </template>
@@ -228,7 +244,7 @@
             },
         },
         methods: {
-            getData: function (callback = () => {}) {
+            getData(callback = () => {}) {
                 var {id} = this.$route.params
                 Tool.get(`/api/v1/topic/${id}`, {}, ({data}) => {
                     if(data) {
@@ -238,10 +254,10 @@
                     }
                 }, this.GET_DATA_ERROR, callback)
             },
-            testThing: function (ups) { //验证是否点赞
+            testThing(ups) { //验证是否点赞
                 return ups.indexOf(this.user.id || '') > -1
             },
-            toggleThing: function (item) { //点赞
+            toggleThing(item) { //点赞
 
                 if(!this.user.loginname) {
                     return this.$router.go('/signin') //未登录，先去登录
@@ -250,7 +266,7 @@
                 this.$store.dispatch(`${NAME}SET_THING_STATE`, index, this.user.id)
                 Tool.post(`/api/v1/reply/${item.id}/ups`, {accesstoken: this.user.accesstoken})
             },
-            reTa: function (index) {
+            reTa(index) {
                 if(!this.user.loginname) {
                     return this.$router.go('/signin') //未登录，先去登录
                 }
@@ -258,7 +274,7 @@
             }
         },
         events: {
-            reGo: function (callback) {
+            reGo(callback) {
                 this.getData(callback)
             }
         }

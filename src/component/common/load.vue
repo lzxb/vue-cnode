@@ -42,7 +42,7 @@
             state: {
                 type: Number, //参数类型是数字
                 default: 0, //0是正在加载中，1是加载成功， -1是加载失败
-                validator: function (val) {
+                validator(val) {
                     return [-1, 0, 1].indexOf(val) > -1
                 }
             },

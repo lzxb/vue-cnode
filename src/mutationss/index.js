@@ -39,6 +39,12 @@ mutationss.SIGNOUT = (state) => {
     state.user = {}
     Tool.removeLocalItem('user')
 }
+/**
+ * 更新用户的消息数量
+ */
+mutationss.MSG_NUM = (state, msgNum) => {
+    state.msgNum = msgNum
+}
 
 const newPage = (name) => {
     
