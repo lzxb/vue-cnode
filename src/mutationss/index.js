@@ -43,7 +43,7 @@ mutationss.SIGNOUT = (state) => {
  * 更新用户的消息数量
  */
 mutationss.MSG_NUM = (state, msgNum) => {
-    state.msgNum = msgNum
+    state.user.msgNum = msgNum
 }
 
 const newPage = (name) => {
