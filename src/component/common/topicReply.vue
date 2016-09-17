@@ -39,7 +39,7 @@
 </style>
 <template>
     <div class="reply-box">
-        <div class="text"><textarea :placeholder="placeholder" v-model="content"></textarea></div>
+        <div class="text"><textarea :placeholder="'@' + loginname" v-model="content"></textarea></div>
         <div flex="main:right">
             <div class="msg">{{error_msg}}</div>
             <div flex-box="0">
@@ -52,7 +52,7 @@
     import Tool from '../../Tool'
     export default {
         props: {
-            placeholder: { //输入框提示内容
+            loginname: { //回复的用户
                 type: String,
                 default: ''
             },
@@ -84,7 +84,9 @@
                 this.btnname = '回复中...'
                 this.error_msg = ''
                 var {reply_id, topic_id, accesstoken, content} = this
-                
+                if (reply_id) {
+                    content = `[@${this.loginname}](/user/${this.loginname}) ${content}`
+                }
                 var text = content += '\n\r<br><br>来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
                 Tool.post(`/api/v1//topic/${topic_id}/replies`, {reply_id, accesstoken, content: text}, ({success, error_msg}) => {
                     this.content = ''

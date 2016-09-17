@@ -190,7 +190,7 @@
                             :topic_id="view.id" 
                             :reply_id="item.id" 
                             :accesstoken="user.accesstoken" 
-                            :placeholder="`@${item.author.loginname}`"
+                            :loginname="item.author.loginname"
                             :success="getData"
                             ></topic-reply>
                     </div>
