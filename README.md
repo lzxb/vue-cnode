@@ -48,8 +48,8 @@ vue模板的方式对比react的jsx方式，虽然入手简单，但是图灵表
 因为我是把vue-cnode是放在git pages上面，因为觉得访问速度比较慢，便将vue-cnode打包成一个离线缓存的webApp，
 发现了html-webpack-plugin并没有将manifest的服务器路径设置进去，于是第一次给老外pull代码便自然而然的发生了。
 如果你的打包生产版本发现manifest的文件路径不对，不要惊慌，自己手动修改一下html-webpack-plugin的index.js代码即可，如下
+```
 ```javascript
   //index.js 557行，加上assets.publicPath
   return start + ' manifest="' + assets.publicPath + assets.manifest + '"' + end;
-```
 ```
