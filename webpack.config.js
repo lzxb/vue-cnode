@@ -58,7 +58,7 @@ plugins.push(new ExtractTextPlugin('[name].css')) //css单独打包
 plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
     filename: '../index.html', //生成的html存放路径，相对于 path
     template: './src/template/index.html', //html模板路径
-    hash: true    //为静态资源生成hash值
+    hash: process.env.NODE_ENV != 'production'    //生产版本时，会打包成离线应用程序，不需要添加hash，否则会造成无法离线缓存的bug
 }))
 
 
