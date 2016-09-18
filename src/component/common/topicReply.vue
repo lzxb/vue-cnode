@@ -39,7 +39,7 @@
 </style>
 <template>
     <div class="reply-box">
-        <div class="text"><textarea :placeholder="'@' + loginname" v-model="content"></textarea></div>
+        <div class="text"><textarea :placeholder=" reply_id ? '@' + loginname : ''" v-model="content"></textarea></div>
         <div flex="main:right">
             <div class="msg">{{error_msg}}</div>
             <div flex-box="0">

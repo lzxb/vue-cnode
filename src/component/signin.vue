@@ -72,10 +72,16 @@
                         res.msgNum = 0 //设置默认的消息数量
                         this.SIGNIN(res)
                         history.go(-1)
+                        this.submitName = '登录成功，页面跳转中...'
+                    } else {
+                        this.submitName = '登录失败'
                     }
-                    errorCB()
+                    this.submitState = true  
 
-                }, errorCB)
+                }, () => {
+                    this.submitName = '登录失败'
+                    this.submitState = false      
+                })
             }
         }
     }
