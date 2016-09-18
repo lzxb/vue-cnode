@@ -1,7 +1,7 @@
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
-var ExtractTextPlugin = require('extract-text-webpack-plugin') //css单独打包
-var AppCachePlugin = require('appcache-webpack-plugin'); //生成离线缓存清单
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
+const ExtractTextPlugin = require('extract-text-webpack-plugin') //css单独打包
+const AppCachePlugin = require('appcache-webpack-plugin'); //生成离线缓存清单
 
 var publicPath = '/dist/' //服务器路径
 var path = __dirname + '/dist/'
@@ -49,7 +49,7 @@ if (process.env.NODE_ENV == 'production') { //生产环境
     }))
     publicPath = '/vue-cnode/dist/'
     path = __dirname + '/vue-cnode/dist/'
-    plugins.unshift(new AppCachePlugin({ //自动生成app.appcache 离线缓存清单
+    plugins.push(new AppCachePlugin({ //自动生成app.appcache 离线缓存清单
         output: 'main.appcache'
     }))
 }
