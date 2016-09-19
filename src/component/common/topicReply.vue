@@ -87,7 +87,7 @@
                 if (reply_id) {
                     content = `[@${this.loginname}](/user/${this.loginname}) ${content}`
                 }
-                var text = content += '\n\r<br><br>来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
+                var text = content += '\n\r来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
                 Tool.post(`/api/v1//topic/${topic_id}/replies`, {reply_id, accesstoken, content: text}, ({success, error_msg}) => {
                     this.content = ''
                     this.btnname = '回复'
