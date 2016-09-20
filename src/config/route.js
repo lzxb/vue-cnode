@@ -1,3 +1,12 @@
+import index from '../component/index'
+import topicCreate from '../component/topicCreate'
+import topic from '../component/topic'
+import myMessages from '../component/myMessages'
+import userView from '../component/userView'
+import signin from '../component/signin'
+import signout from '../component/signout'
+import about from '../component/about'
+
 export default {
     '/': {
         component: (resolve) => {
@@ -10,58 +19,43 @@ export default {
                     query: 'tab',
                     data: { all: '全部', good: '精华', share: '分享', ask: '问答', 'job': '招聘' }
                 },
-                component: (resolve) => {
-                    require(['../component/index.vue'], resolve)
-                }
+                component: index
             },
             '/topic/create': {
                 auth: true,
                 title: '创建主题',
-                component: (resolve) => {
-                    require(['../component/topicCreate.vue'], resolve)
-                }
+                component: topicCreate
             },
             '/topic/:id': {
                 auth: false,
                 title: '详情',
-                component: (resolve) => {
-                    require(['../component/topic.vue'], resolve)
-                }
+                component: topic
             },
             'my/messages': {
                 auth: true,
                 title: '我的消息',
-                component: (resolve) => {
-                    require(['../component/myMessages.vue'], resolve)
-                }
+                component: myMessages
             },
             'user/:loginname': {
                 auth: false,
                 title: '用户信息',
-                component: (resolve) => {
-                    require(['../component/userView.vue'], resolve)
-                }
+                component: userView
             },
             '/signin': {
                 auth: false,
                 title: '登录',
-                component: (resolve) => {
-                    require(['../component/signin.vue'], resolve)
-                }
+                component: signin
             },
             '/signout': {
                 auth: true,
                 title: '退出',
-                component: (resolve) => {
-                    require(['../component/signout.vue'], resolve)
-                }
+                component: signout,
             },
             '/about': {
                 auth: false,
                 title: '关于',
-                component: (resolve) => {
-                    require(['../component/about.vue'], resolve)
-                }
+                component: about
+
             }
         }
     }
