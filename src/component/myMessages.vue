@@ -62,7 +62,7 @@
             <ul class="list">
                 <li flex="box:first" v-for="item in list" track-by="id">
                     <a class="user" v-link="'/user/' + item.author.loginname">
-                        <div class="user-headimg" :style="{backgroundImage: url(' + item.author.avatar_url +')}"></div>
+                        <div class="user-headimg" :style="{backgroundImage: 'url(' + item.author.avatar_url +')'}"></div>
                     </a>
                     <div>
                         <div class="name">{{item.author.loginname}}
