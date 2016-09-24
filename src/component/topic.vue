@@ -13,6 +13,7 @@
     }
     
     .user-view {
+        display: block;
         position: relative;
         padding: 10px;
         border-bottom: 1px solid @shallow;
