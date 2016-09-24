@@ -120,12 +120,12 @@
         </ul>
         <ul class="list" :style="{display: state.tabIndex == 0 ? 'block' : 'none'}">
             <li flex="box:first" v-for="item in view.recent_replies" track-by="id">
-                <a class="head" v-link="`/user/${item.author.loginname}`">
+                <a class="head" v-link="'/user/' + item.author.loginname">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
                     </div>
                 </a>
-                <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
+                <a v-link="'/topic/' + item.id" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
                         <div class="name">{{item.author.loginname}}</div>
                         <time>{{item.last_reply_at | formatDate}}</time>
@@ -136,12 +136,12 @@
         </ul>
         <ul class="list" :style="{display: state.tabIndex == 1 ? 'block' : 'none'}">
             <li flex="box:first" v-for="item in view.recent_topics" track-by="id">
-                <a class="head" v-link="`/user/${item.author.loginname}`">
+                <a class="head" v-link="'/user/' + item.author.loginname">
                     <div class="pic">
                         <img :src="item.author.avatar_url" alt="">
                     </div>
                 </a>
-                <a v-link="`/topic/${item.id}`" class="main" flex="dir:top box:first">
+                <a v-link="'/topic/' + item.id" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
                         <div class="name">{{item.author.loginname}}</div>
                         <time>{{item.last_reply_at | formatDate}}</time>

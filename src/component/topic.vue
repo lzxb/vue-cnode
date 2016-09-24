@@ -131,7 +131,7 @@
 <template>
     <template v-if="loadState > 0">
         <div class="topic">
-            <div class="user-view">
+            <a class="user-view" v-link="'/user/' + view.author.loginname">
                 <div class="typeicon" flex v-if="view.top || view.good">
                     <div class="icon" v-if="view.top">
                         <i class="iconfont icon-zhiding"></i>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             <div class="tit">{{view.title}}</div>
             <article class="markdown-body article">{{{view.content}}}</article>
             <div class="re-tit" v-if="view.replies.length">共<em>{{view.replies.length}}条回复</em></div>
