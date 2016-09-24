@@ -26,3 +26,11 @@ router.beforeEach(({to, next}) => {
     }
 })
 router.start(Vue.extend({}), '#main')
+
+applicationCache.onupdateready = () => {
+    setTimeout(() => {
+        if (confirm('更新已经完成，是否要切换到最新版本')) {
+            location.reload()
+        }
+    }, 1000)
+}
