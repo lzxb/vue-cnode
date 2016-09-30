@@ -36,7 +36,7 @@ export const formatDate = (str) => {
  */
 export const getTextImgUrl = (content) => {
     var arr = []
-    content.replace(/src="(.*?)"/g, ($1, $2) => {
+    content.replace(/src="((http:)*\/\/(.*?)\.(png|jpg|gif))"/gi, ($1, $2) => {
         if (arr.length < 4 && arr.indexOf($2) < 0) arr.push($2)
         return $1
     })

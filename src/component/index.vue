@@ -151,7 +151,7 @@
                 <div class="images count-{{item.content | getTextImgUrl | length}}" flex="box:mean">
                     <div class="item" v-for="imgurl in item.content | getTextImgUrl">
                         <div class="pic">
-                            <img :src="transparent" :style="{backgroundImage: 'url(' + imgurl + ')'}" alt="">
+                            <img src="../images/transparent.png" :style="{backgroundImage: 'url(' + imgurl + ')'}" alt="">
                         </div>
                     </div>
                 </div>
