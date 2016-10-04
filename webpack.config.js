@@ -25,7 +25,7 @@ loaders.push({
 loaders.push({
     test: /\.less|\.css/,
     exclude: /^node_modules$/,
-    loader: 'style-loader!css-loader!postcss-loader!less-loader'
+    loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
 })
 
 loaders.push({
@@ -75,9 +75,6 @@ module.exports = {
     plugins: plugins,
     resolve: {
         extensions: ['', '.js', '.vue'], //后缀名自动补全
-        alias: {
-            vue: 'vue/dist/vue.js'
-        }
     }
 }
 

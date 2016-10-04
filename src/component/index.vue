@@ -187,6 +187,7 @@
     store.dispatch(`${NAME}ADD_CUSTOM_KEY`, {
         page: 1 //加载到第几页
     })
+
     export default {
         mixins: [mixins(NAME)],
         route: {

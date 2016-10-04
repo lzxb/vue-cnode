@@ -82,6 +82,7 @@
         }
     }
 </style>
+<template>
     <div class="app" :class="{'app-side-bar-show': sideBar}">
         <div class="wrap">
             <v-header :title="title"></v-header>
@@ -99,7 +100,7 @@
                 </li>
             </ul>
             <div class="user" v-else>
-                <router-link to="'/user/' + user.loginname" flex v-on:click="SIDE_BAR_HIDE">
+                <a v-link="`/user/${user.loginname}`" flex v-on:click="SIDE_BAR_HIDE">
                     <div class="headimg" flex-box="0">
                         <img :src="user.avatar_url" alt="">
                     </div>
@@ -107,13 +108,13 @@
                     <div class="font" flex="cross:center" flex-box="0">
                         <i class="iconfont icon-jiantouright"></i>
                     </div>
-                </router-link>
+                </a>
             </div>
             <ul class="nav" v-for="o in menus">
                 <li v-for="d in o" v-if="d.auth ? user.loginname : true">
                     <a flex="box:first" v-link="d.link" v-on:click="SIDE_BAR_HIDE">
                         <div class="icon" flex="main:center cross:center">
-                            <i class="iconfont" :class="['icon-' + d.icon]"></i>
+                            <i class="iconfont icon-{{d.icon}}"></i>
                         </div>
                         <div class="tit">
                             {{d.title}}
@@ -124,9 +125,6 @@
             </ul>
         </div>
         <div class="side-bar-close" v-on:click="SIDE_BAR_HIDE"></div>
-    </div>
-<template>
-    <div class="app" :class="{'app-side-bar-show': sideBar}">
     </div>
 </template>
 <script>
