@@ -25,7 +25,7 @@ loaders.push({
 loaders.push({
     test: /\.less|\.css/,
     exclude: /^node_modules$/,
-    loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
+    loader: 'style-loader!css-loader!postcss-loader!less-loader'
 })
 
 loaders.push({
