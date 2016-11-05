@@ -27,6 +27,7 @@ export default [
                 component: resolve => require(['../pages/topic/edit/'], resolve)
             },
             {
+                meta: { auth: false },
                 path: '/topic/:vid', //查看帖子信息
                 component: resolve => require(['../pages/topic/vid/'], resolve)
             },
