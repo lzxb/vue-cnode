@@ -3,7 +3,10 @@
 </style>
 <template>
     <div>
-        首页
+        <v-header title="主题"></v-header>
+        <v-content style="bottom: 0;">
+            内容详情
+        </v-content>
     </div> 
 </template>
 <script>
