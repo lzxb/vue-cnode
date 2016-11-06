@@ -3,6 +3,7 @@
     .form {
         width: 80%;
         padding: 0 10%;
+        margin-top: -50px;
         .line {
             padding: 20px 0;
         }
