@@ -27,13 +27,18 @@
                     }
                 }
             }
+            .active {
+                i, em {
+                    color: @main;
+                }
+            }
         }
     }
 </style>
 <template>
     <footer class="footer">
         <ul flex="box:mean">
-            <li>
+            <li class="active">
                 <router-link to="/">
                     <i class="iconfont icon-index"></i>
                     <em>首页</em>
@@ -52,7 +57,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/">
+                <router-link to="/home">
                     <i class="iconfont icon-user"></i>
                     <em>我的</em>
                 </router-link>

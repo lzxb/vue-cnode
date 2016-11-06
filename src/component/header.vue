@@ -21,15 +21,25 @@
 </style>
 <template>
     <header class="header" flex="box:justify">
-        <div class="item" flex="main:center cross:center">
-            <i class="iconfont icon-about"></i>
-        </div>    
-        <h2 class="title">首页</h2>    
-        <div class="item" flex="main:center cross:center">
-            <i class="iconfont icon-user"></i>
-        </div>    
+        <slot name="left">
+            <div class="item" flex="main:center cross:center" v-on:click="$router.go(-1)">
+                <i class="iconfont icon-back"></i>
+            </div>    
+        </slot>
+        <h2 class="title">{{title}}</h2> 
+        <slot name="right">
+            <div class="item" flex="main:center cross:center">
+            </div>    
+        </slot>   
     </header>Ï
 </template>
 <script>
-        
+    export default {
+        props: {
+            title: {
+                type: String,
+                default: ''
+            }
+        }
+    }
 </script>

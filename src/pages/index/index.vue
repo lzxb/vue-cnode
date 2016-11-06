@@ -52,6 +52,8 @@
                 strong {
                     line-height: 24px;
                     font-size: 16px;
+                    font-weight: normal;
+                    color: darken(@text, 10%);
                 }
                 time {
                     line-height: 16px;

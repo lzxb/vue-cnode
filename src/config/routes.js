@@ -19,7 +19,11 @@ export default [
                 component: resolve => require(['../pages/user/username/'], resolve)
             },
             {
-                path: '/topic/create', //创建帖子
+                path: '/home', //我的个人中心
+                component: resolve => require(['../pages/home/'], resolve)
+            },
+            {
+                path: '/topic/create', //创建帖子 
                 component: resolve => require(['../pages/topic/edit/'], resolve)
             },
             {

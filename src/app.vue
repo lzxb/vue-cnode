@@ -1,5 +1,4 @@
-<style lang="less" scoped>
-
+<style lang="less">
 </style>
 <template>
     <router-view></router-view>
