@@ -1,4 +1,5 @@
 <style lang="less" scoped>
+    @import "../../less/config";
     .form {
         width: 80%;
         padding: 0 10%;
@@ -18,9 +19,10 @@
             width: 100%;
             line-height: 38px;
             border-radius: 5px;
-            border: 1px solid #ddd;
+            border: 1px solid darken(@main, 3%);
             font-size: 14px;
-            background: #eee;
+            color: #fff;
+            background: @main;
         }
     }
 </style>
@@ -40,5 +42,7 @@
     </div>
 </template>
 <script>
-    
+    export default {
+        
+    }
 </script>   

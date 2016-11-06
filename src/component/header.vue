@@ -2,12 +2,12 @@
     @import "../less/config";
     .header {
         position: absolute;
-        top: 0;
         right: 0;
         left: 0;
         z-index: 10500;
         height: 50px;
         line-height: 50px;
+
         .item {
             width: 50px;
         }
@@ -24,13 +24,13 @@
         <slot name="left">
             <div class="item" flex="main:center cross:center" v-on:click="$router.go(-1)">
                 <i class="iconfont icon-back"></i>
-            </div>    
+            </div>
         </slot>
-        <h2 class="title">{{title}}</h2> 
+        <h2 class="title">{{title}}</h2>
         <slot name="right">
             <div class="item" flex="main:center cross:center">
-            </div>    
-        </slot>   
+            </div>
+        </slot>
     </header>Ï
 </template>
 <script>
