@@ -1,4 +1,5 @@
 <style lang="less" scoped>
+
 </style>
 <template>
     <router-view></router-view>
@@ -6,6 +7,7 @@
 <script>
     export default {
         data() {
+            return {}
         }
     }
 </script>
