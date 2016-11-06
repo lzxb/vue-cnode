@@ -11,9 +11,9 @@
         ul {
             padding: 5px 0;
             margin: 0;
-            li{
+            li {
                 list-style: none;
-                a{
+                a {
                     text-decoration: none;
                     color: @text;
                     i {
@@ -28,7 +28,8 @@
                 }
             }
             .active {
-                i, em {
+                i,
+                em {
                     color: @main;
                 }
             }
@@ -66,5 +67,10 @@
     </footer>
 </template>
 <script>
-        
+    import Vue from 'vue'
+    export default {
+        data() {
+
+        }
+    }
 </script>
