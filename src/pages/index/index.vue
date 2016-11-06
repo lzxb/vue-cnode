@@ -75,19 +75,19 @@
     <div>
         <nav class="nav">
             <ul flex="box:mean">
-                <li :class="{active: !this.$route.query.tab}">
+                <li :class="{ active: !this.$route.query.tab }">
                     <router-link to="/">首页</router-link>
                 </li>
-                <li :class="{active: this.$route.query.tab == 'good'}">
+                <li :class="{ active: this.$route.query.tab == 'good' }">
                     <router-link to="/?tab=good">精华</router-link>
                 </li>
-                <li :class="{active: this.$route.query.tab == 'share'}">
+                <li :class="{ active: this.$route.query.tab == 'share' }">
                     <router-link to="/?tab=share">分享</router-link>
                 </li>
-                <li :class="{active: this.$route.query.tab == 'ask'}">
+                <li :class="{ active: this.$route.query.tab == 'ask' }">
                     <router-link to="/?tab=ask">问答</router-link>
                 </li>
-                <li :class="{active: this.$route.query.tab == 'job'}">
+                <li :class="{ active: this.$route.query.tab == 'job' }">
                     <router-link to="/?tab=job">招聘</router-link>
                 </li>
             </ul>
@@ -101,12 +101,12 @@
                                 <img width="100%" height="100%" :src="item.author.avatar_url" alt="">
                             </div>
                             <div class="box" flex="dir:top">
-                                <strong>{{item.author.loginname}}</strong>
-                                <time>{{item.create_at}}</time>
+                                <strong>{{ item.author.loginname }}</strong>
+                                <time>{{ item.create_at }}</time>
                             </div>
                         </div>
                         <div class="tit">
-                            {{item.title}}
+                            {{ item.title }}
                         </div>
                     </router-link>
                 </li>
@@ -118,21 +118,21 @@
 <script>
     import util from 'util'
     export default {
-        data() {
+        data () {
             return {
                 list: []
             }
         },
-        mounted() {
+        mounted () {
             this.getList()
         },
         watch: {
-            $route() {
+            $route () {
                 this.getList()
             }
         },
         methods: {
-            getList() {
+            getList () {
                 var { tab = 'all' } = this.$route.query
                 util.get('/api/v1/topics', { tab }, ({ data }) => {
 

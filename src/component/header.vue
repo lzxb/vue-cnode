@@ -22,14 +22,11 @@
 <template>
     <header class="header" flex="box:justify">
         <slot name="left">
-            <div class="item" flex="main:center cross:center" v-on:click="$router.go(-1)">
-                <i class="iconfont icon-back"></i>
-            </div>
+            <div class="item" flex="main:center cross:center"></div>
         </slot>
         <h2 class="title">{{title}}</h2>
         <slot name="right">
-            <div class="item" flex="main:center cross:center">
-            </div>
+            <div class="item" flex="main:center cross:center"></div>
         </slot>
     </header>Ï
 </template>

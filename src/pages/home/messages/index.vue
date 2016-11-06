@@ -3,7 +3,9 @@
 </style>
 <template>
     <div>
-        个人中心
+        <v-header title="消息"></v-header>
+        <v-content></v-content>
+        <v-footer></v-footer>
     </div>
 </template>
 <script>

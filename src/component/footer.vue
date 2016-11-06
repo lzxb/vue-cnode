@@ -39,30 +39,14 @@
 <template>
     <footer class="footer">
         <ul flex="box:mean">
-            <li class="active">
-                <router-link to="/">
-                    <i class="iconfont icon-index"></i>
-                    <em>首页</em>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/">
-                    <i class="iconfont icon-edit"></i>
-                    <em>发表</em>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/">
-                    <i class="iconfont icon-msg"></i>
-                    <em>消息</em>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/home">
-                    <i class="iconfont icon-user"></i>
-                    <em>我的</em>
-                </router-link>
-            </li>
+            <template v-for="item in list">                
+                <li :class="{ active: item.path == $route.path }">
+                    <router-link :to="item.path">
+                        <i class="iconfont" :class="[ item.icon ]"></i>
+                        <em>{{ item.title }}</em>
+                    </router-link>
+                </li>
+            </template>
         </ul>
     </footer>
 </template>
@@ -70,7 +54,30 @@
     import Vue from 'vue'
     export default {
         data() {
-            return {}
+            return {
+                list: [
+                    {
+                        title: '首页',
+                        path: '/',
+                        icon: 'icon-index'
+                    },
+                    {
+                        title: '发表',
+                        path: '/topic/create',
+                        icon: 'icon-edit'
+                    },
+                    {
+                        title: '消息',
+                        path: '/home/messages',
+                        icon: 'icon-msg'
+                    },
+                    {
+                        title: '我的',
+                        path: '/home/index',
+                        icon: 'icon-user'
+                    }
+                ]
+            }
         }
     }
 </script>
