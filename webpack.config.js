@@ -48,24 +48,12 @@ module.exports = {
             {
                 test: /\.css/,
                 exclude: /^node_modules$/,
-                loader: 'style-loader!css-loader'
+                loader: `style-loader!css-loader!autoprefixer-loader?{ browsers: ['last 100 versions'] }!`
             },
             {
                 test: /\.less/,
                 exclude: /^node_modules$/,
-                loader: `style-loader!css-loader!autoprefixer-loader?{
-                    browsers: [
-                        'ie >= 8',
-                        'ie_mob >= 10',
-                        'ff >= 26',
-                        'chrome >= 30',
-                        'safari >= 6',
-                        'opera >= 23',
-                        'ios >= 5',
-                        'android >= 2.3',
-                        'bb >= 10'
-                    ]
-                }!less-loader`
+                loader: `style-loader!css-loader!autoprefixer-loader?{ browsers: ['last 100 versions'] }!less-loader`
             },
             {
                 test: /\.(png|jpg)$/,
@@ -88,4 +76,11 @@ module.exports = {
             util: path.resolve('src/util/index.js'), //常用工具方法
         }
     },
+    vue: {
+        postcss: [
+            require('autoprefixer')({
+                browsers: ['last 100 versions']
+            })
+        ]
+    }
 }

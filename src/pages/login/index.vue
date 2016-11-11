@@ -57,7 +57,6 @@
                 form: {
                     accesstoken: ''
                 },
-                error_msg: '', //错误提示
                 status: false //true正在提交， false还没提交
             }
         },
@@ -70,7 +69,7 @@
 
                     if (is.object(res)) {
                         if (res.success) {
-                            this.error_msg = '登录成功'
+                            util.toast('登录成功')
                             this.SIGNIN({
                                 avatar_url: res.avatar_url,
                                 id: res.id,
@@ -79,16 +78,16 @@
                             })
                             this.$router.go(-1)
                         } else {
-                            this.error_msg = res.error_msg
+                            util.toast(res.error_msg)
                         }
                     } else {
-                        this.error_msg = '登录失败'
+                        util.toast('登录失败')
                     }
 
                     this.status = false
 
                 }, () => {
-                    this.error_msg = '登录失败'
+                    util.toast('登录失败')
                     this.status = false
                 })
             }

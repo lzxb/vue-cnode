@@ -20,6 +20,7 @@ export default [
             },
             {
                 path: '/home/index/', //我的个人中心
+                meta: { auth: false },
                 component: resolve => require(['../pages/home/index/'], resolve)
             },
             {

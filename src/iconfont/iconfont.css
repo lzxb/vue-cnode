@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1478401715141'); /* IE9*/
-  src: url('iconfont.eot?t=1478401715141#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1478401715141') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1478401715141') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1478401715141#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1478872254028'); /* IE9*/
+  src: url('iconfont.eot?t=1478872254028#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1478872254028') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1478872254028') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1478872254028#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -17,6 +17,8 @@
 }
 
 .icon-index:before { content: "\e61b"; }
+
+.icon-setting:before { content: "\e651"; }
 
 .icon-back:before { content: "\e604"; }
 
@@ -35,4 +37,6 @@
 .icon-good:before { content: "\e612"; }
 
 .icon-edit:before { content: "\e60f"; }
+
+.icon-arrow-right:before { content: "\e6cf"; }
 
