@@ -24,11 +24,13 @@ export default [
                 component: resolve => require(['../pages/home/index/'], resolve)
             },
             {
+                meta: { auth: false },
                 path: '/home/messages/', //我的消息
                 component: resolve => require(['../pages/home/messages/'], resolve)
             },
             {
-                path: '/topic/create', //创建帖子 
+                path: '/topic/create', //创建帖子
+                meta: { auth: false },
                 component: resolve => require(['../pages/topic/edit/'], resolve)
             },
             {

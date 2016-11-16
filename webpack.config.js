@@ -32,7 +32,7 @@ module.exports = {
     output: {
         publicPath: config.publicPath, //服务器的路径
         path: path.resolve(__dirname + config.publicPath), //编译到指定目录下
-        filename: '[name].js' //编译后的文件名
+        filename: '[name].js?v=[hash]' //编译后的文件名
     },
     module: {
         loaders: [
