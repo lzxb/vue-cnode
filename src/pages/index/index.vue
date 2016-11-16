@@ -118,12 +118,12 @@
 <script>
     import util from 'util'
     export default {
-        data () {
+        data() {
             return {
                 list: []
             }
         },
-        mounted () {
+        mounted() {
             this.getList()
         },
         watch: {
@@ -132,7 +132,7 @@
             }
         },
         methods: {
-            getList () {
+            getList() {
                 var { tab = 'all' } = this.$route.query
                 util.get('/api/v1/topics', { tab }, ({ data }) => {
 

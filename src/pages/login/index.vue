@@ -50,7 +50,8 @@
     import util from 'util'
     import is from 'is'
     import { mapActions } from 'vuex'
-
+    import { SIGNIN } from 'store/user'
+    
     export default {
         data() {
             return {
@@ -61,7 +62,7 @@
             }
         },
         methods: {
-            ...mapActions(['SIGNIN']),
+            ...mapActions([SIGNIN]),
             submit () {
                 if (this.status) return
                 this.status = true
@@ -70,7 +71,7 @@
                     if (is.object(res)) {
                         if (res.success) {
                             util.toast('登录成功')
-                            this.SIGNIN({
+                            this.USER_SIGNIN({
                                 avatar_url: res.avatar_url,
                                 id: res.id,
                                 loginname: res.loginname,

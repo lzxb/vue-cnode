@@ -8,6 +8,7 @@
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
         select {
+            padding: 0;
             border-radius: 5px;
             background: none;
         }
@@ -42,7 +43,7 @@
         </v-header>
         <v-content flex="dir:top">
             <div class="title">
-                <input type="text" placeholder="请输入标题">
+                <input type="text" placeholder="标题">
             </div>
             <div class="select">
                 <select>
@@ -53,7 +54,7 @@
                 </select>
             </div>
             <div class="con" flex="dir:top" flex-box="1">
-                <textarea flex-box="1"></textarea>
+                <textarea flex-box="1" placeholder="内容"></textarea>
             </div>
         </v-content>
         <v-footer></v-footer>
