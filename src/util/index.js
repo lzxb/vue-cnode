@@ -28,9 +28,6 @@ export default {
     post(url, data = {}, success = () => { }, error = () => { }) {
         ajax({ url, data, success, error, type: 'POST' })
     },
-    getPageKey() {
-        return is.object(history.state) ? history.state.key : location.href
-    },
     /**
      * 消息消失框
      */
