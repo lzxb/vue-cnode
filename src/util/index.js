@@ -1,37 +1,26 @@
 import is from 'is'
-import ajax from 'superagent' //ajax 请求库
+// import ajax from 'superagent' //ajax 请求库
 import config from 'config'
+import ajax from './ajax'
+
+ajax.before((res, next) => {
+    res.url = 'https://cnodejs.org' + res.url
+    res.data.type = true
+    next()
+})
+
+ajax.after((res, next) => {
+    next()
+})
 
 export default {
-    get(url, query = {}, success = () => { }, error = () => { }, end = () => { }) {
-        var bool = true //true允许回调方法，false不再执行回调
-        ajax('GET', config.target + url).query(query).end((err, res = {}) => {
-            if (!bool) return //防止继续执行回调
-            if (res.body && is.object(res.body)) {
-                success(res.body)
-            } else {
-                error({})
-            }
-            end(res.body)
-        })
-        return () => {
-            bool = false
-        }
+    get(url, data = {}, success = () => { }, error = () => { }, complete = () => { }) {
+        ajax({ url, data, success, error, complete, type: 'GET' })
     },
     post(url, body = {}, success = () => { }, error = () => { }, end = () => { }) {
-        var bool = true //true允许回调方法，false不再执行回调
-        ajax('POST', config.target + url).send(body).end((err, res = {}) => {
-            if (!bool) return //防止继续执行回调
-            if (res.body && is.object(res.body)) {
-                success(res.body)
-            } else {
-                error({})
-            }
-            end(res.body)
-        })
-        return () => {
-            bool = false
-        }
+    },
+    getPageKey() {
+        return is.object(history.state) ? history.state.key : location.href
     },
     /**
      * 消息消失框

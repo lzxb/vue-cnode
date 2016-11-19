@@ -147,7 +147,6 @@
             getList() {
                 var { tab = 'all' } = this.$route.query
                 util.get('/api/v1/topics', { tab }, ({ data }) => {
-
                     this.list = data
                 })
             }

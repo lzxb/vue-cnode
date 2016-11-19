@@ -19,7 +19,8 @@ Object.keys(common).forEach((key) => {
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    routes
+    routes,
+    mode: 'history'
 })
 router.beforeEach(({meta, path}, from, next) => {
     var {auth = true} = meta

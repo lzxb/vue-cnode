@@ -8,13 +8,11 @@ var server = new WebpackDevServer(compiler, {
     publicPath: config.publicPath,
     stats: {
         colors: true //显示不同的颜色区分打包的文件
-    },
-    proxy: { //代理服务器
-        '/api/*': {
-            target: config.target,
-            changeOrigin: true
-        }
     }
+})
+
+server.app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/src/template/index-dev.html')
 })
 
 server.listen(3000, (err) => {
