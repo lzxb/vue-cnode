@@ -1,5 +1,8 @@
 <style lang="less" scoped>
     @import "../../../less/config";
+    .con {
+        background: #eee;
+    }
     .user {
         position: relative;
         height: 180px;
@@ -36,18 +39,19 @@
         margin: 0;
         li {
             list-style: none;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #ddd;
             background: #fbfbfb;
             &:first-of-type {
-                border-top: 1px solid #eee;
+                border-top: 1px solid #ddd;
             }
         }
         a {
-            padding: 5px 10px;
+            padding: 8px 10px;
             line-height: 28px;
             .icon {
-                width: 25px;
+                width: 45px;
                 .iconfont {
+                    font-size: 24px;
                     color: #aaa;
                 }
             }
@@ -64,7 +68,7 @@
 <template>
     <div>
         <v-header title="个人中心"></v-header>
-        <v-content>
+        <v-content class="con">
             <router-link to="/user/lzxb">
                 <div class="user">
                 </div>
@@ -73,9 +77,9 @@
             </router-link>
             <nav class="nav">
                 <li>
-                    <router-link to="/" flex="box:justify">
+                    <router-link to="/topic/create" flex="box:justify">
                         <div class="icon" flex="cross:center">
-                            <i class="iconfont icon-edit"></i>
+                            <i class="iconfont icon-edit" style="color: #14b11d"></i>
                         </div>
                         <div class="text">发表主题</div>
                         <div class="arrow">
@@ -84,9 +88,9 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/" flex="box:justify">
+                    <router-link to="/home/messages" flex="box:justify">
                         <div class="icon" flex="cross:center">
-                            <i class="iconfont icon-msg"></i>
+                            <i class="iconfont icon-msg" style="color: #bd1616;"></i>
                         </div>
                         <div class="text">我的消息</div>
                         <div class="arrow">
@@ -100,20 +104,20 @@
                 <li>
                     <router-link to="/" flex="box:justify">
                         <div class="icon" flex="cross:center">
-                            <i class="iconfont icon-about"></i>
+                            <i class="iconfont icon-setting"></i>
                         </div>
-                        <div class="text">关于</div>
+                        <div class="text">设置</div>
                         <div class="arrow">
                             <i class="iconfont icon-arrow-right"></i>
                         </div>
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/" flex="box:justify">
+                    <router-link to="/about" flex="box:justify">
                         <div class="icon" flex="cross:center">
-                            <i class="iconfont icon-setting"></i>
+                            <i class="iconfont icon-about"></i>
                         </div>
-                        <div class="text">设置</div>
+                        <div class="text">关于</div>
                         <div class="arrow">
                             <i class="iconfont icon-arrow-right"></i>
                         </div>

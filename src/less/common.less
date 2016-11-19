@@ -1,7 +1,9 @@
 @import "./config";
+
 /*
     初始化页面布局
 */
+
 body {
     overflow: hidden;
     position: absolute;
@@ -13,10 +15,21 @@ body {
     font-size: 13px;
     -webkit-tap-highlight-color: transparent;
 }
+
+* {
+    outline: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
 a {
     text-decoration: none;
     color: @main;
-}
-* {
-    outline: none;
 }

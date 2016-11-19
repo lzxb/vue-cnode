@@ -106,12 +106,13 @@
                 list: []
             }
         },
-        mounted() {
+        created() {
             this.getList()
         },
         methods: {
             getList() {
                 var { accesstoken } = this.user
+                if(!accesstoken) return false
                 util.get('/api/v1/messages', { mdrender: true, accesstoken }, ({ data }) => {
                     var { hasnot_read_messages, has_read_messages } = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)

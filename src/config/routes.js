@@ -15,7 +15,13 @@ export default [
                 component: resolve => require(['../pages/signout/'], resolve)
             },
             {
+                path: '/about', //关于
+                meta: { auth: false },
+                component: resolve => require(['../pages/about/'], resolve)
+            },
+            {
                 path: '/user/:username', //查看用户信息
+                meta: { auth: false },
                 component: resolve => require(['../pages/user/username/'], resolve)
             },
             {
