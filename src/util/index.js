@@ -1,23 +1,32 @@
 import is from 'is'
-// import ajax from 'superagent' //ajax 请求库
 import config from 'config'
 import ajax from './ajax'
+import store from '../store'
 
 ajax.before((res, next) => {
     res.url = 'https://cnodejs.org' + res.url
-    res.data.type = true
+    var { accesstoken } = store.state.user
+    if(accesstoken) {
+        res.data.accesstoken = accesstoken
+    }
+
     next()
 })
 
 ajax.after((res, next) => {
-    next()
+    if (res) {
+        next()
+    } else {
+        exports.default.toast('加载失败')
+    }
 })
 
 export default {
-    get(url, data = {}, success = () => { }, error = () => { }, complete = () => { }) {
-        ajax({ url, data, success, error, complete, type: 'GET' })
+    get(url, data = {}, success = () => { }, error = () => { }) {
+        ajax({ url, data, success, error, type: 'GET' })
     },
-    post(url, body = {}, success = () => { }, error = () => { }, end = () => { }) {
+    post(url, data = {}, success = () => { }, error = () => { }) {
+        ajax({ url, data, success, error, type: 'POST' })
     },
     getPageKey() {
         return is.object(history.state) ? history.state.key : location.href

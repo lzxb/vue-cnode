@@ -57,9 +57,9 @@ var ajax = (option) => { //ajax请求方法
             xhr.open('GET', setting.url + '?' + query.join('&') + '&' + new Date().getTime(), true)
             xhr.send()
         } else { // post请求
-            xhr.open(setting.type, setting.url, true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.send(sData);
+            xhr.open(setting.type, setting.url, true)
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            xhr.send(query.join('&'))
         }
         xhr.onloadend = ({ currentTarget }) => { //请求结束执行方法
             var { response } = currentTarget
