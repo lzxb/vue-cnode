@@ -66,7 +66,7 @@
             <div class="msg-box" v-if="list.length">
                 <ul class="list">
                     <li flex="box:first" v-for="(item, $index) in list">
-                        <router-link class="user" to="'/user/' + item.author.loginname">
+                        <router-link class="user" :to="'/user/' + item.author.loginname">
                             <div class="user-headimg" :style="{backgroundImage: 'url(' + item.author.avatar_url +')'}"></div>
                         </router-link>
                         <div>
@@ -75,12 +75,12 @@
                             </div>
                             <div v-if="item.type == 'at'">
                                 在话题
-                                <router-link to="'/topic/' + item.topic.id">{{ item.topic.title }}</router-link> 中 @了你
+                                <router-link :to="'/topic/' + item.topic.id">{{ item.topic.title }}</router-link> 中 @了你
 
                             </div>
                             <div v-if="item.type == 'reply'">
                                 回复你了的话题
-                                <router-link to="'/topic/' + item.topic.id">{{ item.topic.title }}</router-link>
+                                <router-link :to="'/topic/' + item.topic.id">{{ item.topic.title }}</router-link>
                             </div>
                             <div class="markdown-body" v-html="item.reply.content"></div>
                         </div>

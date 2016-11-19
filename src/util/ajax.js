@@ -75,13 +75,13 @@ var ajax = (option) => { //ajax请求方法
 /**
  * 开始请求的拦截器
  */
-ajax.before = (callback) => {
+ajax.beforeEach = (callback) => {
     _startIntercept.push(callback)
 }
 /**
  * 请求结束的拦截器
  */
-ajax.after = (callback) => {
+ajax.afterEach = (callback) => {
     _endIntercept.push(callback)
 }
 export default ajax

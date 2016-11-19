@@ -3,7 +3,7 @@ import config from 'config'
 import ajax from './ajax'
 import store from '../store'
 
-ajax.before((res, next) => {
+ajax.beforeEach((res, next) => {
     res.url = 'https://cnodejs.org' + res.url
     var { accesstoken } = store.state.user
     if(accesstoken) {
@@ -13,7 +13,7 @@ ajax.before((res, next) => {
     next()
 })
 
-ajax.after((res, next) => {
+ajax.afterEach((res, next) => {
     if (res) {
         next()
     } else {
