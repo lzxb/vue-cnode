@@ -129,8 +129,11 @@
 </template>
 <script>
     import util from 'util'
+    import routeData from 'route-data'
+
     export default {
-        data() {
+        mixins: [routeData],
+        routeData() {
             return {
                 list: []
             }

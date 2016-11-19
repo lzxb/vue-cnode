@@ -11,7 +11,7 @@ var server = new WebpackDevServer(compiler, {
     }
 })
 
-server.app.get('*', function (req, res) {
+server.app.get('/vue-cnode/*', function (req, res) {
     res.sendFile(__dirname + '/src/template/index-dev.html')
 })
 

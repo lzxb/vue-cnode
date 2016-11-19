@@ -7,7 +7,7 @@ const IS_ENV = process.env.NODE_ENV == 'production'
 
 var plugins = []
 if (IS_ENV) { //生产环境
-    plugins.push(new webpack.DefinePlugin({ 
+    plugins.push(new webpack.DefinePlugin({
         'process.env': { //设置成生产环境
             NODE_ENV: 'production'
         }
@@ -73,8 +73,9 @@ module.exports = {
         alias: {
             vue: 'vue/dist/vue.js', //webpack打包时，需要设置别名
             config: path.resolve('src/config/config.js'), //程序的一些基本配置
-            util: path.resolve('src/util/index.js'), //常用工具方法
             store: path.resolve('src/store/'), //常用工具方法
+            util: path.resolve('src/util/index.js'), //常用工具方法
+            'route-data': path.resolve('src/util/route-data.js'), //组件数据缓存
         }
     },
     vue: {
