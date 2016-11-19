@@ -10,6 +10,7 @@
             padding: 0;
             margin: 0;
             li {
+                position: relative;
                 list-style: none;
                 line-height: 50px;
                 text-align: center;
@@ -20,12 +21,23 @@
                 color: lighten(@text, 50%);
             }
             .active {
+                &:after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    bottom: 1px;
+                    left: 0;
+                    z-index: 1;
+                    height: 3px;
+                    background: @main;
+                }
                 a {
                     color: @text;
                 }
             }
         }
     }
+    
     .list {
         padding: 0;
         margin: 0;
@@ -113,7 +125,7 @@
             </ul>
         </v-content>
         <v-footer></v-footer>
-    </div> 
+    </div>
 </template>
 <script>
     import util from 'util'
