@@ -69,11 +69,11 @@
     <div>
         <v-header title="个人中心"></v-header>
         <v-content class="con">
-            <router-link to="/user/lzxb">
+            <router-link :to="'/user/' + user.loginname">
                 <div class="user">
                 </div>
-                <div class="headimg" :style="{backgroundImage: 'url(https://avatars1.githubusercontent.com/u/8424643?v=3&s=460)'}"></div>
-                <div class="user-name">狼族小狈</div>
+                <div class="headimg" v-if="user.avatar_url" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
+                <div class="user-name">{{user.loginname}}</div>
             </router-link>
             <nav class="nav">
                 <li>
@@ -130,7 +130,9 @@
     </div>
 </template>
 <script>
+    import { mapState } from 'vuex'
     export default {
+        computed: mapState({ user: (state) => state.user}),
         data() {
             return {}
         }

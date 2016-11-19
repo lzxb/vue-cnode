@@ -98,10 +98,12 @@
 <script>
     import { mapState } from 'vuex'
     import util from 'util'
+    import routeData from 'route-data'
 
     export default {
+        mixins: [routeData],
         computed: mapState({ user: (state) => state.user}),
-        data() {
+        routeData() {
             return {
                 list: []
             }

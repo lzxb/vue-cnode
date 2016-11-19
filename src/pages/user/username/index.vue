@@ -128,8 +128,8 @@
                 </div>
             </div>
             <ul class="tab-nav" flex="box:mean">
-                <li :class="{on: tabIndex == 0}">回复</li>
-                <li :class="{on: tabIndex == 1}">主题</li>
+                <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">回复</li>
+                <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">主题</li>
             </ul>
             <ul class="list" :style="{display: tabIndex == 0 ? 'block' : 'none'}">
                 <li flex="box:first" v-for="item in data.recent_replies" track-by="id">
@@ -168,8 +168,10 @@
 </template>
 <script>
     import util from 'util'
+    import routeData from 'route-data'
     export default {
-        data() {
+        mixins: [routeData],
+        routeData() {
             return {
                 tabIndex: 0,
                 data: {}
@@ -177,6 +179,9 @@
         },
         created() {
             this.getData()
+        },
+        watch: {
+            $route: 'getData'
         },
         methods: {
             getData() {
