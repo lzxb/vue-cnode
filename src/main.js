@@ -18,7 +18,7 @@ Object.keys(common).forEach((key) => {
 })
 
 Vue.use(VueRouter)
-Vue.directive('scrollRecord', scrollRecord)
+Vue.directive('scroll-record', scrollRecord)
 
 const router = new VueRouter({
     routes,
