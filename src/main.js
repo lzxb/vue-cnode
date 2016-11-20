@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import routes from './config/routes'
 import store from './store/'
+import { scrollRecord } from 'route-data'
 import common from './component/' //加载公共组件
 
 import 'normalize.css'
@@ -17,6 +18,7 @@ Object.keys(common).forEach((key) => {
 })
 
 Vue.use(VueRouter)
+Vue.directive('scrollRecord', scrollRecord)
 
 const router = new VueRouter({
     routes,

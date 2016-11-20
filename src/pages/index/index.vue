@@ -104,7 +104,7 @@
                 </li>
             </ul>
         </nav>
-        <v-content>
+        <v-content v-scrollRecord>
             <ul class="list">
                 <li v-for="item in list">
                     <router-link :to="'/topic/' + item.id">
