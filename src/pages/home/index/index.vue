@@ -3,6 +3,7 @@
     .con {
         background: #eee;
     }
+    
     .user {
         position: relative;
         height: 180px;
@@ -69,11 +70,15 @@
     <div>
         <v-header title="个人中心"></v-header>
         <v-content class="con">
-            <router-link :to="'/user/' + user.loginname">
-                <div class="user">
-                </div>
-                <div class="headimg" v-if="user.avatar_url" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
+            <router-link v-if="user.avatar_url" :to="'/user/' + user.loginname">
+                <div class="user"></div>
+                <div class="headimg" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
                 <div class="user-name">{{user.loginname}}</div>
+            </router-link>
+            <router-link v-if="!user.avatar_url" to="/login">
+                <div class="user"></div>
+                <div class="headimg"></div>
+                <div class="user-name">你还未登录，请先登录！</div>
             </router-link>
             <nav class="nav">
                 <li>

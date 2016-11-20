@@ -1,7 +1,7 @@
 /**
  * 还原页面数据
  */
-import RouterStore from './route-store'
+import RouterStore from './store'
 
 const store = new RouterStore()
 

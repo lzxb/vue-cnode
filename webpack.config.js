@@ -75,7 +75,7 @@ module.exports = {
             config: path.resolve('src/config/config.js'), //程序的一些基本配置
             store: path.resolve('src/store/'), //常用工具方法
             util: path.resolve('src/util/index.js'), //常用工具方法
-            'route-data': path.resolve('src/util/route-data.js'), //组件数据缓存
+            'route-data': path.resolve('src/lib/route-data/index.js'), //组件数据缓存
         }
     },
     vue: {

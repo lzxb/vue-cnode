@@ -67,7 +67,6 @@
     </div>
 </template>
 <script>
-    console.log(module)
     import util from 'util'
     import routeData from 'route-data'
     export default {
