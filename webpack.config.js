@@ -76,6 +76,7 @@ module.exports = {
             store: path.resolve('src/store/'), //常用工具方法
             util: path.resolve('src/util/index.js'), //常用工具方法
             'is-seeing': path.resolve('src/util/is-seeing.js'),
+            'pull-list': path.resolve('src/mixins/pull-list.js'), //拉取列表
             'route-data': path.resolve('src/lib/route-data/index.js'), //组件数据缓存
         }
     },

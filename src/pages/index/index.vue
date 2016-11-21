@@ -117,7 +117,7 @@
                             </div>
                             <div class="box" flex="dir:top">
                                 <strong>{{ item.author.loginname }}</strong>
-                                <time>{{ item.create_at  | formatDate }}</time>
+                                <time>{{ item.create_at | formatDate }}</time>
                             </div>
                         </div>
                         <div class="tit">
@@ -133,44 +133,18 @@
 </template>
 <script>
     import util from 'util'
-    import routeData from 'route-data'
+    import pullList from 'pull-list'
 
     export default {
-        mixins: [routeData],
-        routeData() {
-            return {
-                complete: false, //数据是否加载完成
-                loading: false, //是否在请求中
-                page: 1, //当前请求的页数
-                list: [] //列表的数据
-            }
-        },
-        mounted() {
-            this.loading = false
-        },
-        watch: {
-            $route () {
-                this.getList()
-            }
-        },
+        mixins: [pullList],
         methods: {
-            getList() {
-                if(this.complete || this.loading) return
-                this.loading = true
+            _pullList(){
                 var { page, $route } = this
                 var { tab = 'all' } = $route.query
-                util.get('/api/v1/topics', { tab, page }, ({ data }) => {
-                    this.loading = false //请求完成
-                    if(data.length > 0) {
-                        data.forEach((item) => this.list.push(item))
-                    } else {
-                        this.complete = true
-                    }
-                    this.page++
-                })
-            },
-            seeing() {
-                this.getList()
+                return {
+                    url: '/api/v1/topics',
+                    data: { page, tab }
+                }
             }
         }
     } 
