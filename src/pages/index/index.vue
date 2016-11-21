@@ -114,7 +114,7 @@
                             </div>
                             <div class="box" flex="dir:top">
                                 <strong>{{ item.author.loginname }}</strong>
-                                <time>{{ item.create_at }}</time>
+                                <time>{{ item.create_at  | formatDate }}</time>
                             </div>
                         </div>
                         <div class="tit">

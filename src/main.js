@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import routes from './config/routes'
 import store from './store/'
+import * as filters from './filters/'
 import { scrollRecord } from 'route-data'
 import common from './component/' //加载公共组件
 
@@ -16,7 +17,7 @@ Object.keys(common).forEach((key) => {
     var name = key.replace(/(\w)/, (v) => v.toUpperCase()) //首字母大写
     Vue.component(`v${name}`, common[key])
 })
-
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) //注册过滤器
 Vue.use(VueRouter)
 Vue.directive('scroll-record', scrollRecord)
 

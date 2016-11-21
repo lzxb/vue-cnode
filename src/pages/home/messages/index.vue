@@ -71,7 +71,7 @@
                         </router-link>
                         <div>
                             <div class="name">{{ item.author.loginname }}
-                                <time>{{ item.create_at }}</time>
+                                <time>{{ item.create_at | formatDate }}</time>
                             </div>
                             <div v-if="item.type == 'at'">
                                 在话题
