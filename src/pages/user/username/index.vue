@@ -63,46 +63,7 @@
             }
         }
     }
-    
-    .list {
-        li {
-            padding: 10px;
-            height: 50px;
-            border-bottom: 1px solid #eee;
-            background: #fff;
-            .head {
-                .pic {
-                    overflow: hidden;
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 50%;
-                    img {
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-            }
-            .main {
-                padding-left: 10px;
-                color: inherit;
-                .con {
-                    padding: 0 5px;
-                    line-height: 30px;
-                    font-size: 14px;
-                }
-                .name {
-                    color: #666;
-                }
-                .line {
-                    line-height: 20px;
-                }
-                time {
-                    font-size: 12px;
-                    color: #888;
-                }
-            }
-        }
-    }
+
 </style>
 <template>
     <div>
@@ -131,45 +92,19 @@
                 <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">回复</li>
                 <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">主题</li>
             </ul>
-            <ul class="list" :style="{display: tabIndex == 0 ? 'block' : 'none'}">
-                <li flex="box:first" v-for="item in data.recent_replies" track-by="id">
-                    <router-link class="head" :to="'/user/' + item.author.loginname">
-                        <div class="pic">
-                            <img :src="item.author.avatar_url" alt="">
-                        </div>
-                    </router-link>
-                    <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
-                        <div class="line" flex="box:last">
-                            <div class="name">{{item.author.loginname}}</div>
-                            <time>{{item.last_reply_at}}</time>
-                        </div>
-                        <div class="con">{{item.title}}</div>
-                    </router-link>
-                </li>
-            </ul>
-            <ul class="list" :style="{display: tabIndex == 1 ? 'block' : 'none'}">
-                <li flex="box:first" v-for="item in data.recent_topics" track-by="id">
-                    <router-link class="head" :to="'/user/' + item.author.loginname">
-                        <div class="pic">
-                            <img :src="item.author.avatar_url" alt="">
-                        </div>
-                    </router-link>
-                    <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
-                        <div class="line" flex="box:last">
-                            <div class="name">{{item.author.loginname}}</div>
-                            <time>{{item.last_reply_at}}</time>
-                        </div>
-                        <div class="con">{{item.title}}</div>
-                    </router-link>
-                </li>
-            </ul>
+            <list v-show="tabIndex == 0" :list="data.recent_replies"></list>
+            <list v-show="tabIndex == 1" :list="data.recent_topics"></list>
         </v-content>
     </div>
 </template>
 <script>
+    import is from 'is'
     import util from 'util'
     import routeData from 'route-data'
+    import list from './list'
+
     export default {
+        components: { list },
         mixins: [routeData],
         routeData() {
             return {
@@ -186,9 +121,9 @@
         methods: {
             getData() {
                 var { username = '' } = this.$route.params
-                util.get(`/api/v1/user/${username}`, {}, ({ success, data }) => {
+                util.get(`/api/v1/user/${username}`, {}, ({ data }) => {
 
-                    if(success) this.data = data
+                    if(is.object(data) && data.loginname) this.data = data
 
                 })
             }
