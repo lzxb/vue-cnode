@@ -1,3 +1,7 @@
+import is from 'is'
+const getPageKey = () => { //获取当前页面key值，由vue-router生成
+    return is.object(history.state) ? history.state.key : location.href
+}
 /**
  * 异步中间件方法调用
  */
@@ -34,6 +38,7 @@ var _endIntercept = [] //结束的拦截器
 var _win = window
 
 var ajax = (option) => { //ajax请求方法
+    const key = getPageKey()
     var setting = {
         url: _win.location.pathname,
         type: 'GET',
@@ -64,9 +69,10 @@ var ajax = (option) => { //ajax请求方法
         xhr.onloadend = ({ currentTarget }) => { //请求结束执行方法
             var { response } = currentTarget
             if (/application\/json/.test(currentTarget.getAllResponseHeaders()) || setting.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
-                nextMethod(_endIntercept, JSON.parse(response), setting.success)
+
+                if (key == getPageKey()) nextMethod(_endIntercept, JSON.parse(response), setting.success)
             } else {
-                nextMethod(_endIntercept, null, setting.error)
+                if (key == getPageKey()) nextMethod(_endIntercept, null, setting.error)
             }
         }
     })

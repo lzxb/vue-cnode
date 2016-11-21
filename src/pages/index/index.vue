@@ -124,6 +124,7 @@
                     </router-link>
                 </li>
             </ul>
+            <v-loading></v-loading>
         </v-content>
         <v-footer></v-footer>
     </div>

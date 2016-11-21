@@ -5,7 +5,7 @@ import routes from './config/routes'
 import store from './store/'
 import * as filters from './filters/'
 import { scrollRecord } from 'route-data'
-import common from './component/' //加载公共组件
+import component from './component/' //加载公共组件
 
 import 'normalize.css'
 import 'flex.css'
@@ -13,9 +13,9 @@ import './iconfont/iconfont.css'
 import './css/common.css'
 import './less/common.less'
 
-Object.keys(common).forEach((key) => {
+Object.keys(component).forEach((key) => {
     var name = key.replace(/(\w)/, (v) => v.toUpperCase()) //首字母大写
-    Vue.component(`v${name}`, common[key])
+    Vue.component(`v${name}`, component[key])
 })
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) //注册过滤器
 Vue.use(VueRouter)

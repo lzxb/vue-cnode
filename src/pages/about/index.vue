@@ -1,5 +1,4 @@
 <style lang="less" scoped>
-
 </style>
 <template>
     <div>
@@ -8,7 +7,8 @@
                 <i class="iconfont icon-back"></i>
             </div>
         </v-header>
-        <v-content>内容</v-content>
+        <v-content>
+        </v-content>
     </div>
 </template>
 <script>
