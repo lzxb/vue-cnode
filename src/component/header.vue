@@ -5,9 +5,9 @@
         right: 0;
         left: 0;
         z-index: 10500;
-        height: 50px;
-        line-height: 50px;
-
+        height: 49px;
+        line-height: 49px;
+        border-bottom: 1px solid #ddd;
         .item {
             width: 50px;
         }

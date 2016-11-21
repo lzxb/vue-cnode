@@ -69,7 +69,7 @@
 <template>
     <div>
         <v-header title="个人中心"></v-header>
-        <v-content class="con">
+        <v-content class="con" v-scroll-record>
             <router-link v-if="user.avatar_url" :to="'/user/' + user.loginname">
                 <div class="user"></div>
                 <div class="headimg" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
@@ -136,9 +136,12 @@
 </template>
 <script>
     import { mapState } from 'vuex'
+    import routeData from 'route-data'
+
     export default {
+        mixins: [routeData],
         computed: mapState({ user: (state) => state.user}),
-        data() {
+        routeData() {
             return {}
         }
     }

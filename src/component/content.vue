@@ -8,7 +8,6 @@
         bottom: 50px;
         left: 0;
         z-index: 100;
-        box-shadow: 0 0 3px #c3c3c3;
         -webkit-overflow-scrolling : touch; 
     }
 </style>

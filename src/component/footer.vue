@@ -6,8 +6,9 @@
         bottom: 0;
         left: 0;
         z-index: 50;
-        height: 50px;
+        height: 49px;
         text-align: center;
+        border-top: 1px solid #ddd;
         ul {
             padding: 5px 0;
             margin: 0;

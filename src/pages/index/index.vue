@@ -6,13 +6,14 @@
         right: 0;
         left: 0;
         z-index: 10;
+        border-bottom: 1px solid #ddd;
         ul {
             padding: 0;
             margin: 0;
             li {
                 position: relative;
                 list-style: none;
-                line-height: 50px;
+                line-height: 49px;
                 text-align: center;
             }
             a {
@@ -24,8 +25,8 @@
                 &:after {
                     content: "";
                     position: absolute;
+                    top: 0;
                     right: 0;
-                    bottom: 1px;
                     left: 0;
                     z-index: 1;
                     height: 3px;

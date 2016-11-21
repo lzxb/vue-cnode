@@ -62,7 +62,7 @@
 <template>
     <div>
         <v-header title="消息"></v-header>
-        <v-content>
+        <v-content v-scroll-record>
             <div class="msg-box" v-if="list.length">
                 <ul class="list">
                     <li flex="box:first" v-for="(item, $index) in list">

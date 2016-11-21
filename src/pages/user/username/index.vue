@@ -111,7 +111,7 @@
                 <i class="iconfont icon-back"></i>
             </div>
         </v-header>
-        <v-content style="bottom: 0;">
+        <v-content style="bottom: 0;" v-scroll-record>
             <div class="user" flex="dir:top cross:center">
                 <div class="user-bg">
                     <img src="./headimg-bg.jpg" alt="">
