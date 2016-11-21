@@ -4,7 +4,7 @@ import ajax from './ajax'
 import store from '../store'
 
 ajax.beforeEach((res, next) => {
-    res.url = 'https://cnodejs.org' + res.url
+    res.url = 'http://www.vue-js.com/' + res.url
     var { accesstoken } = store.state.user
     if(accesstoken) {
         res.data.accesstoken = accesstoken

@@ -33,6 +33,44 @@
 </style>
 <template>
     <div class="loading-box">
-        <div class="loading-start"></div>
+        <div :class="!complete ? 'loading-start' : 'msg'">
+            {{ complete ? '没有了' : '' }}
+        </div>
     </div>
 </template>
+<script>
+    import isSeeing from 'is-seeing'
+    export default {
+        props: {
+            complete: { //是否加载完成
+                type: Boolean,
+                default: false
+            },
+            loading: { // 是否在请求中
+                type: Boolean,
+                default: false
+            } 
+        },
+        data() {
+            return {
+                state: this.loading
+            }
+        },
+        mounted() {
+            this.timer = setInterval(() => {
+                if(isSeeing(this.$el) && !this.state) {
+                    this.state = true
+                    this.$emit('seeing')
+                }
+            }, 300)
+        },
+        beforeDestroy() {
+            clearInterval(this.timer)
+        },
+        watch: {
+            loading(to) {
+                this.state = to
+            }
+        }
+    }
+</script>

@@ -8,6 +8,7 @@
         z-index: 10;
         border-bottom: 1px solid #ddd;
         ul {
+            overflow: hidden;
             padding: 0;
             margin: 0;
             li {
@@ -40,6 +41,7 @@
     }
     
     .list {
+        overflow: hidden;
         padding: 0;
         margin: 0;
         background: #eee;
@@ -107,7 +109,7 @@
         </nav>
         <v-content v-scroll-record>
             <ul class="list">
-                <li v-for="item in list">
+                <li v-for="item in list" key="item.id">
                     <router-link :to="'/topic/' + item.id">
                         <div class="top" flex="box:first">
                             <div class="headimg" flex="cross:center">
@@ -124,7 +126,7 @@
                     </router-link>
                 </li>
             </ul>
-            <v-loading></v-loading>
+            <v-loading :complete="complete" :loading="loading" @seeing="seeing"></v-loading>
         </v-content>
         <v-footer></v-footer>
     </div>
@@ -137,11 +139,14 @@
         mixins: [routeData],
         routeData() {
             return {
-                list: []
+                complete: false, //数据是否加载完成
+                loading: false, //是否在请求中
+                page: 1, //当前请求的页数
+                list: [] //列表的数据
             }
         },
         mounted() {
-            this.getList()
+            this.loading = false
         },
         watch: {
             $route () {
@@ -150,10 +155,22 @@
         },
         methods: {
             getList() {
-                var { tab = 'all' } = this.$route.query
-                util.get('/api/v1/topics', { tab }, ({ data }) => {
-                    this.list = data
+                if(this.complete || this.loading) return
+                this.loading = true
+                var { page, $route } = this
+                var { tab = 'all' } = $route.query
+                util.get('/api/v1/topics', { tab, page }, ({ data }) => {
+                    this.loading = false //请求完成
+                    if(data.length > 0) {
+                        data.forEach((item) => this.list.push(item))
+                    } else {
+                        this.complete = true
+                    }
+                    this.page++
                 })
+            },
+            seeing() {
+                this.getList()
             }
         }
     } 
