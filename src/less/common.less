@@ -3,9 +3,11 @@
 /*
     初始化页面布局
 */
+
 html {
     background: #333;
 }
+
 body {
     overflow: hidden;
     position: absolute;
@@ -38,8 +40,25 @@ a {
     text-decoration: none;
     color: @main;
 }
-.markdown-content {
-    img {
-        max-width: 100%;
+
+.common-typeicon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 80px;
+    .icon {
+        padding: 20px 5px;
+    }
+    .iconfont {
+        display: block;
+        font-size: 34px;
+        transform: rotate(35deg);
+    }
+    .icon-topic-top {
+        color: red;
+    }
+    .icon-topic-good {
+        color: green;
     }
 }

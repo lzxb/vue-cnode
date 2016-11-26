@@ -1,15 +1,20 @@
 <style lang="less" scoped>
     @import '../../../less/config';
-
     .tit {
         position: relative;
         padding: 15px;
         margin: 0;
         line-height: 24px;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 22px;
         text-align: center;
         color: @text;
+    }
+    
+    .author {
+        position: relative;
+        display: block;
+        padding: 15px;
         &:after {
             content: "";
             position: absolute;
@@ -18,6 +23,36 @@
             left: 10%;
             z-index: 1;
             border-bottom: 1px solid #eee;
+        }
+        .headimg {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background-position: center center;
+            background-size: cover;
+        }
+        .box {
+            padding-left: 15px;
+            strong {
+                line-height: 24px;
+                font-size: 16px;
+                font-weight: normal;
+                color: darken(@text, 10%);
+            }
+            time {
+                line-height: 16px;
+                font-size: 12px;
+                font-style: normal;
+                color: #aaa;
+            }
+            .tag {
+                margin-left: 4px;
+                line-height: 16px;
+                font-size: 12px;
+                font-style: normal;
+                color: @main;
+            }
         }
     }
     
@@ -33,6 +68,26 @@
             </div>
         </v-header>
         <v-content style="bottom: 0;">
+            <router-link class="author" :to="'/user/' + author.loginname">
+                <div class="top" flex="box:first">
+                    <div class="headimg" :style="{ backgroundImage: 'url(' + author.avatar_url + ')' }"></div>
+                    <div class="box" flex="dir:top">
+                        <strong>{{ author.loginname }}</strong>
+                        <div flex>
+                            <time>{{ create_at | formatDate }}</time>
+                            <span class="tag">#分享#</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="common-typeicon" flex v-if="top || good">
+                    <div class="icon" v-if="good">
+                        <i class="iconfont icon-topic-good"></i>
+                    </div>
+                    <div class="icon" v-if="top">
+                        <i class="iconfont icon-topic-top"></i>
+                    </div>
+                </div>
+            </router-link>
             <h2 class="tit">{{title}}</h2>
             <div class="markdown-body" v-html="content"></div>
         </v-content>

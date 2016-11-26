@@ -61,9 +61,9 @@
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
-                img {
-                    border: none;
-                }
+                border: 1px solid #ddd;
+                background-position: center center;
+                background-size: cover;
             }
             .box {
                 padding-left: 5px;
@@ -86,27 +86,6 @@
                     font-style: normal;
                     color: @main;
                 }
-            }
-        }
-        .typeicon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            z-index: 2;
-            height: 80px;
-            .icon {
-                padding: 20px 5px;
-            }
-            .iconfont {
-                display: block;
-                font-size: 34px;
-                transform: rotate(35deg);
-            }
-            .icon-topic-top {
-                color: red;
-            }
-            .icon-topic-good {
-                color: green;
             }
         }
         .tit {
@@ -180,9 +159,7 @@
                 <li v-for="item in list" key="item.id">
                     <router-link :to="'/topic/' + item.id">
                         <div class="top" flex="box:first">
-                            <div class="headimg" flex="cross:center">
-                                <img width="100%" height="100%" :src="item.author.avatar_url" alt="">
-                            </div>
+                            <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
                             <div class="box" flex="dir:top">
                                 <strong>{{ item.author.loginname }}</strong>
                                 <div flex>
@@ -191,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="typeicon" flex v-if="item.top || item.good">
+                        <div class="common-typeicon" flex v-if="item.top || item.good">
                             <div class="icon" v-if="item.good">
                                 <i class="iconfont icon-topic-good"></i>
                             </div>
