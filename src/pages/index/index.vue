@@ -151,7 +151,7 @@
         <nav class="nav">
             <ul flex="box:mean">
                 <li :class="{ active: !this.$route.query.tab }">
-                    <router-link to="/">首页</router-link>
+                    <router-link to="/">全部</router-link>
                 </li>
                 <li :class="{ active: this.$route.query.tab == 'good' }">
                     <router-link to="/?tab=good">精华</router-link>

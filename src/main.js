@@ -10,6 +10,7 @@ import component from './component/' //加载公共组件
 import 'normalize.css'
 import 'flex.css'
 import './iconfont/iconfont.css'
+import 'github-markdown-css'
 import './css/common.css'
 import './less/common.less'
 
