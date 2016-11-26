@@ -73,7 +73,10 @@
                 width: 48px;
                 height: 48px;
                 border-radius: 50%;
-                background: #eee;
+                border: 1px solid #ddd;
+                background-color: #eee;
+                background-position: center center;
+                background-size: cover;
             }
         }
         time {
@@ -134,9 +137,7 @@
             <ul class="re-list">
                 <li flex="box:first" v-for="(item, $index) in replies">
                     <div class="headimg">
-                        <router-link class="pic" :to="'/user/' + item.author.loginname">
-                            <img :src="item.author.avatar_url" alt="">
-                        </router-link>
+                        <router-link class="pic" :to="'/user/' + item.author.loginname" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></router-link>
                     </div>
                     <div class="bd">
                         <div flex>
