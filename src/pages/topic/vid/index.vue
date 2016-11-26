@@ -1,5 +1,5 @@
 <style lang="less" scoped>
-    
+
 </style>
 <template>
     <div>
@@ -9,10 +9,33 @@
             </div>
         </v-header>
         <v-content style="bottom: 0;">
-            内容详情
+            
         </v-content>
-    </div> 
+    </div>
 </template>
 <script>
-        
+    import util from 'util'
+    import { mapState } from 'vuex'
+    import routeData from 'route-data'
+
+    export default {
+        mixins: [routeData],
+        computed: mapState({ user: (state) => state.user}),
+        routeData() {
+            return {
+                data: {}
+            }
+        },
+        mounted() {
+            this.getData()
+        },
+        methods: {
+            getData() {
+                var { vid } = this.$route.params
+                util.get(`/api/v1/topic/${vid}`, {}, ({ data, success }) => {
+                    if(success) return this.data = data
+                })
+            }
+        }
+    }
 </script>
