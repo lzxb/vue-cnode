@@ -111,7 +111,7 @@
                 <i class="iconfont icon-back"></i>
             </div>
         </v-header>
-        <v-content style="bottom: 0;">
+        <v-content style="bottom: 0;" v-scroll-record>
             <router-link class="author" :to="'/user/' + author.loginname">
                 <div class="top" flex="box:first">
                     <div class="headimg" :style="{ backgroundImage: 'url(' + author.avatar_url + ')' }"></div>
