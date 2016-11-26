@@ -59,6 +59,47 @@
     .markdown-body {
         padding: 15px;
     }
+    
+    .re-list {
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .headimg {
+            padding-right: 10px;
+            .pic {
+                overflow: hidden;
+                display: block;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: #eee;
+            }
+        }
+        time {
+            padding-left: 10px;
+            font-size: 12px;
+        }
+        .num {
+            font-size: 13px;
+        }
+        .bottom {
+            .icon {
+                position: relative;
+                padding: 5px 10px;
+                &.count {
+                    color: @main;
+                }
+                em {
+                    font-size: 13px;
+                    font-style: normal;
+                }
+            }
+        }
+        .markdown-body {
+            padding: 10px 0;
+        }
+    }
 </style>
 <template>
     <div>
@@ -90,6 +131,32 @@
             </router-link>
             <h2 class="tit">{{title}}</h2>
             <div class="markdown-body" v-html="content"></div>
+            <ul class="re-list">
+                <li flex="box:first" v-for="(item, $index) in replies">
+                    <div class="headimg">
+                        <router-link class="pic" :to="'/user/' + item.author.loginname">
+                            <img :src="item.author.avatar_url" alt="">
+                        </router-link>
+                    </div>
+                    <div class="bd">
+                        <div flex>
+                            <router-link flex-box="0" :to="'/user/' + item.author.loginname">{{item.author.loginname}}</router-link>
+                            <time flex-box="1">{{item.create_at | formatDate}}</time>
+                            <div flex-box="0" class="num">#{{$index + 1}}</div>
+                        </div>
+                        <div class="markdown-body" v-html="item.content"></div>
+                        <div class="bottom" flex="dir:right cross:center">
+                            <div class="icon">
+                                <i class="iconfont icon-comment-topic"></i>
+                            </div>
+                            <div class="icon" :class="{count: testThing(item.ups)}" v-if="item.author.loginname !== user.loginname">
+                                <i class="iconfont icon-comment-fabulous"></i>
+                                <em v-if="item.ups.length">{{item.ups.length}}</em>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </v-content>
     </div>
 </template>
@@ -129,6 +196,9 @@
                 util.get(`/api/v1/topic/${vid}`, {}, ({ data, success }) => {
                     if(success) return Object.assign(this.$data, data)
                 })
+            },
+            testThing(ups) { //验证是否点赞
+                return ups.indexOf(this.user.id || '') > -1
             }
         }
     }
