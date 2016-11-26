@@ -12,10 +12,13 @@
             width: 50px;
         }
         .title {
+            overflow: hidden;
             padding: 0;
             margin: 0;
             text-align: center;
             font-size: 16px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
 </style>

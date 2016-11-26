@@ -5,6 +5,7 @@
  * @returns 格式化后的时间
  */
 export const formatDate = (str) => {
+    if(!str) return ''
     var date = new Date(str)
     var time = new Date().getTime() - date.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
     if (time < 0) {
