@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1479028472432'); /* IE9*/
-  src: url('iconfont.eot?t=1479028472432#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1479028472432') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1479028472432') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1479028472432#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1480091783373'); /* IE9*/
+  src: url('iconfont.eot?t=1480091783373#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1480091783373') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1480091783373') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1480091783373#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -28,6 +28,8 @@
 
 .icon-edit:before { content: "\e60d"; }
 
+.icon-comment:before { content: "\e613"; }
+
 .icon-about:before { content: "\e6ce"; }
 
 .icon-user:before { content: "\e603"; }
@@ -35,6 +37,12 @@
 .icon-ask:before { content: "\e605"; }
 
 .icon-job:before { content: "\e645"; }
+
+.icon-topic-top:before { content: "\e68e"; }
+
+.icon-topic-good:before { content: "\e690"; }
+
+.icon-click:before { content: "\e601"; }
 
 .icon-good:before { content: "\e612"; }
 

@@ -46,9 +46,11 @@
         margin: 0;
         background: #eee;
         li {
-            padding: 15px;
+            position: relative;
+            padding: 15px 15px 0 15px;
             margin-bottom: 15px;
             list-style: none;
+            box-shadow: 0 0 5px #ccc;
             background: #fff;
         }
         .top {
@@ -78,11 +80,69 @@
                 }
             }
         }
+        .typeicon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            height: 80px;
+            .icon {
+                padding: 20px 5px;
+            }
+            .iconfont {
+                display: block;
+                font-size: 34px;
+                transform: rotate(35deg);
+            }
+            .icon-topic-top {
+                color: red;
+            }
+            .icon-topic-good {
+                color: green;
+            }
+        }
         .tit {
-            padding: 5px 0;
+            padding: 10px 0;
             line-height: 22px;
             font-size: 16px;
+            font-weight: bold;
             color: @text;
+        }
+    }
+    
+    .expand {
+        padding: 10px 0;
+        border-top: 1px solid #e1e1e1;
+        text-align: center;
+        .item {
+            padding: 0 10px;
+            line-height: 20px;
+            text-align: center;
+            border-right: 1px solid #e1e1e1;
+            &:last-of-type {
+                border: none;
+            }
+            .iconfont {
+                color: #aaa;
+            }
+            .num,
+            .time {
+                padding-left: 3px;
+                font-size: 12px;
+                color: #aaa;
+            }
+            .pic,
+            img {
+                width: 16px;
+                height: 16px;
+                background: #e1e1e1;
+                background-size: cover;
+                background-position: center center;
+            }
+            .pic {
+                overflow: hidden;
+                border-radius: 50%;
+            }
         }
     }
 </style>
@@ -120,8 +180,32 @@
                                 <time>{{ item.create_at | formatDate }}</time>
                             </div>
                         </div>
+                        <div class="typeicon" flex v-if="item.top || item.good">
+                            <div class="icon" v-if="item.good">
+                                <i class="iconfont icon-topic-good"></i>
+                            </div>
+                            <div class="icon" v-if="item.top">
+                                <i class="iconfont icon-topic-top"></i>
+                            </div>
+                        </div>
                         <div class="tit">
                             {{ item.title }}
+                        </div>
+                        <div class="expand" flex="box:mean">
+                            <div class="item click" flex="main:center cross:center">
+                                <i class="iconfont icon-click"></i>
+                                <div class="num">{{item.visit_count > 0 ? item.visit_count : '暂无阅读'}}</div>
+                            </div>
+                            <div class="item reply" flex="main:center cross:center">
+                                <i class="iconfont icon-comment"></i>
+                                <div class="num">{{item.reply_count > 0 ? item.reply_count : '暂无评论'}}</div>
+                            </div>
+                            <div class="item last-reply" flex="main:center cross:center">
+                                <div class="pic">
+                                    <img alt="" :style="{backgroundImage: 'url(' + item.author.avatar_url + ')'}">
+                                </div>
+                                <time class="time">{{item.last_reply_at | formatDate}}</time>
+                            </div>
                         </div>
                     </router-link>
                 </li>
