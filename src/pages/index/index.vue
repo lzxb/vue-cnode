@@ -18,6 +18,7 @@
                 text-align: center;
             }
             a {
+                display: block;
                 text-decoration: none;
                 font-size: 14px;
                 color: lighten(@text, 50%);
@@ -77,6 +78,13 @@
                     font-size: 12px;
                     font-style: normal;
                     color: #aaa;
+                }
+                .tag {
+                    margin-left: 4px;
+                    line-height: 16px;
+                    font-size: 12px;
+                    font-style: normal;
+                    color: @main;
                 }
             }
         }
@@ -177,7 +185,10 @@
                             </div>
                             <div class="box" flex="dir:top">
                                 <strong>{{ item.author.loginname }}</strong>
-                                <time>{{ item.create_at | formatDate }}</time>
+                                <div flex>
+                                    <time>{{ item.create_at | formatDate }}</time>
+                                    <span class="tag">#分享#</span>
+                                </div>
                             </div>
                         </div>
                         <div class="typeicon" flex v-if="item.top || item.good">
@@ -188,9 +199,7 @@
                                 <i class="iconfont icon-topic-top"></i>
                             </div>
                         </div>
-                        <div class="tit">
-                            {{ item.title }}
-                        </div>
+                        <div class="tit">{{ item.title }}</div>
                         <div class="expand" flex="box:mean">
                             <div class="item click" flex="main:center cross:center">
                                 <i class="iconfont icon-click"></i>
