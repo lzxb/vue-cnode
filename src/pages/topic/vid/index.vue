@@ -1,6 +1,6 @@
 <style lang="less" scoped>
     @import '../../../less/config';
-    .head {
+    .datas {
         padding: 10px;
         border-bottom: 1px solid #eee;
         .tit {
@@ -17,6 +17,9 @@
             .item {
                 padding: 0 5px;
                 color: #666;
+                .iconfont {
+                    padding-right: 3px;
+                }
             }
         }
     }
@@ -118,19 +121,7 @@
                     <i class="iconfont icon-topic-top"></i>
                 </div>
             </div>
-            <div class="head">
-                <div class="tit">{{ title }}</div>
-                <div class="bottom" flex="main:center">
-                    <div class="item click" flex="main:center cross:center">
-                        <i class="iconfont icon-click"></i>
-                        <div class="num">{{ visit_count }}</div>
-                    </div>
-                    <div class="item reply" flex="main:center cross:center">
-                        <i class="iconfont icon-comment"></i>
-                        <div class="num">{{ reply_count }}</div>
-                    </div>
-                </div>
-            </div>
+
             <ul class="re-list">
                 <li flex="box:first">
                     <div class="headimg">
@@ -142,18 +133,33 @@
                             <time flex-box="1">{{ create_at | formatDate }}</time>
                             <div flex-box="0" class="num">#楼主</div>
                         </div>
-                        <div class="markdown-body" v-html="content"></div>
-                        <div class="bottom" flex="dir:right cross:center">
-                            <div class="icon">
-                                <i class="iconfont icon-comment-topic"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="datas">
+                        <div class="tit">{{ title }}</div>
+                        <div class="bottom" flex="main:center">
+                            <div class="item click" flex="main:center cross:center">
+                                <i class="iconfont icon-click"></i>
+                                <div class="num">{{ visit_count }}</div>
+                            </div>
+                            <div class="item reply" flex="main:center cross:center">
+                                <i class="iconfont icon-comment"></i>
+                                <div class="num">{{ reply_count }}</div>
                             </div>
                         </div>
-                        <div class="reply-box">
-                            <div class="text"><textarea placeholder="@oyosc"></textarea></div>
-                            <div flex="main:right">
-                                <div class="msg"></div>
-                                <div flex-box="0"> <button class="btn">回复</button> </div>
-                            </div>
+                    </div>
+                    <div class="markdown-body" v-html="content"></div>
+                    <div class="bottom" flex="dir:right cross:center">
+                        <div class="icon">
+                            <i class="iconfont icon-comment-topic"></i>
+                        </div>
+                    </div>
+                    <div class="reply-box">
+                        <div class="text"><textarea placeholder="@oyosc"></textarea></div>
+                        <div flex="main:right">
+                            <div class="msg"></div>
+                            <div flex-box="0"> <button class="btn">回复</button> </div>
                         </div>
                     </div>
                 </li>
