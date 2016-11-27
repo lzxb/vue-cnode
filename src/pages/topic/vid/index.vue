@@ -1,14 +1,24 @@
 <style lang="less" scoped>
     @import '../../../less/config';
-    .tit {
-        position: relative;
-        padding: 15px;
-        margin: 0;
-        line-height: 24px;
-        font-weight: bold;
-        font-size: 22px;
-        text-align: center;
-        color: @text;
+    .head {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        .tit {
+            position: relative;
+            padding: 10px 0;
+            margin: 0;
+            line-height: 24px;
+            font-weight: bold;
+            font-size: 22px;
+            text-align: center;
+            color: @text;
+        }
+        .bottom {
+            .item {
+                padding: 0 5px;
+                color: #666;
+            }
+        }
     }
     
     .re-list {
@@ -54,7 +64,8 @@
             padding: 10px 0;
         }
     }
-        .reply-box {
+    
+    .reply-box {
         .text {
             padding: 5px 10px;
             margin-bottom: 10px;
@@ -76,7 +87,7 @@
             padding: 5px 30px;
             line-height: 24px;
             border-radius: 5px;
-            border: 1px solid darken(@main,3%);
+            border: 1px solid darken(@main, 3%);
             font-size: 14px;
             color: #fff;
             background: @main;
@@ -93,7 +104,7 @@
 </style>
 <template>
     <div>
-        <v-header :title="title">
+        <v-header title="主题">
             <div slot="left" class="item" flex="main:center cross:center" v-on:click="$router.go(-1)">
                 <i class="iconfont icon-back"></i>
             </div>
@@ -107,6 +118,19 @@
                     <i class="iconfont icon-topic-top"></i>
                 </div>
             </div>
+            <div class="head">
+                <div class="tit">{{ title }}</div>
+                <div class="bottom" flex="main:center">
+                    <div class="item click" flex="main:center cross:center">
+                        <i class="iconfont icon-click"></i>
+                        <div class="num">{{ visit_count }}</div>
+                    </div>
+                    <div class="item reply" flex="main:center cross:center">
+                        <i class="iconfont icon-comment"></i>
+                        <div class="num">{{ reply_count }}</div>
+                    </div>
+                </div>
+            </div>
             <ul class="re-list">
                 <li flex="box:first">
                     <div class="headimg">
@@ -114,8 +138,8 @@
                     </div>
                     <div class="bd">
                         <div flex>
-                            <router-link flex-box="0" :to="'/user/' + author.loginname">{{author.loginname}}</router-link>
-                            <time flex-box="1">{{create_at | formatDate}}</time>
+                            <router-link flex-box="0" :to="'/user/' + author.loginname">{{ author.loginname }}</router-link>
+                            <time flex-box="1">{{ create_at | formatDate }}</time>
                             <div flex-box="0" class="num">#楼主</div>
                         </div>
                         <div class="markdown-body" v-html="content"></div>
@@ -139,9 +163,9 @@
                     </div>
                     <div class="bd">
                         <div flex>
-                            <router-link flex-box="0" :to="'/user/' + item.author.loginname">{{item.author.loginname}}</router-link>
-                            <time flex-box="1">{{item.create_at | formatDate}}</time>
-                            <div flex-box="0" class="num">#{{$index + 1}}</div>
+                            <router-link flex-box="0" :to="'/user/' + item.author.loginname">{{ item.author.loginname }}</router-link>
+                            <time flex-box="1">{{ item.create_at | formatDate }}</time>
+                            <div flex-box="0" class="num">#{{ $index + 1 }}</div>
                         </div>
                         <div class="markdown-body" v-html="item.content"></div>
                         <div class="bottom" flex="dir:right cross:center">
@@ -150,7 +174,7 @@
                             </div>
                             <div class="icon" :class="{count: testThing(item.ups)}" v-if="item.author.loginname !== user.loginname">
                                 <i class="iconfont icon-comment-fabulous"></i>
-                                <em v-if="item.ups.length">{{item.ups.length}}</em>
+                                <em v-if="item.ups.length">{{ item.ups.length }}</em>
                             </div>
                         </div>
                     </div>
