@@ -123,6 +123,7 @@
             </div>
 
             <ul class="re-list">
+                <!-- 楼主信息 start -->
                 <li flex="box:first">
                     <div class="headimg">
                         <router-link class="pic" :to="'/user/' + author.loginname" :style="{ backgroundImage: 'url(' + author.avatar_url + ')' }"></router-link>
@@ -135,6 +136,8 @@
                         </div>
                     </div>
                 </li>
+                <!-- 楼主信息 end -->
+                <!-- 主题信息 start -->
                 <li>
                     <div class="datas">
                         <div class="tit">{{ title }}</div>
@@ -150,19 +153,16 @@
                         </div>
                     </div>
                     <div class="markdown-body" v-html="content"></div>
-                    <div class="bottom" flex="dir:right cross:center">
-                        <div class="icon">
-                            <i class="iconfont icon-comment-topic"></i>
-                        </div>
-                    </div>
                     <div class="reply-box">
-                        <div class="text"><textarea placeholder="@oyosc"></textarea></div>
+                        <div class="text"><textarea placeholder="发表你的看法..."></textarea></div>
                         <div flex="main:right">
                             <div class="msg"></div>
                             <div flex-box="0"> <button class="btn">回复</button> </div>
                         </div>
                     </div>
                 </li>
+                <!-- 主题信息 end -->
+                <!-- 主题评论 start -->
                 <li flex="box:first" v-for="(item, $index) in replies">
                     <div class="headimg">
                         <router-link class="pic" :to="'/user/' + item.author.loginname" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></router-link>
@@ -185,6 +185,7 @@
                         </div>
                     </div>
                 </li>
+                <!-- 主题评论 end -->
             </ul>
         </v-content>
     </div>
