@@ -54,7 +54,7 @@
             .icon {
                 position: relative;
                 padding: 5px 10px;
-                &.count {
+                &.fabulous {
                     color: @main;
                 }
                 em {
@@ -178,7 +178,7 @@
                             <div class="icon">
                                 <i class="iconfont icon-comment-topic"></i>
                             </div>
-                            <div class="icon" :class="{count: testThing(item.ups)}" v-if="item.author.loginname !== user.loginname">
+                            <div class="icon" :class="{fabulous: testThing(item.ups)}" v-if="item.author.loginname !== user.loginname" @click="fabulousItem(item)">
                                 <i class="iconfont icon-comment-fabulous"></i>
                                 <em v-if="item.ups.length">{{ item.ups.length }}</em>
                             </div>
@@ -229,6 +229,16 @@
             },
             testThing(ups) { //验证是否点赞
                 return ups.indexOf(this.user.id || '') > -1
+            },
+            fabulousItem({ ups, id }) { //点赞
+                if(!this.user.accesstoken) return this.$router.push('/login')
+                var index = ups.indexOf(this.user.id)
+                if(index > -1) {
+                    ups.splice(index, 1)
+                } else {
+                    ups.push(this.user.id)
+                }
+                util.post(`/api/v1/reply/${id}/ups`)
             }
         }
     }
