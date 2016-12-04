@@ -50,6 +50,7 @@
 </template>
 <script>
     import util from 'util'
+    console.log(util)
     export default {
         props: {
             reply_id: { //评论的评论id，如果没有则是对主题的评论
@@ -77,12 +78,12 @@
                 }
                 var text = content += '\n\r<br>来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
                 util.post(`/api/v1/topic/${vid}/replies`, {reply_id, content}, ({ success, error_msg }) => {
+                    this.btnname = '回复'
                     if(success) {
                         this.content = ''
-                        this.btnname = '回复'
                         this.$emit('success')
                     } else {
-                        util.msg(error_msg)
+                        util.toast(error_msg)
                     }
                 }, () => {
                     this.btnname = '回复失败'

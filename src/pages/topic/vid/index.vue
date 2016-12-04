@@ -163,11 +163,10 @@
                     <!-- 主题评论 end -->
 
                 </ul>
-                <div class="reply">
+                <div class="reply" v-if="user.id">
                     <reply-box @success="getData"></reply-box>
                 </div>
             </template>
-
         </v-content>
     </div>
 </template>
