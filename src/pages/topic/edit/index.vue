@@ -84,11 +84,12 @@
         methods: {
             submit() {
                 var { form } = this
-                if(form.title == '') {
+
+                if(!form.title) {
                     return util.toast('标题不能为空')
-                } else if(form.tab == '') {
+                } else if(!form.tab) {
                     return util.toast('选项不能为空')
-                } else if(form.content) {
+                } else if(!form.content) {
                     return util.toast('内容不能为空')
                 }
 

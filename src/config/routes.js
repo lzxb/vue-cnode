@@ -25,22 +25,18 @@ export default [
                 component: resolve => require(['../pages/user/username/'], resolve)
             },
             {
-                path: '/home/index/', //我的个人中心
+                path: '/my/home/', //我的个人中心
                 meta: { auth: false },
-                component: resolve => require(['../pages/home/index/'], resolve)
+                component: resolve => require(['../pages/my/home/'], resolve)
             },
             {
                 meta: { auth: false },
-                path: '/home/messages/', //我的消息
-                component: resolve => require(['../pages/home/messages/'], resolve)
+                path: '/my/messages/', //我的消息
+                component: resolve => require(['../pages/my/messages/'], resolve)
             },
             {
                 path: '/topic/create', //创建帖子
                 meta: { auth: false },
-                component: resolve => require(['../pages/topic/edit/'], resolve)
-            },
-            {
-                path: '/topic/:vid/edit', //编辑帖子
                 component: resolve => require(['../pages/topic/edit/'], resolve)
             },
             {

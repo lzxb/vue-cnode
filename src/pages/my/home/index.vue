@@ -107,17 +107,6 @@
             <div style="height: 50px;"></div>
             <nav class="nav">
                 <li>
-                    <router-link to="/" flex="box:justify">
-                        <div class="icon" flex="cross:center">
-                            <i class="iconfont icon-setting"></i>
-                        </div>
-                        <div class="text">设置</div>
-                        <div class="arrow">
-                            <i class="iconfont icon-arrow-right"></i>
-                        </div>
-                    </router-link>
-                </li>
-                <li>
                     <router-link to="/about" flex="box:justify">
                         <div class="icon" flex="cross:center">
                             <i class="iconfont icon-about"></i>

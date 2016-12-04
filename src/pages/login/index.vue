@@ -35,7 +35,7 @@
             </div>
         </v-header>
         <v-content flex="main:center cross:center" style="bottom: 0;">
-            <form class="form" v-on:submit.prevent="submit">
+            <form class="form" @submit.prevent="submit">
                 <div class="line">
                     <input class="text" type="text" placeholder="Access Token" v-model="form.accesstoken">
                 </div>

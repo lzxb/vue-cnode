@@ -69,12 +69,12 @@
                     },
                     {
                         title: '消息',
-                        path: '/home/messages',
+                        path: '/my/messages',
                         icon: 'icon-msg'
                     },
                     {
                         title: '我的',
-                        path: '/home/index',
+                        path: '/my/home',
                         icon: 'icon-user'
                     }
                 ]
