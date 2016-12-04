@@ -50,7 +50,7 @@
     import util from 'util'
     import is from 'is'
     import { mapActions } from 'vuex'
-    import { SIGNIN } from 'store/user'
+    import { USER_SIGNIN } from 'store/user'
     
     export default {
         data() {
@@ -62,7 +62,7 @@
             }
         },
         methods: {
-            ...mapActions([SIGNIN]),
+            ...mapActions([USER_SIGNIN]),
             submit () {
                 if (this.status) return
                 this.status = true

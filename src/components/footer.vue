@@ -15,6 +15,8 @@
             li {
                 list-style: none;
                 a {
+                    position: relative;
+                    display: block;
                     text-decoration: none;
                     color: @text;
                     i {
@@ -25,6 +27,20 @@
                         line-height: 16px;
                         font-size: 13px;
                         font-style: normal;
+                    }
+                    .count {
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        z-index: 2;
+                        padding: 1px 3px;
+                        line-height: 12px;
+                        border-radius: 50%;
+                        text-align: center;
+                        font-size: 12px;
+                        opacity: 0.9;
+                        color: #fff;
+                        background: red;
                     }
                 }
             }
@@ -40,11 +56,12 @@
 <template>
     <footer class="footer">
         <ul flex="box:mean">
-            <template v-for="item in list">                
+            <template v-for="item in list">
                 <li :class="{ active: item.path == $route.path }">
                     <router-link :to="item.path">
                         <i class="iconfont" :class="[ item.icon ]"></i>
                         <em>{{ item.title }}</em>
+                        <div class="count" v-if="user.id && item.icon == '/my/messages' && count > 0">{{ count }}</div>
                     </router-link>
                 </li>
             </template>
@@ -52,10 +69,14 @@
     </footer>
 </template>
 <script>
-    import Vue from 'vue'
+    import util from 'util'
+    import { mapState } from 'vuex'
+
     export default {
+        computed: mapState({ user: (state) => state.user}),
         data() {
             return {
+                count: 0,
                 list: [
                     {
                         title: '首页',
@@ -78,6 +99,15 @@
                         icon: 'icon-user'
                     }
                 ]
+            }
+        },
+        created() {
+            this.getCount()
+        },
+        methods: {
+            getCount() {
+                if(!this.user.id) return
+                util.get('/api/v1/message/count', {}, (res) => this.count = res.data)
             }
         }
     }
