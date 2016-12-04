@@ -11,7 +11,7 @@ var server = new WebpackDevServer(compiler, {
     }
 })
 
-server.app.get('/vue-cnode/*', function (req, res) {
+server.app.get(`${config.base}*`, function (req, res) {
     res.sendFile(__dirname + '/index.html')
 })
 
@@ -20,5 +20,5 @@ server.listen(3000, (err) => {
         console.log(err)
         return
     }
-    console.log('http://localhost:3000' + config.publicPath)
+    console.log('http://localhost:3000' + config.base)
 })
