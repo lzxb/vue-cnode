@@ -65,9 +65,8 @@
 |   |-- app.vue                      // 页面入口文件
 |   |-- main.js                      // 程序入口文件，加载各种公共组件
 |-- .babelrc                         // ES6语法编译配置
-|-- gulpfile.js                      // 启动，打包，部署，自动化构建
 |-- webpack.config.js                // 程序打包配置
-|-- server.js                        // 代理服务器配置
+|-- server.js                        // 开发时使用的服务器
 |-- README.md                        // 项目说明
 |-- package.json                     // 配置项目相关信息，通过执行 npm init 命令创建
 .
