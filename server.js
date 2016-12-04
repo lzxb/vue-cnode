@@ -12,7 +12,7 @@ var server = new WebpackDevServer(compiler, {
 })
 
 server.app.get('/vue-cnode/*', function (req, res) {
-    res.sendFile(__dirname + '/src/template/index-dev.html')
+    res.sendFile(__dirname + '/index.html')
 })
 
 server.listen(3000, (err) => {
