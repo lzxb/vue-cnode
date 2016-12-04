@@ -21,12 +21,118 @@
     <!-- QQ应用模式 -->
     <meta name="x5-page-mode" content="app">
     <title>vue-cnode</title>
+    <style type="text/css">
+        .app-loading {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: -moz-box;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            -ms-grid-row-align: center;
+            -moz-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            -moz-box-pack: center;
+            justify-content: center;
+            -webkit-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            background: #b81912;
+        }
+        
+        .app-loading-hide {
+            left: 120%;
+            bottom: 120%;
+            opacity: 0;
+        }
+        
+        .app-loading .box {
+            width: 400px;
+            height: 300px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .app-loading .svg {
+            margin: 0 auto;
+        }
+        
+        .app-loading h2 {
+            margin-top: 50px;
+            line-height: 70px;
+            font-size: 40px;
+        }
+        
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                /*初始状态 透明度为0*/
+            }
+            50% {
+                opacity: 0;
+                /*中间状态 透明度为0*/
+            }
+            100% {
+                opacity: 1;
+                /*结尾状态 透明度为1*/
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <!-- loading start -->
+    <div class="app-loading">
+        <div class="box">
+            <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="60" height="60" fill="white">
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(0 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(45 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.125s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(90 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.25s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(135 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.375s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(180 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.5s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(225 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.675s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(270 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.75s" />
+                </path>
+                <path opacity=".1" d="M14 0 H18 V8 H14 z" transform="rotate(315 16 16)">
+                    <animate attributeName="opacity" from="1" to=".1" dur="1s" repeatCount="indefinite" begin="0.875s" />
+                </path>
+            </svg>
+            <h2>vue-cnode</h2>
+            <p>致力于 Node.js 的技术研究</p>
+        </div>
+    </div>
+    <!-- loading end -->
     <div id="app">
         <router-view></router-view>
     </div>
-<script type="text/javascript" src="/vue-cnode/dist/main.js?v=4d9b048b9242e0331904"></script></body>
+    <script type="text/javascript">
+        var PAGE_START_TIME = new Date().getTime() //记录页面初始化时间
+    </script>
+    <script type="text/javascript" src="/vue-cnode/dist/main.js?v=4d9b048b9242e0331904"></script></body>
 
 </html>
