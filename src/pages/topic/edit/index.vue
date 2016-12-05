@@ -48,7 +48,7 @@
         <v-content>
             <form flex="dir:top" @submit.prevent="submit">
                 <div class="title">
-                    <input type="text" placeholder="标题" v-model="form.title">
+                    <input type="text" placeholder="标题..." v-model="form.title">
                 </div>
                 <div class="select">
                     <select v-model="form.tab">
@@ -59,7 +59,7 @@
                 </select>
                 </div>
                 <div class="con" flex="dir:top" flex-box="1">
-                    <textarea flex-box="1" placeholder="内容" v-model="form.content"></textarea>
+                    <textarea flex-box="1" placeholder="内容..." v-model="form.content"></textarea>
                 </div>
             </form>
         </v-content>
