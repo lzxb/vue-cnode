@@ -1,13 +1,13 @@
 ; (function (win) {
-    win.openNativeApp = function (agreement, download) {
+    win.openNativeApp = function (setting) {
 
         var iframe = document.createElement('iframe')
         iframe.style.display = 'none'
-        iframe.src = agreement
+        iframe.src = setting.schema
         document.body.appendChild(iframe)
         setTimeout(function () {
             document.body.removeChild(iframe)
-            location.href = download
+            location.href = setting.download
         }, 2000)
     }
 })(window)

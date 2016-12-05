@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <script src=./openNativeApp.js></script>
 </head>
+
 <body>
-    <a href="ZhiMaBaoBao://">IOS打开芝麻宝宝</a>
-    <a href="m://my.zhimabaobaoforever" onclick="openNativeApp('m://my.zhimabaobaoforever', 'https://www.baidu.com/')">Android打开芝麻宝宝</a>
+    <button onclick="to">打开</button>
+    <script>
+
+        function to() {
+            var ua = navigator.userAgent.toLowerCase();	
+            if (/iphone|ipad|ipod/.test(ua)) {
+                openNativeApp({
+                    schema: 'ZhiMaBaoBao://', //调用的协议
+                    download: 'https://www.baidu.com/' //下载的地址
+                })
+            } else if (/android/.test(ua)) {
+                openNativeApp({
+                    schema: 'm://my.zhimabaobaoforever', //调用的协议
+                    download: 'https://www.baidu.com/' //下载的地址
+                })
+            } else {
+                // PC端
+            }
+        }
+    </script>
 </body>
+
 </html>
