@@ -87,7 +87,8 @@
             </div>
         </v-header>
         <v-content style="bottom: 0;" v-scroll-record>
-            <v-loading v-if="!id"></v-loading>
+            <v-loading v-if="!id && existence"></v-loading>
+            <v-data-null v-if="!existence" msg="话题不存在"></v-data-null>
             <template v-if="id">
                 <div class="common-typeicon" flex v-if="top || good">
                     <div class="icon" v-if="good">
@@ -183,6 +184,7 @@
         computed: mapState({ user: (state) => state.user}),
         routeData() {
             return {
+                existence: true,
                 id: '',
                 author_id: '',
                 tab: "share",
@@ -206,8 +208,12 @@
             getData() {
                 var { vid } = this.$route.params
                 util.get(`/api/v1/topic/${vid}`, {}, ({ data, success }) => {
-                    data.replies.forEach((item) => item.comment = false)
-                    if(success) return Object.assign(this.$data, data)
+                    if(success) {
+                        data.replies.forEach((item) => item.comment = false)
+                        Object.assign(this.$data, data)
+                    } else {
+                        this.existence = false
+                    }
                 })
             },
             testThing(ups) { //验证是否点赞

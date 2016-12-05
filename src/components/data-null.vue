@@ -11,10 +11,15 @@
     }
 </style>
 <template>
-    <div class="data-null">暂无记录</div>
+    <div class="data-null">{{ msg }}</div>
 </template>
 <script>
     export default {
-
+        props: {
+            msg: {
+                type: String,
+                default: '暂无记录'
+            }
+        }
     }
 </script>

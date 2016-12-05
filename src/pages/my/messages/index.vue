@@ -10,9 +10,9 @@
                 list-style: none;
                 border-bottom: 1px solid #eee;
                 background: #fff;
-                a {
+                /*a {
                     color: @text;
-                }
+                }*/
                 .name {
                     font-weight: bold;
                     line-height: 28px;
@@ -90,7 +90,7 @@
                     </li>
                 </ul>
             </div>
-            <v-data-null v-if="!list.length" />
+            <v-data-null v-if="!list.length"></v-data-null>
         </v-content>
         <v-footer></v-footer>
     </div>

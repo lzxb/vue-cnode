@@ -33,7 +33,7 @@
                         top: 0;
                         left: 50%;
                         z-index: 2;
-                        padding: 1px 3px;
+                        padding: 1px 4px;
                         line-height: 12px;
                         border-radius: 50%;
                         text-align: center;
@@ -61,7 +61,7 @@
                     <router-link :to="item.path">
                         <i class="iconfont" :class="[ item.icon ]"></i>
                         <em>{{ item.title }}</em>
-                        <div class="count" v-if="user.id && item.icon == '/my/messages' && count > 0">{{ count }}</div>
+                        <div class="count" v-if="item.path == '/my/messages' && count > 0">{{ count }}</div>
                     </router-link>
                 </li>
             </template>
