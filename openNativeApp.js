@@ -6,8 +6,8 @@
         iframe.src = agreement
         document.body.appendChild(iframe)
         setTimeout(function () {
-            console.log('ok')
+            document.body.removeChild(iframe)
             location.href = download
-        }, 500)
+        }, 2000)
     }
 })(window)
