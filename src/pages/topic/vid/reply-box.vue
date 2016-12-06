@@ -50,7 +50,6 @@
 </template>
 <script>
     import util from 'util'
-    console.log(util)
     export default {
         props: {
             reply_id: { //评论的评论id，如果没有则是对主题的评论
@@ -70,6 +69,7 @@
         },
         methods: {
             submit() { //提交
+                if(!this.content) return util.toast('请输入回复内容')
                 this.btnname = '回复中...'
                 var { reply_id, content, loginname } = this
                 var { vid } = this.$route.params

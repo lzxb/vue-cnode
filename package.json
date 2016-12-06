@@ -41,10 +41,11 @@
   },
   "dependencies": {
     "flex.css": "^1.1.6",
+    "github-markdown-css": "^2.4.1",
     "is": "^3.2.0",
     "normalize.css": "^5.0.0",
-    "vue": "^2.0.4",
-    "vue-router": "^2.0.1",
+    "vue": "^2.1.4",
+    "vue-router": "^2.1.1",
     "vuex": "^2.0.0"
   }
 }

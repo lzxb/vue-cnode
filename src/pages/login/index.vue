@@ -65,6 +65,7 @@
             ...mapActions([USER_SIGNIN]),
             submit () {
                 if (this.status) return
+                if(!this.form.accesstoken) return util.toast('请输入accesstoken')
                 this.status = true
                 util.post('/api/v1/accesstoken', this.form, (res) => {
 

@@ -37,7 +37,7 @@ export default [
             {
                 path: '/topic/create', //创建帖子
                 meta: { auth: false },
-                component: resolve => require(['../pages/topic/edit/'], resolve)
+                component: resolve => require(['../pages/topic/create/'], resolve)
             },
             {
                 meta: { auth: false },
