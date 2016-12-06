@@ -78,6 +78,11 @@
     .reply {
         padding: 50px 10px;
     }
+    
+    .tip-login {
+        padding: 100px;
+        text-align: center;
+    }
 </style>
 <template>
     <div>
@@ -132,7 +137,7 @@
                         <div class="markdown-body" v-html="content"></div>
                     </li>
                     <!-- 主题信息 end -->
-                    <li class="replies-count">
+                    <li class="replies-count" v-if="replies.length">
                         共(<em>{{ replies.length }}</em>)条回复
                     </li>
                     <!-- 主题评论 start -->
@@ -166,6 +171,9 @@
                 </ul>
                 <div class="reply" v-if="user.id">
                     <reply-box @success="getData"></reply-box>
+                </div>
+                <div class="tip-login" v-if="!user.id">
+                    你还未登录，请先<router-link to="/login">登录</router-link>
                 </div>
             </template>
         </v-content>
