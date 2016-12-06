@@ -1,1 +1,200 @@
-webpackJsonp([3],{23:function(t,a,i){"use strict";function e(t){return t&&t.__esModule?t:{default:t}}Object.defineProperty(a,"__esModule",{value:!0});var s=i(5),o=i(6),r=e(o);a.default={mixins:[r.default],computed:(0,s.mapState)({user:function(t){return t.user}}),routeData:function(){return{}}}},53:function(t,a,i){a=t.exports=i(1)(),a.push([t.id,".con[data-v-33377670]{background:#eee}.user[data-v-33377670]{position:relative;height:180px;background-image:url("+i(74)+");background-position:50%;background-size:cover}.headimg[data-v-33377670]{position:absolute;top:100px;bottom:0;left:50%;z-index:1;width:120px;height:120px;margin:0 0 -40px -60px;border-radius:50%;border:1px solid #ddd;background-color:#eee;background-size:cover;background-position:50%;-webkit-filter:none;filter:none}.user-name[data-v-33377670]{padding:40px 0 50px;line-height:32px;text-align:center}.nav[data-v-33377670]{padding:0;margin:0}.nav li[data-v-33377670]{list-style:none;border-bottom:1px solid #ddd;background:#fbfbfb}.nav li[data-v-33377670]:first-of-type{border-top:1px solid #ddd}.nav a[data-v-33377670]{padding:8px 10px;line-height:28px}.nav a .icon[data-v-33377670]{width:45px}.nav a .icon .iconfont[data-v-33377670]{font-size:24px;color:#aaa}.nav a .text[data-v-33377670]{font-size:13px;color:#222}.nav a .icon-arrow-right[data-v-33377670]{color:#ccc}",""])},74:function(t,a,i){t.exports=i.p+"headimg-bg.jpg?v=55bfe251347ce829af67d68847a6806c"},85:function(t,a,i){var e,s;i(115),e=i(23);var o=i(98);s=e=e||{},"object"!=typeof e.default&&"function"!=typeof e.default||(s=e=e.default),"function"==typeof s&&(s=s.options),s.render=o.render,s.staticRenderFns=o.staticRenderFns,s._scopeId="data-v-33377670",t.exports=e},98:function(t,a){t.exports={render:function(){var t=this,a=t.$createElement;return a("div",[a("v-header",{attrs:{title:"个人中心"}},[t.user.id?a("div",{staticClass:"item",attrs:{flex:"main:center cross:center"},on:{click:function(a){t.$router.push("/signout")}},slot:"right"},[a("i",{staticClass:"iconfont icon-signout"})]):t._e()])," ",a("v-content",{directives:[{name:"scroll-record",rawName:"v-scroll-record"}],staticClass:"con"},[t.user.avatar_url?a("router-link",{attrs:{to:"/user/"+t.user.loginname}},[a("div",{staticClass:"user"})," ",a("div",{staticClass:"headimg",style:{backgroundImage:"url("+t.user.avatar_url+")"}})," ",a("div",{staticClass:"user-name"},[t._s(t.user.loginname)])]):t._e()," ",t.user.avatar_url?t._e():a("router-link",{attrs:{to:"/login"}},[a("div",{staticClass:"user"})," ",a("div",{staticClass:"headimg"})," ",a("div",{staticClass:"user-name"},["你还未登录，请先登录！"])])," ",a("nav",{staticClass:"nav"},[a("li",[a("router-link",{attrs:{to:"/topic/create",flex:"box:justify"}},[a("div",{staticClass:"icon",attrs:{flex:"cross:center"}},[a("i",{staticClass:"iconfont icon-edit",staticStyle:{color:"#14b11d"}})])," ",a("div",{staticClass:"text"},["发表主题"])," ",a("div",{staticClass:"arrow"},[a("i",{staticClass:"iconfont icon-arrow-right"})])])])," ",a("li",[a("router-link",{attrs:{to:"/home/messages",flex:"box:justify"}},[a("div",{staticClass:"icon",attrs:{flex:"cross:center"}},[a("i",{staticClass:"iconfont icon-msg",staticStyle:{color:"#bd1616"}})])," ",a("div",{staticClass:"text"},["我的消息"])," ",a("div",{staticClass:"arrow"},[a("i",{staticClass:"iconfont icon-arrow-right"})])])])])," ",a("div",{staticStyle:{height:"50px"}})," ",a("nav",{staticClass:"nav"},[a("li",[a("router-link",{attrs:{to:"/about",flex:"box:justify"}},[a("div",{staticClass:"icon",attrs:{flex:"cross:center"}},[a("i",{staticClass:"iconfont icon-about"})])," ",a("div",{staticClass:"text"},["关于"])," ",a("div",{staticClass:"arrow"},[a("i",{staticClass:"iconfont icon-arrow-right"})])])])])," ",a("div",{staticStyle:{height:"50px"}})])," ",a("v-footer")])},staticRenderFns:[]}},115:function(t,a,i){var e=i(53);"string"==typeof e&&(e=[[t.id,e,""]]),i(2)(e,{}),e.locals&&(t.exports=e.locals)}});
+webpackJsonp([3],{
+
+/***/ 31:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(32)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(34)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(35)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/lzxb/Documents/vue-cnode/src/pages/about/index.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-3ccd41f3"
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-3ccd41f3", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-3ccd41f3", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] index.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ },
+
+/***/ 32:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(33);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3ccd41f3&scoped=true!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3ccd41f3&scoped=true!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 33:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.about[data-v-3ccd41f3] {\n  padding: 10px;\n  line-height: 22px;\n}\n.about dt[data-v-3ccd41f3] {\n  line-height: 28px;\n  font-weight: bold;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+
+/***/ 34:
+/***/ function(module, exports) {
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	"use strict";
+
+/***/ },
+
+/***/ 35:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', [_h('v-header', {
+	    attrs: {
+	      "title": "关于"
+	    }
+	  }, [_h('div', {
+	    staticClass: "item",
+	    attrs: {
+	      "flex": "main:center cross:center"
+	    },
+	    on: {
+	      "click": function($event) {
+	        _vm.$router.go(-1)
+	      }
+	    },
+	    slot: "left"
+	  }, [_h('i', {
+	    staticClass: "iconfont icon-back"
+	  })])]), " ", _h('v-content', {
+	    staticStyle: {
+	      "bottom": "0"
+	    }
+	  }, [_h('div', {
+	    staticClass: "about"
+	  }, [_h('dl', [_h('dt', ["前言"]), " ", _h('dd', ["\n                    项目灵感的最初来源是来自", _h('a', ["@shinygang"]), "的Vue-cnodejs，感谢cnodejs社区提供的API。\n                "]), " ", _h('dt', ["技术栈"]), " ", _h('dd', ["\n                    项目基于vue2、vue-router、vuex、flex.css、ES6进行开发，使用了webpack、babel编译。\n                "]), " ", _h('dt', ["感悟"]), " ", _h('dd', ["\n                    在vue-cnode升级vue2的时候，在公司内部已经有两个正式项目使用vue2， 遇到的一个最难的问题，就是如何能在页面后退时还原数据和滚动条位置， 虽然vue2内置了keep-alive组件，vue-router也提供了scrollBehavior方法进行设置，\n                    但是仍然无法满足需求，后来阅读vue-router的源码发现， 每个页面都会自动在history.state对象中存储一个对应的key值， 便利用这个特性实现了页面后退时，数据和滚动条还原， 不过目前只是实现了页面的顶级组件还原，如果需要对顶级组件下的子组件实现数据还原，\n                    可以利用$options._scopeId来实现。哈哈，具体如何实现就要靠大家自己发挥想象力了\n                "]), " ", _h('dt', ["源码"]), " ", _h('dd', [_h('a', {
+	    attrs: {
+	      "href": "https://github.com/lzxb/vue-cnode",
+	      "target": "_blank"
+	    }
+	  }, ["https://github.com/lzxb/vue-cnode"])]), " ", _h('dt', ["反馈"]), " ", _h('dd', [_h('a', {
+	    attrs: {
+	      "href": "https://github.com/lzxb/vue-cnode/issues",
+	      "target": "_blank"
+	    }
+	  }, ["https://github.com/lzxb/vue-cnode"])]), " ", _h('dt', ["版本"]), " ", _h('dd', ["\n                    v2.0 beta\n                "])])])])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-3ccd41f3", module.exports)
+	  }
+	}
+
+/***/ }
+
+});

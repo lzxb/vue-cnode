@@ -1,1 +1,287 @@
-webpackJsonp([1],{29:function(t,e,a){"use strict";function i(t){return t&&t.__esModule?t:{default:t}}Object.defineProperty(e,"__esModule",{value:!0});var s=a(8),n=i(s),r=a(4),o=i(r),d=a(6),c=i(d),l=a(92),f=i(l);e.default={components:{list:f.default},mixins:[c.default],routeData:function(){return{tabIndex:0,data:{}}},created:function(){this.getData()},watch:{$route:"getData"},methods:{getData:function(){var t=this,e=this.$route.params.username,a=void 0===e?"":e;o.default.get("/api/v1/user/"+a,{},function(e){var a=e.data;n.default.object(a)&&a.loginname&&(t.data=a)})}}}},30:function(t,e){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default={props:{list:{type:Array,default:function(){return[]}}}}},57:function(t,e,a){e=t.exports=a(1)(),e.push([t.id,".user .user-bg[data-v-3f93c9c0]{overflow:hidden;width:100%;height:160px;background:#80bd01}.user .user-bg img[data-v-3f93c9c0]{width:100%}.user .headimg[data-v-3f93c9c0]{overflow:hidden;position:relative;z-index:2;margin-top:-42px;border-radius:50%;border:1px solid #eee;background:#fff}.user .headimg .pic[data-v-3f93c9c0]{overflow:hidden;width:80px;height:80px;margin:2px}.user .headimg .pic img[data-v-3f93c9c0]{width:100%;height:100%;border-radius:50%;background:#eee}.user .name[data-v-3f93c9c0]{margin:20px 10px;font-size:20px;font-weight:500}.user .score[data-v-3f93c9c0]{width:100%;font-size:12px}.user .score div[data-v-3f93c9c0]{padding:10px}.tab-nav[data-v-3f93c9c0]{margin-top:10px;border-top:1px solid #eee;border-bottom:1px solid #eee;background:#fff}.tab-nav li[data-v-3f93c9c0]{line-height:38px;text-align:center;border-right:1px solid #eee;font-size:16px}.tab-nav li[data-v-3f93c9c0]:last-of-type{border:none}.tab-nav li.on[data-v-3f93c9c0]{color:#80bd01}",""])},60:function(t,e,a){e=t.exports=a(1)(),e.push([t.id,".list[data-v-50400bc0]{overflow:hidden}.list li[data-v-50400bc0]{padding:10px;height:50px;border-bottom:1px solid #eee;background:#fff}.list li .head .pic[data-v-50400bc0]{overflow:hidden;width:24px;height:24px;border-radius:50%}.list li .head .pic img[data-v-50400bc0]{width:100%;height:100%}.list li .main[data-v-50400bc0]{padding-left:10px;color:inherit}.list li .main .con[data-v-50400bc0]{padding:0 5px;line-height:30px;font-size:14px}.list li .main .name[data-v-50400bc0]{color:#666}.list li .main .line[data-v-50400bc0]{line-height:20px}.list li .main time[data-v-50400bc0]{font-size:12px;color:#888}.list-null[data-v-50400bc0]{line-height:120px;text-align:center}",""])},75:function(t,e,a){t.exports=a.p+"headimg-bg.jpg?v=55bfe251347ce829af67d68847a6806c"},91:function(t,e,a){var i,s;a(119),i=a(29);var n=a(102);s=i=i||{},"object"!=typeof i.default&&"function"!=typeof i.default||(s=i=i.default),"function"==typeof s&&(s=s.options),s.render=n.render,s.staticRenderFns=n.staticRenderFns,s._scopeId="data-v-3f93c9c0",t.exports=i},92:function(t,e,a){var i,s;a(122),i=a(30);var n=a(105);s=i=i||{},"object"!=typeof i.default&&"function"!=typeof i.default||(s=i=i.default),"function"==typeof s&&(s=s.options),s.render=n.render,s.staticRenderFns=n.staticRenderFns,s._scopeId="data-v-50400bc0",t.exports=i},102:function(t,e,a){t.exports={render:function(){var t=this,e=t.$createElement;return e("div",[e("v-header",{attrs:{title:"个人资料"}},[e("div",{staticClass:"item",attrs:{flex:"main:center cross:center"},on:{click:function(e){t.$router.go(-1)}},slot:"left"},[e("i",{staticClass:"iconfont icon-back"})])])," ",e("v-content",{directives:[{name:"scroll-record",rawName:"v-scroll-record"}],staticStyle:{bottom:"0"}},[e("div",{staticClass:"user",attrs:{flex:"dir:top cross:center"}},[e("div",{staticClass:"user-bg"},[e("img",{attrs:{src:a(75),alt:""}})])," ",e("div",{staticClass:"headimg"},[e("div",{staticClass:"pic"},[t.data.avatar_url?e("img",{attrs:{src:t.data.avatar_url,alt:""}}):t._e()])])," ",e("div",{staticClass:"name"},[t._s(t.data.loginname)])," ",e("div",{staticClass:"score",attrs:{flex:"main:justify"}},[e("div",["积分："+t._s(t.data.score)])," ",e("div",["注册于："+t._s(t.data.create_at)])])])," ",e("ul",{staticClass:"tab-nav",attrs:{flex:"box:mean"}},[e("li",{class:{on:0==t.tabIndex},on:{click:function(e){t.tabIndex=0}}},["回复"])," ",e("li",{class:{on:1==t.tabIndex},on:{click:function(e){t.tabIndex=1}}},["主题"])])," ",e("list",{directives:[{name:"show",rawName:"v-show",value:0==t.tabIndex,expression:"tabIndex == 0"}],attrs:{list:t.data.recent_replies}})," ",e("list",{directives:[{name:"show",rawName:"v-show",value:1==t.tabIndex,expression:"tabIndex == 1"}],attrs:{list:t.data.recent_topics}})])])},staticRenderFns:[]}},105:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement;return e("div",[t.list.length?e("ul",{staticClass:"list"},[t._l(t.list,function(a){return e("li",{attrs:{flex:"box:first","track-by":"id"}},[e("router-link",{staticClass:"head",attrs:{to:"/user/"+a.author.loginname}},[e("div",{staticClass:"pic"},[e("img",{attrs:{src:a.author.avatar_url,alt:""}})])])," ",e("router-link",{staticClass:"main",attrs:{to:"/topic/"+a.id,flex:"dir:top box:first"}},[e("div",{staticClass:"line",attrs:{flex:"box:last"}},[e("div",{staticClass:"name"},[t._s(a.author.loginname)])," ",e("time",[t._s(a.last_reply_at)])])," ",e("div",{staticClass:"con"},[t._s(a.title)])])])})]):t._e()," ",t.list.length?t._e():e("div",{staticClass:"list-null"},["没有记录"])])},staticRenderFns:[]}},119:function(t,e,a){var i=a(57);"string"==typeof i&&(i=[[t.id,i,""]]),a(2)(i,{}),i.locals&&(t.exports=i.locals)},122:function(t,e,a){var i=a(60);"string"==typeof i&&(i=[[t.id,i,""]]),a(2)(i,{}),i.locals&&(t.exports=i.locals)}});
+webpackJsonp([1],{
+
+/***/ 14:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(15)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(17)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(25)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/lzxb/Documents/vue-cnode/src/pages/login/index.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-43b5eacf"
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-43b5eacf", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-43b5eacf", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] index.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ },
+
+/***/ 15:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(16);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-43b5eacf&scoped=true!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-43b5eacf&scoped=true!./../../../node_modules/less-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 16:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.form[data-v-43b5eacf] {\n  width: 80%;\n  padding: 0 10%;\n  margin-top: -50px;\n}\n.form .line[data-v-43b5eacf] {\n  padding: 20px 0;\n}\n.form .text[data-v-43b5eacf] {\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 100%;\n  padding: 5px 10px;\n  line-height: 28px;\n  -webkit-border-radius: 5px;\n     -moz-border-radius: 5px;\n          border-radius: 5px;\n  border: 1px solid #ddd;\n  font-size: 14px;\n}\n.form .btn[data-v-43b5eacf] {\n  width: 100%;\n  line-height: 38px;\n  -webkit-border-radius: 5px;\n     -moz-border-radius: 5px;\n          border-radius: 5px;\n  border: 1px solid #76ae01;\n  font-size: 14px;\n  color: #fff;\n  background: #80bd01;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+
+/***/ 17:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	var _util = __webpack_require__(18);
+
+	var _util2 = _interopRequireDefault(_util);
+
+	var _is = __webpack_require__(19);
+
+	var _is2 = _interopRequireDefault(_is);
+
+	var _vuex = __webpack_require__(23);
+
+	var _user = __webpack_require__(24);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            form: {
+	                accesstoken: ''
+	            },
+	            status: false //true正在提交， false还没提交
+	        };
+	    },
+
+	    methods: _extends({}, (0, _vuex.mapActions)([_user.USER_SIGNIN]), {
+	        submit: function submit() {
+	            var _this = this;
+
+	            if (this.status) return;
+	            if (!this.form.accesstoken) return _util2.default.toast('请输入accesstoken');
+	            this.status = true;
+	            _util2.default.post('/api/v1/accesstoken', this.form, function (res) {
+
+	                if (_is2.default.object(res)) {
+	                    if (res.success) {
+	                        _util2.default.toast('登录成功');
+	                        _this.USER_SIGNIN({
+	                            avatar_url: res.avatar_url,
+	                            id: res.id,
+	                            loginname: res.loginname,
+	                            accesstoken: _this.form.accesstoken
+	                        });
+	                        _this.$router.go(-1);
+	                    } else {
+	                        _util2.default.toast(res.error_msg);
+	                    }
+	                } else {
+	                    _util2.default.toast('登录失败');
+	                }
+
+	                _this.status = false;
+	            }, function () {
+	                _util2.default.toast('登录失败');
+	                _this.status = false;
+	            });
+	        }
+	    })
+	};
+
+/***/ },
+
+/***/ 25:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', [_h('v-header', {
+	    attrs: {
+	      "title": "登录"
+	    }
+	  }, [_h('div', {
+	    staticClass: "item",
+	    attrs: {
+	      "flex": "main:center cross:center"
+	    },
+	    on: {
+	      "click": function($event) {
+	        _vm.$router.go(-1)
+	      }
+	    },
+	    slot: "left"
+	  }, [_h('i', {
+	    staticClass: "iconfont icon-back"
+	  })])]), " ", _h('v-content', {
+	    staticStyle: {
+	      "bottom": "0"
+	    },
+	    attrs: {
+	      "flex": "main:center cross:center"
+	    }
+	  }, [_h('form', {
+	    staticClass: "form",
+	    on: {
+	      "submit": function($event) {
+	        $event.preventDefault();
+	        _vm.submit($event)
+	      }
+	    }
+	  }, [_h('div', {
+	    staticClass: "line"
+	  }, [_h('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.form.accesstoken),
+	      expression: "form.accesstoken"
+	    }],
+	    staticClass: "text",
+	    attrs: {
+	      "type": "text",
+	      "placeholder": "Access Token"
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.form.accesstoken)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.form.accesstoken = $event.target.value
+	      }
+	    }
+	  })]), " ", _h('div', {
+	    staticClass: "line"
+	  }, [_h('button', {
+	    staticClass: "btn"
+	  }, [_vm._s(_vm.status ? '正在登录中' : '登录')])])])])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-43b5eacf", module.exports)
+	  }
+	}
+
+/***/ }
+
+});

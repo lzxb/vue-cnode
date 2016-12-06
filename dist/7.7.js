@@ -1,1 +1,349 @@
-webpackJsonp([7],{24:function(t,e,i){"use strict";function a(t){return t&&t.__esModule?t:{default:t}}Object.defineProperty(e,"__esModule",{value:!0});var s=i(5),o=i(4),n=a(o),r=i(6),d=a(r);e.default={mixins:[d.default],computed:(0,s.mapState)({user:function(t){return t.user}}),routeData:function(){return{list:[]}},created:function(){this.getList()},methods:{getList:function(){var t=this,e=this.user.accesstoken;return!!e&&void n.default.get("/api/v1/messages",{mdrender:!0,accesstoken:e},function(e){var i=e.data,a=i.hasnot_read_messages,s=i.has_read_messages;Array.prototype.push.apply(a,s),t.list=a})}}}},62:function(t,e,i){e=t.exports=i(1)(),e.push([t.id,".msg-box .list[data-v-6428f5f5]{padding:0;margin:0}.msg-box .list li[data-v-6428f5f5]{position:relative;padding:10px;list-style:none;border-bottom:1px solid #eee;background:#fff}.msg-box .list li .name[data-v-6428f5f5]{font-weight:700;line-height:28px}.msg-box .list li .name time[data-v-6428f5f5]{padding-left:5px;font-size:12px;font-weight:400;color:#999}.msg-box .list li .content[data-v-6428f5f5]{padding:5px 0}.msg-box .list li .weidu[data-v-6428f5f5]{position:absolute;top:0;right:0;z-index:1;width:auto;text-align:right}.msg-box .list li .weidu .iconfont[data-v-6428f5f5]{font-size:60px;color:#222}.user-headimg[data-v-6428f5f5]{width:38px;height:38px;margin-right:10px;border-radius:50%;border:1px solid #ddd;background-size:cover;background-color:#eee}.markdown-body[data-v-6428f5f5]{padding:5px;margin-top:10px;border-radius:5px;background:#eee}",""])},86:function(t,e,i){var a,s;i(124),a=i(24);var o=i(107);s=a=a||{},"object"!=typeof a.default&&"function"!=typeof a.default||(s=a=a.default),"function"==typeof s&&(s=s.options),s.render=o.render,s.staticRenderFns=o.staticRenderFns,s._scopeId="data-v-6428f5f5",t.exports=a},107:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement;return e("div",[e("v-header",{attrs:{title:"消息"}})," ",e("v-content",{directives:[{name:"scroll-record",rawName:"v-scroll-record"}]},[t.list.length?e("div",{staticClass:"msg-box"},[e("ul",{staticClass:"list"},[t._l(t.list,function(i,a){return e("li",{attrs:{flex:"box:first"}},[e("router-link",{staticClass:"user",attrs:{to:"/user/"+i.author.loginname}},[e("div",{staticClass:"user-headimg",style:{backgroundImage:"url("+i.author.avatar_url+")"}})])," ",e("div",[e("div",{staticClass:"name"},[t._s(i.author.loginname)+"\n                            ",e("time",[t._s(t._f("formatDate")(i.create_at))])])," ","at"==i.type?e("div",["\n                            在话题\n                            ",e("router-link",{attrs:{to:"/topic/"+i.topic.id}},[t._s(i.topic.title)])," 中 @了你\n\n                        "]):t._e()," ","reply"==i.type?e("div",["\n                            回复你了的话题\n                            ",e("router-link",{attrs:{to:"/topic/"+i.topic.id}},[t._s(i.topic.title)])]):t._e()," ",e("div",{staticClass:"markdown-body",domProps:{innerHTML:t._s(i.reply.content)}})])," ",e("div",{staticClass:"weidu"},[e("i",{staticClass:"iconfont icon-weidu"})])])})])]):t._e()," ",t.list.length?t._e():e("v-data-null")])," ",e("v-footer")])},staticRenderFns:[]}},124:function(t,e,i){var a=i(62);"string"==typeof a&&(a=[[t.id,a,""]]),i(2)(a,{}),a.locals&&(t.exports=a.locals)}});
+webpackJsonp([7],{
+
+/***/ 62:
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+
+	/* styles */
+	__webpack_require__(63)
+
+	/* script */
+	__vue_exports__ = __webpack_require__(65)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(66)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/lzxb/Documents/vue-cnode/src/pages/topic/create/index.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-43dd100c"
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-43dd100c", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-43dd100c", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] index.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+	module.exports = __vue_exports__
+
+
+/***/ },
+
+/***/ 63:
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(64);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-43dd100c&scoped=true!./../../../../node_modules/less-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-43dd100c&scoped=true!./../../../../node_modules/less-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+
+/***/ 64:
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\nform[data-v-43dd100c] {\n  height: 100%;\n}\n.title[data-v-43dd100c] {\n  padding: 5px 10px;\n}\n.select[data-v-43dd100c] {\n  padding: 5px 10px;\n  border-top: 1px solid #ddd;\n  border-bottom: 1px solid #ddd;\n}\n.select select[data-v-43dd100c] {\n  padding: 0;\n  -webkit-border-radius: 5px;\n     -moz-border-radius: 5px;\n          border-radius: 5px;\n  background: none;\n}\n.con[data-v-43dd100c] {\n  padding: 5px 10px;\n}\n.con textarea[data-v-43dd100c] {\n  line-height: 24px;\n}\ninput[data-v-43dd100c],\nselect[data-v-43dd100c],\ntextarea[data-v-43dd100c] {\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 100%;\n  height: 32px;\n  padding: 0 5px;\n  line-height: 28px;\n  border: none;\n  font-size: 14px;\n  resize: none;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+
+/***/ 65:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _util = __webpack_require__(18);
+
+	var _util2 = _interopRequireDefault(_util);
+
+	var _routeData = __webpack_require__(40);
+
+	var _routeData2 = _interopRequireDefault(_routeData);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	    mixins: [_routeData2.default],
+	    routeData: function routeData() {
+	        return {
+	            form: {
+	                topic_id: '', //新建主题
+	                title: '', //标题
+	                tab: '', //发表的板块
+	                content: '' }
+	        };
+	    },
+
+	    methods: {
+	        submit: function submit() {
+	            var _this = this;
+
+	            var form = this.form;
+
+
+	            if (!form.title) {
+	                return _util2.default.toast('标题不能为空');
+	            } else if (!form.tab) {
+	                return _util2.default.toast('选项不能为空');
+	            } else if (!form.content) {
+	                return _util2.default.toast('内容不能为空');
+	            }
+
+	            _util2.default.post('/api/v1/topics', this.form, function (_ref) {
+	                var success = _ref.success,
+	                    topic_id = _ref.topic_id,
+	                    error_msg = _ref.error_msg;
+
+	                if (success) {
+	                    _this.$router.push({ path: '/topic/' + topic_id });
+	                } else {
+	                    _util2.default.toast(error_msg);
+	                }
+	            });
+	        }
+	    }
+	};
+
+/***/ },
+
+/***/ 66:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', [_h('v-header', {
+	    attrs: {
+	      "title": "发表"
+	    }
+	  }, [_h('a', {
+	    staticClass: "item",
+	    attrs: {
+	      "flex": "main:center cross:center"
+	    },
+	    on: {
+	      "click": _vm.submit
+	    },
+	    slot: "right"
+	  }, [_h('i', {
+	    staticClass: "iconfont icon-edit"
+	  })])]), " ", _h('v-content', [_h('form', {
+	    attrs: {
+	      "flex": "dir:top"
+	    },
+	    on: {
+	      "submit": function($event) {
+	        $event.preventDefault();
+	        _vm.submit($event)
+	      }
+	    }
+	  }, [_h('div', {
+	    staticClass: "title"
+	  }, [_h('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.form.title),
+	      expression: "form.title"
+	    }],
+	    attrs: {
+	      "type": "text",
+	      "placeholder": "标题..."
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.form.title)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.form.title = $event.target.value
+	      }
+	    }
+	  })]), " ", _h('div', {
+	    staticClass: "select"
+	  }, [_h('select', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.form.tab),
+	      expression: "form.tab"
+	    }],
+	    on: {
+	      "change": function($event) {
+	        _vm.form.tab = Array.prototype.filter.call($event.target.options, function(o) {
+	          return o.selected
+	        }).map(function(o) {
+	          var val = "_value" in o ? o._value : o.value;
+	          return val
+	        })[0]
+	      }
+	    }
+	  }, [_h('option', {
+	    attrs: {
+	      "value": ""
+	    }
+	  }, ["请选择"]), " ", _h('option', {
+	    attrs: {
+	      "value": "share"
+	    }
+	  }, ["分享"]), " ", _h('option', {
+	    attrs: {
+	      "value": "ask"
+	    }
+	  }, ["问答"]), " ", _h('option', {
+	    attrs: {
+	      "value": "job"
+	    }
+	  }, ["招聘"])])]), " ", _h('div', {
+	    staticClass: "con",
+	    attrs: {
+	      "flex": "dir:top",
+	      "flex-box": "1"
+	    }
+	  }, [_h('textarea', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.form.content),
+	      expression: "form.content"
+	    }],
+	    attrs: {
+	      "flex-box": "1",
+	      "placeholder": "内容..."
+	    },
+	    domProps: {
+	      "value": _vm._s(_vm.form.content)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.form.content = $event.target.value
+	      }
+	    }
+	  })])])]), " ", _h('v-footer')])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-43dd100c", module.exports)
+	  }
+	}
+
+/***/ }
+
+});
