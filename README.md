@@ -2,7 +2,8 @@
 
 ### 前言
 ```
-项目灵感的最初来源是(@shinygang)[https://github.com/shinygang/Vue-cnodejs]来自的Vue-cnodejs，感谢cnodejs社区提供的API。
+项目灵感的最初来源是[@shinygang](https://github.com/shinygang/Vue-cnodejs)来自的Vue-cnodejs，
+感谢[cnodejs](https://cnodejs.org/)社区提供的API。
 ```
 
 ### 技术栈
