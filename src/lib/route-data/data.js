@@ -17,7 +17,7 @@ const init = function($route) {
     if (keepAlive) {
         return keepAlive
     }
-    return this.$options.routeData()
+    return this.$options.routeData.call(this)
 }
 /**
  * 保存数据
