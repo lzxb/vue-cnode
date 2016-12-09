@@ -11,6 +11,14 @@
 基于vue2 + vue-router + vuex + ES6 + less + flex.css重写vue版cnode社区，使用webpack打包
 ```
 
+### 使用项目
+```
+1.克隆项目：      git clone https://github.com/lzxb/vue-cnode.git
+2.安装依赖：      npm install
+3.启动服务：      npm run dev
+4.发布代码：      npm run dist
+```
+
 ### 功能
 - [x] 首页列表，上拉加载
 - [x] 主题详情，回复，点赞
