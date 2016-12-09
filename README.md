@@ -4,7 +4,7 @@
 
 项目灵感的最初来源是[@shinygang](https://github.com/shinygang/Vue-cnodejs)来自的Vue-cnodejs，
 感谢[cnodejs](https://cnodejs.org/)社区提供的API。
-
+github：[https://github.com/lzxb/vue-cnode](https://github.com/lzxb/vue-cnode)
 ### 感悟
 ```
 在vue-cnode升级vue2的时候，在公司内部已经有两个正式项目使用vue2，
