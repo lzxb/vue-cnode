@@ -49,6 +49,8 @@
 - [x] 页面跳转，不再执行此页面的ajax请求回调方法
 - [x] 启动图
 
+
+
 ### 项目目录说明
 ```
 .
@@ -99,3 +101,6 @@
 |-- package.json                     // 配置项目相关信息，通过执行 npm init 命令创建
 .
 ```
+
+### [扫一扫二维码查看效果](http://lzxb.github.io/vue-cnode/)
+ [![扫一扫二维码查看效果](https://github.com/lzxb/vue-cnode/raw/master/shot/QR-code.png)](http://lzxb.github.io/vue-cnode/)
