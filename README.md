@@ -1,5 +1,10 @@
 # vue-cnode
 
+### 前言
+```
+项目灵感的最初来源是(@shinygang)[https://github.com/shinygang/Vue-cnodejs]来自的Vue-cnodejs，感谢cnodejs社区提供的API。
+```
+
 ### 技术栈
 ```
 基于vue2 + vue-router + vuex + ES6 + less + flex.css重写vue版cnode社区，使用webpack打包
