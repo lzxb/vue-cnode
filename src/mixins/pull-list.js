@@ -54,13 +54,13 @@ export default {
             this.loading = true
             var { url, data = {} } = this._pullList()
             util.get(url, data, ({ data }) => {
-                this.loading = false //请求完成
                 if (data.length > 0) {
                     data.forEach((item) => this.list.push(item))
                 } else {
                     this.complete = true
                 }
                 this.page++
+                this.loading = false //请求完成
             })
         },
         seeing() {
