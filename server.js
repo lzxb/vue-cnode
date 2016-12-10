@@ -1,6 +1,6 @@
 const Webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const webpackConfig = require("./webpack.config")
+const webpackConfig = require('./webpack.config')
 const config = require('./config/')
 
 var compiler = Webpack(webpackConfig)
