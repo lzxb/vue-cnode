@@ -64,6 +64,7 @@ export default {
             })
         },
         seeing() {
+            if (this.page == 1) return //防止偶然性的第一个重复请求的bug
             this.pullList()
         }
     }
