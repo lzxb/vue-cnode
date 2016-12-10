@@ -1,7 +1,7 @@
 <style lang="less" scoped>
     @import "../less/config";
     .content {
-        overflow: overlay;
+        overflow: auto;
         position: absolute;
         top: 50px;
         right: 0;
