@@ -27,7 +27,7 @@
         <slot name="left">
             <div class="item" flex="main:center cross:center"></div>
         </slot>
-        <h2 class="title">{{title}}</h2>
+        <h2 class="title">{{ title }}</h2>
         <slot name="right">
             <div class="item" flex="main:center cross:center"></div>
         </slot>

@@ -180,17 +180,14 @@
                         <div class="expand" flex="box:mean">
                             <div class="item click" flex="main:center cross:center">
                                 <i class="iconfont icon-click"></i>
-                                <div class="num">{{item.visit_count > 0 ? item.visit_count : '暂无阅读'}}</div>
+                                <div class="num">{{ item.visit_count > 0 ? item.visit_count : '暂无阅读' }}</div>
                             </div>
                             <div class="item reply" flex="main:center cross:center">
                                 <i class="iconfont icon-comment"></i>
-                                <div class="num">{{item.reply_count > 0 ? item.reply_count : '暂无评论'}}</div>
+                                <div class="num">{{ item.reply_count > 0 ? item.reply_count : '暂无评论' }}</div>
                             </div>
                             <div class="item last-reply" flex="main:center cross:center">
-                                <div class="pic">
-                                    <img alt="" :style="{backgroundImage: 'url(' + item.author.avatar_url + ')'}">
-                                </div>
-                                <time class="time">{{item.last_reply_at | formatDate}}</time>
+                                <time class="time">{{ item.last_reply_at | formatDate }}</time>
                             </div>
                         </div>
                     </router-link>

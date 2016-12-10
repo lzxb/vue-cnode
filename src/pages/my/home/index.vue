@@ -77,7 +77,7 @@
             <router-link v-if="user.avatar_url" :to="'/user/' + user.loginname">
                 <div class="user"></div>
                 <div class="headimg" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
-                <div class="user-name">{{user.loginname}}</div>
+                <div class="user-name">{{ user.loginname }}</div>
             </router-link>
             <router-link v-if="!user.avatar_url" to="/login">
                 <div class="user"></div>

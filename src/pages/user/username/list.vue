@@ -55,10 +55,10 @@
                 </router-link>
                 <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
                     <div class="line" flex="box:last">
-                        <div class="name">{{item.author.loginname}}</div>
-                        <time>{{item.last_reply_at}}</time>
+                        <div class="name">{{ item.author.loginname }}</div>
+                        <time>{{ item.last_reply_at | formatDate }}</time>
                     </div>
-                    <div class="con">{{item.title}}</div>
+                    <div class="con">{{ item.title | formatDate }}</div>
                 </router-link>
             </li>
         </ul>

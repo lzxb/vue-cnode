@@ -82,10 +82,10 @@
                         <img v-if="data.avatar_url" :src="data.avatar_url" alt="">
                     </div>
                 </div>
-                <div class="name">{{data.loginname}}</div>
+                <div class="name">{{ data.loginname }}</div>
                 <div class="score" flex="main:justify">
-                    <div>积分：{{data.score}}</div>
-                    <div>注册于：{{data.create_at}}</div>
+                    <div>积分：{{ data.score }}</div>
+                    <div>注册于：{{ data.create_at | formatDate }}</div>
                 </div>
             </div>
             <ul class="tab-nav" flex="box:mean">
