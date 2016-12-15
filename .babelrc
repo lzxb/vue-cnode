@@ -3,6 +3,7 @@
         "es2015",
         "stage-0"
     ],
+    "compact": true,
     "plugins": [
         "transform-object-assign",
         "transform-vue-jsx"

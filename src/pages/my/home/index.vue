@@ -57,6 +57,7 @@
                 }
             }
             .text {
+                line-height: 30px;
                 font-size: 13px;
                 color: @text;
             }
