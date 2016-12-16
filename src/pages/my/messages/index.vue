@@ -102,7 +102,7 @@
 
     export default {
         mixins: [routeData],
-        computed: mapState({ user: (state) => state.user}),
+        computed: mapState({ user: (state) => state.user }),
         routeData() {
             return {
                 list: []

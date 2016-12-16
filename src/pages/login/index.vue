@@ -1,5 +1,8 @@
 <style lang="less" scoped>
     @import "../../less/config";
+    .content {
+        bottom: 0
+    }
     .form {
         width: 80%;
         padding: 0 10%;
@@ -34,7 +37,7 @@
                 <i class="iconfont icon-back"></i>
             </div>
         </v-header>
-        <v-content flex="main:center cross:center" style="bottom: 0;">
+        <v-content flex="main:center cross:center">
             <form class="form" @submit.prevent="submit">
                 <div class="line">
                     <input class="text" type="text" placeholder="Access Token" v-model="form.accesstoken">
@@ -51,7 +54,7 @@
     import is from 'is'
     import { mapActions } from 'vuex'
     import { USER_SIGNIN } from 'store/user'
-    
+
     export default {
         data() {
             return {
@@ -63,9 +66,9 @@
         },
         methods: {
             ...mapActions([USER_SIGNIN]),
-            submit () {
+            submit() {
                 if (this.status) return
-                if(!this.form.accesstoken) return util.toast('请输入accesstoken')
+                if (!this.form.accesstoken) return util.toast('请输入accesstoken')
                 this.status = true
                 util.post('/api/v1/accesstoken', this.form, (res) => {
 

@@ -205,7 +205,7 @@
     export default {
         mixins: [pullList],
         methods: {
-            _pullList(){
+            _pullList() {
                 var { page, $route } = this
                 var { tab = 'all' } = $route.query
                 return {

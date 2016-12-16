@@ -1,4 +1,7 @@
 <style lang="less" scoped>
+    .content {
+        bottom: 0
+    }
     .about {
         padding: 10px;
         line-height: 22px;
@@ -15,7 +18,7 @@
                 <i class="iconfont icon-back"></i>
             </div>
         </v-header>
-        <v-content style="bottom: 0">
+        <v-content class="content">
             <div class="about">
                 <dl>
                     <dt>前言</dt>
@@ -50,5 +53,5 @@
     </div>
 </template>
 <script>
-    
+
 </script>
