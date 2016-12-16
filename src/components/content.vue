@@ -17,5 +17,5 @@
     </div>
 </template>
 <script>
-        
+
 </script>

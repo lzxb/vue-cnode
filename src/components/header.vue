@@ -31,7 +31,7 @@
         <slot name="right">
             <div class="item" flex="main:center cross:center"></div>
         </slot>
-    </header>Ï
+    </header>
 </template>
 <script>
     export default {

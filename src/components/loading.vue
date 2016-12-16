@@ -49,7 +49,7 @@
             loading: { // 是否在请求中
                 type: Boolean,
                 default: false
-            } 
+            }
         },
         data() {
             return {
@@ -58,7 +58,7 @@
         },
         mounted() {
             this.timer = setInterval(() => {
-                if(isSeeing(this.$el) && !this.state) {
+                if (isSeeing(this.$el) && !this.state) {
                     this.state = true
                     this.$emit('seeing')
                 }

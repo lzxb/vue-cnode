@@ -73,7 +73,7 @@
     import { mapState } from 'vuex'
 
     export default {
-        computed: mapState({ user: (state) => state.user}),
+        mapState({ user: (state) => state.user }),
         data() {
             return {
                 count: 0,
@@ -106,7 +106,7 @@
         },
         methods: {
             getCount() {
-                if(!this.user.id) return
+                if (!this.user.id) return
                 util.get('/api/v1/message/count', {}, (res) => this.count = res.data)
             }
         }
