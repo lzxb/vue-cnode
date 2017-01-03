@@ -114,12 +114,13 @@
         methods: {
             getList() {
                 var { accesstoken } = this.user
-                if(!accesstoken) return false
-                util.get('/api/v1/messages', { mdrender: true, accesstoken }, ({ data }) => {
+                if (!accesstoken) return false
+                util.get('/api/v1/messages', { mdrender: true }, ({ data }) => {
                     var { hasnot_read_messages, has_read_messages } = data
                     Array.prototype.push.apply(hasnot_read_messages, has_read_messages)
                     this.list = hasnot_read_messages
                 })
+                util.post('/api/v1/message/mark_all') //标记全部为已读
             }
         }
     }

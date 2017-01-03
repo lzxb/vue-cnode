@@ -37,6 +37,7 @@ github：[https://github.com/lzxb/vue-cnode](https://github.com/lzxb/vue-cnode)
 - [x] 主题详情，回复，点赞
 - [x] 消息列表
 - [x] 消息提醒
+- [x] 消息标记为已读
 - [x] 个人主页
 - [x] 用户信息
 - [x] 登录
