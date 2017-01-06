@@ -8,7 +8,7 @@ const store = new RouterStore()
 /**
  * 初始化
  */
-const init = function($route) {
+const init = function ($route) {
     if (typeof this.$options.routeData != 'function') {
         throw '必须是以方法返回对象'
     }
@@ -22,7 +22,7 @@ const init = function($route) {
 /**
  * 保存数据
  */
-const saveData = function() {
+const saveData = function () {
     var data = this.$options.routeData()
     var newData = {}
     Object.keys(data).forEach((k) => newData[k] = this.$data[k])

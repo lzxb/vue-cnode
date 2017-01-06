@@ -7,7 +7,7 @@
     import { mapActions } from 'vuex'
     import { USER_SIGNOUT } from 'store/user'
     import util from 'util'
-    
+
     export default {
         mounted() {
             this.USER_SIGNOUT()

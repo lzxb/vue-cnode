@@ -69,8 +69,11 @@
 <script>
     import util from 'util'
     import routeData from 'route-data'
+    import { mapState } from 'vuex'
+
     export default {
         mixins: [routeData],
+        computed: mapState({ user: (state) => state.user }),
         routeData() {
             return {
                 form: {
@@ -83,18 +86,20 @@
         },
         methods: {
             submit() {
+                if (!this.user.id) return this.$router.push({ path: '/login' })
                 var { form } = this
 
-                if(!form.title) {
+                if (!form.title) {
                     return util.toast('标题不能为空')
-                } else if(!form.tab) {
+                } else if (!form.tab) {
                     return util.toast('选项不能为空')
-                } else if(!form.content) {
+                } else if (!form.content) {
                     return util.toast('内容不能为空')
                 }
 
                 util.post('/api/v1/topics', this.form, ({ success, topic_id, error_msg }) => {
-                    if(success) {
+                    if (success) {
+                        Object.assign(this.$data, this.$options.routeData())
                         this.$router.push({ path: `/topic/${topic_id}` })
                     } else {
                         util.toast(error_msg)
