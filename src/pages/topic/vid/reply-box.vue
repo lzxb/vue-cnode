@@ -76,7 +76,10 @@
                 if (reply_id) {
                     content = `[@${loginname}](/user/${loginname}) ${content}`
                 }
-                var text = content += '\n\r<br>来自<a href="https://lzxb.github.io/vue-cnode/" target="_blank">vue-cnode手机版</a>';
+                var text = content += `
+
+
+source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`;
                 util.post(`/api/v1/topic/${vid}/replies`, {reply_id, content}, ({ success, error_msg }) => {
                     this.btnname = '回复'
                     if(success) {
