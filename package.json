@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "cross-env": "node node_modules/cross-env/bin/cross-env",
     "dev": "node server",
-    "dist": "cross-env NODE_ENV=production webpack -p"
+    "dist": "npm run cross-env NODE_ENV=production webpack -p"
   },
   "repository": {
     "type": "git",
