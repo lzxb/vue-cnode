@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const extract = new ExtractTextPlugin('css/[name].css')
+const extract = new ExtractTextPlugin('css/[name].[hash].css')
 const autoprefixer = require('autoprefixer')({ browsers: ['iOS >= 7', 'Android >= 4.1'] })
 const IS_ENV = process.env.NODE_ENV == 'production'
 const plugins = []
@@ -28,7 +28,7 @@ module.exports = {
     main: './src/main.js'
   },
   output: {
-    filename: 'js/[name].js',
+    filename: 'js/[name].[hash].js',
     path: path.resolve(__dirname, `${configs.dest}static`),
     publicPath: configs.publicPath
   },
@@ -91,7 +91,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'iconfont/[name].[ext]'
+              name: 'iconfont/[name].[hash].[ext]'
             }
           }
         ]
@@ -103,7 +103,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 2000,
-              name: 'images/[name].[ext]'
+              name: 'images/[name].[hash].[ext]'
             }
           }
         ]
@@ -115,6 +115,7 @@ module.exports = {
       template: path.resolve(__dirname, 'src/template/index.html'),
       filename: '../index.html',
       title: configs.title,
+      hash: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
