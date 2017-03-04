@@ -3,7 +3,7 @@ import stores from 'stores'
 import configs from 'configs'
 
 ajax.beforeEach((res, next) => {
-  res.url = configs.target + res.url
+  res.url = configs.target + 'api/v1/' + res.url
   var { accesstoken } = stores.state.user
   if (accesstoken) {
     res.data.accesstoken = accesstoken

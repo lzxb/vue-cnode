@@ -71,7 +71,7 @@
         if (this.status) return
         if (!this.form.accesstoken) return util.toast('请输入accesstoken')
         this.status = true
-        util.post('/api/v1/accesstoken', this.form, (res) => {
+        util.post('accesstoken', this.form, (res) => {
           if (is.object(res)) {
             if (res.success) {
               util.toast('登录成功')

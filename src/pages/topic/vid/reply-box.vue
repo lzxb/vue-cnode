@@ -80,7 +80,7 @@
 
 
 source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`
-        util.post(`/api/v1/topic/${vid}/replies`, { replyId, content }, ({ success, error_msg }) => {
+        util.post(`topic/${vid}/replies`, { replyId, content }, ({ success, error_msg }) => {
           this.btnname = '回复'
           if (success) {
             this.content = ''

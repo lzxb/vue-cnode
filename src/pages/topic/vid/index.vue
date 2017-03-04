@@ -218,7 +218,7 @@
     methods: {
       getData () {
         var { vid } = this.$route.params
-        util.get(`/api/v1/topic/${vid}`, {}, ({ data }) => {
+        util.get(`topic/${vid}`, {}, ({ data }) => {
           if (data && data.id) {
             data.replies.forEach((item) => (item.comment = false))
             Object.assign(this.$data, data)
@@ -238,7 +238,7 @@
         } else {
           ups.push(this.user.id)
         }
-        util.post(`/api/v1/reply/${id}/ups`)
+        util.post(`reply/${id}/ups`)
       },
       commentShow (item) { // 显示隐藏回复框
         if (!this.user.accesstoken) return this.$router.push('/login')

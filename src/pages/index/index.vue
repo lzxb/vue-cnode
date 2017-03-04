@@ -210,7 +210,7 @@
         var { page, $route } = this
         var { tab = 'all' } = $route.query
         return {
-          url: '/api/v1/topics',
+          url: 'topics',
           data: { page, tab }
         }
       }

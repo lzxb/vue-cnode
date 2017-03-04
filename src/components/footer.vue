@@ -104,7 +104,7 @@
     methods: {
       getCount () {
         if (!this.user.id) return
-        util.get('/api/v1/message/count', {}, (res) => (this.count = res.data))
+        util.get('message/count', {}, (res) => (this.count = res.data))
       }
     }
   }

@@ -114,11 +114,11 @@
       getList () {
         var { accesstoken } = this.user
         if (!accesstoken) return false
-        util.get('/api/v1/messages', { mdrender: true }, ({ data }) => {
+        util.get('messages', { mdrender: true }, ({ data }) => {
           Array.prototype.push.apply(data.hasnot_read_messages, data.has_read_messages)
           this.list = data.hasnot_read_messages
         })
-        util.post('/api/v1/message/mark_all') // 标记全部为已读
+        util.post('message/mark_all') // 标记全部为已读
       }
     }
   }

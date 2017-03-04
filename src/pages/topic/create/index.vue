@@ -101,7 +101,7 @@
           return util.toast('内容不能为空')
         }
 
-        util.post('/api/v1/topics', this.form, ({ success, topic_id: topicId, error_msg }) => {
+        util.post('topics', this.form, ({ success, topic_id: topicId, error_msg }) => {
           if (success) {
             Object.assign(this.$data, this.$options.routeData())
             this.$router.push({ path: `/topic/${topicId}` })

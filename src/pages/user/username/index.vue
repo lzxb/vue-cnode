@@ -121,7 +121,7 @@
     methods: {
       getData () {
         var { username = '' } = this.$route.params
-        util.get(`/api/v1/user/${username}`, {}, ({ data }) => {
+        util.get(`user/${username}`, {}, ({ data }) => {
           if (is.object(data) && data.loginname) this.data = data
         })
       }
