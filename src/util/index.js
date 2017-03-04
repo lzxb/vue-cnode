@@ -1,9 +1,9 @@
 import ajax from './ajax'
-import store from '../store'
+import stores from 'stores'
 
 ajax.beforeEach((res, next) => {
   res.url = 'https://cnodejs.org' + res.url
-  var { accesstoken } = store.state.user
+  var { accesstoken } = stores.state.user
   if (accesstoken) {
     res.data.accesstoken = accesstoken
   }

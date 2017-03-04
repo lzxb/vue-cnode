@@ -10,6 +10,9 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
   stats: 'normal'
 })
 
+app.use(require('connect-history-api-fallback')({
+  index: '/vue-cnode/index.html'
+}))
 app.use(devMiddleware)
 
 app.listen(3000, (err) => {

@@ -56,22 +56,19 @@
 <template>
   <footer class="footer">
     <ul flex="box:mean">
-      <template v-for="item in list">
-        <li :class="{ active: item.path == $route.path }">
-          <router-link :to="item.path">
-            <i class="iconfont" :class="[ item.icon ]"></i>
-            <em>{{ item.title }}</em>
-            <div class="count" v-if="item.path == '/my/messages' && count > 0">{{ count }}</div>
-          </router-link>
-        </li>
-      </template>
+      <li :class="{ active: item.path == $route.path }"  v-for="item in list">
+        <router-link :to="item.path">
+          <i class="iconfont" :class="[ item.icon ]"></i>
+          <em>{{ item.title }}</em>
+          <div class="count" v-if="item.path == '/my/messages' && count > 0">{{ count }}</div>
+        </router-link>
+      </li>
     </ul>
   </footer>
 </template>
 <script>
   import util from 'util'
   import { mapState } from 'vuex'
-
   export default {
     computed: mapState({ user: (state) => state.user }),
     data () {
@@ -102,14 +99,13 @@
       }
     },
     created () {
+      console.log(this.$store)
       this.getCount()
     },
     methods: {
       getCount () {
         if (!this.user.id) return
-        util.get('/api/v1/message/count', {}, (res) => {
-          this.count = res.data
-        })
+        util.get('/api/v1/message/count', {}, (res) => (this.count = res.data))
       }
     }
   }

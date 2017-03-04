@@ -54,7 +54,7 @@
   import util from 'util'
   import is from 'is'
   import { mapActions } from 'vuex'
-  import { USER_SIGNIN } from 'store/user'
+  import { USER_SIGNIN } from 'stores/user'
 
   export default {
     data () {
