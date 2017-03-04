@@ -1,3 +1,3 @@
 export default {
-    target: 'https://cnodejs.org'
+  target: 'https://cnodejs.org'
 }

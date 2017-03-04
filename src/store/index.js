@@ -5,8 +5,8 @@ import user from './user'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    strict: true, //使用严格模式
-    modules: {
-        user
-    }
+  strict: process.env.NODE_ENV !== 'production', // 使用严格模式
+  modules: {
+    user
+  }
 })

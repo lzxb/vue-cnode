@@ -1,5 +1,5 @@
-export * from './scroll-record'
-import routeData from './data'
+import scrollRecord from './scroll-record'
+import data from './data'
 
-
-export default routeData
+export { scrollRecord }
+export default data
