@@ -1,8 +1,26 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const extract = new ExtractTextPlugin('css/[name].css')
+const autoprefixer = require('autoprefixer')({ browsers: ['iOS >= 7', 'Android >= 4.1'] })
+const IS_ENV = process.env.NODE_ENV == 'production'
+
+const plugins = []
+if (IS_ENV) {
+  plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production')
+    }
+  }))
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    },
+    sourceMap: true
+  }))
+}
 
 module.exports = {
   target: 'web',
@@ -36,11 +54,7 @@ module.exports = {
                   fallback: 'vue-style-loader'
                 })
               },
-              postcss: [
-                require('autoprefixer')({
-                  browsers: ['iOS >= 7', 'Android >= 4.1']
-                })
-              ]
+              postcss: [autoprefixer]
             }
           },
           'eslint-loader'
@@ -49,18 +63,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: extract.extract([
-          // 'style-loader', 
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
-              plugins() {
-                return [
-                  require('autoprefixer')({
-                    browsers: ['iOS >= 7', 'Android >= 4.1']
-                  })
-                ]
-              }
+              plugins: [autoprefixer]
             }
           }
         ])
@@ -68,18 +75,11 @@ module.exports = {
       {
         test: /\.less$/,
         use: extract.extract([
-          // 'style-loader', 
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
-              plugins() {
-                return [
-                  require('autoprefixer')({
-                    browsers: ['iOS >= 7', 'Android >= 4.1']
-                  })
-                ]
-              }
+              plugins: [autoprefixer]
             }
           },
           'less-loader'
@@ -103,9 +103,16 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src/template/index.html') }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/template/index.html'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    }),
     extract
-  ],
+  ].concat(plugins),
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
@@ -118,5 +125,5 @@ module.exports = {
     },
     extensions: ['.js', '.vue', '.json']
   },
-  devtool: '#cheap-module-eval-source-map'
+  devtool: IS_ENV ? false : '#cheap-module-eval-source-map'
 }
