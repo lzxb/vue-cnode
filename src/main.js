@@ -1,3 +1,10 @@
+import 'normalize.css'
+import 'flex.css'
+import './iconfont/iconfont.css'
+import 'github-markdown-css'
+import './css/common.css'
+import './less/common.less'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -6,12 +13,7 @@ import stores from './stores/'
 import * as filters from './filters/'
 import { scrollRecord } from 'route-data'
 import components from './components/' // 加载公共组件
-import 'normalize.css'
-import 'flex.css'
-import './iconfont/iconfont.css'
-import 'github-markdown-css'
-import './css/common.css'
-import './less/common.less'
+import configs from 'configs'
 
 Object.keys(components).forEach((key) => {
   var name = key.replace(/(\w)/, (v) => v.toUpperCase()) // 首字母大写
@@ -24,7 +26,7 @@ Vue.directive('scroll-record', scrollRecord)
 const router = new VueRouter({
   routes,
   mode: 'history',
-  base: '/vue-cnode/'
+  base: configs.base
 })
 router.beforeEach(({ meta, path }, from, next) => {
   const { auth = true } = meta
