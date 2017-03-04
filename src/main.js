@@ -12,6 +12,7 @@ import './iconfont/iconfont.css'
 import 'github-markdown-css'
 import './css/common.css'
 import './less/common.less'
+
 Object.keys(components).forEach((key) => {
   var name = key.replace(/(\w)/, (v) => v.toUpperCase()) // 首字母大写
   Vue.component(`v${name}`, components[key])

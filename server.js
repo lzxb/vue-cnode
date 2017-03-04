@@ -1,3 +1,4 @@
+const configs = require('./configs/')
 const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.config')
@@ -7,11 +8,11 @@ const compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  stats: 'normal'
+  stats: 'minimal'
 })
 
 app.use(require('connect-history-api-fallback')({
-  index: '/vue-cnode/index.html'
+  index: `${configs.publicPath}../index.html`
 }))
 app.use(devMiddleware)
 

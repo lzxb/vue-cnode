@@ -1,4 +1,5 @@
 const path = require('path')
+const configs = require('./configs/')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -6,7 +7,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const extract = new ExtractTextPlugin('css/[name].css')
 const autoprefixer = require('autoprefixer')({ browsers: ['iOS >= 7', 'Android >= 4.1'] })
 const IS_ENV = process.env.NODE_ENV == 'production'
-
 const plugins = []
 if (IS_ENV) {
   plugins.push(new webpack.DefinePlugin({
@@ -29,8 +29,8 @@ module.exports = {
   },
   output: {
     filename: 'js/[name].js',
-    path: path.resolve(__dirname, 'dist/js'),
-    publicPath: '/vue-cnode/'
+    path: path.resolve(__dirname, `${configs.dest}static`),
+    publicPath: configs.publicPath
   },
   module: {
     rules: [
@@ -86,16 +86,24 @@ module.exports = {
         ])
       },
       {
-        test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
-        use: ['file-loader']
+        test: /\.(eot|woff|svg|ttf|woff2|)(\?|$)/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'iconfont/[name].[ext]'
+            }
+          }
+        ]
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 2000
+              limit: 2000,
+              name: 'images/[name].[ext]'
             }
           }
         ]
@@ -105,6 +113,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/template/index.html'),
+      filename: '../index.html',
+      title: configs.title,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -116,12 +126,12 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'config': path.resolve(__dirname, 'src/config/config.js'), //程序的一些基本配置
-      'stores': path.resolve(__dirname, 'src/stores/'), //常用工具方法
-      'util': path.resolve(__dirname, 'src/util/index.js'), //常用工具方法
-      'is-seeing': path.resolve(__dirname, 'src/util/is-seeing.js'),
-      'pull-list': path.resolve(__dirname, 'src/mixins/pull-list.js'), //拉取列表
-      'route-data': path.resolve(__dirname, 'src/libs/route-data/index.js') //页面数据缓存
+      'configs$': path.resolve(__dirname, 'configs/base.js'), //程序的一些基本配置
+      'util$': path.resolve(__dirname, 'src/util/index.js'), //常用工具方法
+      'is-seeing$': path.resolve(__dirname, 'src/util/is-seeing.js'),
+      'pull-list$': path.resolve(__dirname, 'src/mixins/pull-list.js'), //拉取列表
+      'route-data$': path.resolve(__dirname, 'src/libs/route-data/index.js'), //页面数据缓存
+      'stores': path.resolve(__dirname, 'src/stores/') //常用工具方法
     },
     extensions: ['.js', '.vue', '.json']
   },

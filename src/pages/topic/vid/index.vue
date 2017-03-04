@@ -218,8 +218,8 @@
     methods: {
       getData () {
         var { vid } = this.$route.params
-        util.get(`/api/v1/topic/${vid}`, {}, ({ data, success }) => {
-          if (success) {
+        util.get(`/api/v1/topic/${vid}`, {}, ({ data }) => {
+          if (data && data.id) {
             data.replies.forEach((item) => (item.comment = false))
             Object.assign(this.$data, data)
           } else {
