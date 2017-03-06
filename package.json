@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "cross-env": "node node_modules/cross-env/bin/cross-env",
+    "cross-env": "node_modules/.bin/cross-env",
     "dev": "node server",
     "dist": "npm run cross-env NODE_ENV=production webpack -p"
   },
@@ -50,6 +50,7 @@
     "webpack-dev-middleware": "^1.10.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "flex.css": "^1.1.6",
     "github-markdown-css": "^2.4.1",
     "is": "^3.2.1",
