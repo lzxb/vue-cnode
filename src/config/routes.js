@@ -33,7 +33,7 @@ export default [
       {
         path: '/user/:username', // 查看用户信息
         meta: { auth: false },
-        component: resolve => UserUsername
+        component: UserUsername
       },
       {
         path: '/my/home/', // 我的个人中心
