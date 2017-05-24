@@ -1,3 +1,4 @@
+**强烈推荐**：[vuet是一个跨页面、跨组件的状态管理插件](https://github.com/medevicex/vuet)
 
 ### 前言
 
