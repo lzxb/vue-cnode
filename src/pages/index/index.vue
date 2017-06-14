@@ -19,7 +19,7 @@
         </li>
       </ul>
     </nav>
-    <v-content v-route-scroll="{ path: 'topic-list', name: 'list' }">
+    <v-content v-route-scroll="{ path: 'topic-list', name: 'content' }">
       <ul class="list">
         <li v-for="item in list.data" key="item.id">
           <router-link :to="'/topic/' + item.id">

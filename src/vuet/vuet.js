@@ -78,6 +78,39 @@ export default new Vuet({
           }
         }
       }
+    },
+    user: {
+      detail: {
+        data () {
+          return {
+            data: {
+              loginname: null,
+              avatar_url: null,
+              githubUsername: null,
+              create_at: null,
+              score: 0,
+              recent_topics: [],
+              recent_replies: []
+            },
+            existence: true,
+            loading: true,
+            tabIndex: 0
+          }
+        },
+        async fetch ({ route }) {
+          const { data } = await fetch(`${API}/user/${route.params.username}`).then(response => response.json())
+          if (data) {
+            return {
+              data,
+              loading: false
+            }
+          }
+          return {
+            existence: false,
+            loading: false
+          }
+        }
+      }
     }
   }
 })

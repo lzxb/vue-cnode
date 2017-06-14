@@ -5,7 +5,7 @@
         <i class="iconfont icon-back"></i>
       </div>
     </v-header>
-    <v-content style="bottom: 0;" v-scroll-record>
+    <v-content style="bottom: 0;" v-route-scroll="{ path: 'user-detail', name: 'content' }">
       <div class="user" flex="dir:top cross:center">
         <div class="user-bg">
           <img src="./headimg-bg.jpg" alt="">
@@ -22,45 +22,30 @@
         </div>
       </div>
       <ul class="tab-nav" flex="box:mean">
-        <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">回复</li>
-        <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">主题</li>
+        <li :class="{on: detail.tabIndex == 0}" @click="detail.tabIndex = 0">回复</li>
+        <li :class="{on: detail.tabIndex == 1}" @click="detail.tabIndex = 1">主题</li>
       </ul>
-      <list v-show="tabIndex == 0" :list="data.recent_replies"></list>
-      <list v-show="tabIndex == 1" :list="data.recent_topics"></list>
+      <list v-show="detail.tabIndex == 0" :list="data.recent_replies"></list>
+      <list v-show="detail.tabIndex == 1" :list="data.recent_topics"></list>
     </v-content>
   </div>
 </template>
 <script>
-  import is from 'is'
-  import util from 'util'
-  import routeData from 'route-data'
   import list from './list'
+  import { mapModules, mapRules } from 'vuet'
 
   export default {
+    mixins: [
+      mapModules({ detail: 'user-detail' }),
+      mapRules({ route: 'user-detail' })
+    ],
     components: { list },
-    mixins: [routeData],
-    routeData () {
-      return {
-        tabIndex: 0,
-        data: {}
-      }
-    },
-    created () {
-      this.getData()
-    },
-    watch: {
-      $route: 'getData'
-    },
-    methods: {
-      getData () {
-        var { username = '' } = this.$route.params
-        util.get(`user/${username}`, {}, ({ data }) => {
-          if (is.object(data) && data.loginname) this.data = data
-        })
+    computed: {
+      data () {
+        return this.detail.data
       }
     }
   }
-
 </script>
 <style lang="less" scoped>
   @import "../../../less/config";

@@ -5,7 +5,7 @@
         <i class="iconfont icon-back"></i>
       </div>
     </v-header>
-    <v-content style="bottom: 0;" v-scroll-record>
+    <v-content style="bottom: 0;" v-route-scroll="{ path: 'topic-detail', name: 'content' }">
       <v-loading v-if="detail.loading"></v-loading>
       <v-data-null v-if="!detail.existence" msg="话题不存在"></v-data-null>
       <template v-if="!detail.loading && detail.existence">
