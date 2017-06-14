@@ -1,92 +1,3 @@
-<style lang="less" scoped>
-  @import '../../../less/config';
-  .datas {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    .tit {
-      position: relative;
-      padding: 10px 0;
-      margin: 0;
-      line-height: 24px;
-      font-weight: bold;
-      font-size: 22px;
-      text-align: center;
-      color: @text;
-    }
-    .bottom {
-      .item {
-        padding: 0 5px;
-        color: #666;
-        .iconfont {
-          padding-right: 3px;
-        }
-      }
-    }
-  }
-
-
-  .re-list {
-    li {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-    }
-    .headimg {
-      padding-right: 10px;
-      .pic {
-        overflow: hidden;
-        display: block;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 1px solid #ddd;
-        background-color: #eee;
-        background-position: center center;
-        background-size: cover;
-      }
-    }
-    time {
-      padding-left: 10px;
-      font-size: 12px;
-    }
-    .num {
-      font-size: 13px;
-    }
-    .bottom {
-      .icon {
-        position: relative;
-        padding: 5px 10px;
-        &.fabulous {
-          color: @main;
-        }
-        em {
-          font-size: 13px;
-          font-style: normal;
-        }
-      }
-    }
-    .markdown-body {
-      padding: 10px 0;
-    }
-    .replies-count {
-      border-left: 5px solid @main;
-      em {
-        font-style: normal;
-        color: @main;
-      }
-    }
-  }
-
-
-  .reply {
-    padding: 50px 10px;
-  }
-
-
-  .tip-login {
-    padding: 100px;
-    text-align: center;
-  }
-</style>
 <template>
   <div>
     <v-header title="主题">
@@ -250,3 +161,92 @@
   }
 
 </script>
+<style lang="less" scoped>
+  @import '../../../less/config';
+  .datas {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    .tit {
+      position: relative;
+      padding: 10px 0;
+      margin: 0;
+      line-height: 24px;
+      font-weight: bold;
+      font-size: 22px;
+      text-align: center;
+      color: @text;
+    }
+    .bottom {
+      .item {
+        padding: 0 5px;
+        color: #666;
+        .iconfont {
+          padding-right: 3px;
+        }
+      }
+    }
+  }
+
+
+  .re-list {
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .headimg {
+      padding-right: 10px;
+      .pic {
+        overflow: hidden;
+        display: block;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background-color: #eee;
+        background-position: center center;
+        background-size: cover;
+      }
+    }
+    time {
+      padding-left: 10px;
+      font-size: 12px;
+    }
+    .num {
+      font-size: 13px;
+    }
+    .bottom {
+      .icon {
+        position: relative;
+        padding: 5px 10px;
+        &.fabulous {
+          color: @main;
+        }
+        em {
+          font-size: 13px;
+          font-style: normal;
+        }
+      }
+    }
+    .markdown-body {
+      padding: 10px 0;
+    }
+    .replies-count {
+      border-left: 5px solid @main;
+      em {
+        font-style: normal;
+        color: @main;
+      }
+    }
+  }
+
+
+  .reply {
+    padding: 50px 10px;
+  }
+
+
+  .tip-login {
+    padding: 100px;
+    text-align: center;
+  }
+</style>

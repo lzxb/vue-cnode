@@ -1,3 +1,36 @@
+<template>
+  <div class="loading-box">
+    <div :class="!done ? 'loading-start' : 'msg'">
+      {{ done ? '没有了' : '' }}
+    </div>
+  </div>
+</template>
+<script>
+  import isSeeing from 'is-seeing'
+  export default {
+    props: {
+      done: { // 是否加载完成
+        type: Boolean,
+        default: false
+      },
+      loading: { // 是否在请求中
+        type: Boolean,
+        default: false
+      }
+    },
+    mounted () {
+      this.timer = setInterval(() => {
+        if (isSeeing(this.$el) && !this.loading) {
+          this.$emit('seeing')
+        }
+      }, 300)
+    },
+    beforeDestroy () {
+      clearInterval(this.timer)
+    }
+  }
+
+</script>
 <style lang="less" scoped>
   @import "../less/config";
   .loading-box {
@@ -32,36 +65,3 @@
     }
   }
 </style>
-<template>
-  <div class="loading-box">
-    <div :class="!done ? 'loading-start' : 'msg'">
-      {{ done ? '没有了' : '' }}
-    </div>
-  </div>
-</template>
-<script>
-  import isSeeing from 'is-seeing'
-  export default {
-    props: {
-      done: { // 是否加载完成
-        type: Boolean,
-        default: false
-      },
-      loading: { // 是否在请求中
-        type: Boolean,
-        default: false
-      }
-    },
-    mounted () {
-      this.timer = setInterval(() => {
-        if (isSeeing(this.$el) && !this.loading) {
-          this.$emit('seeing')
-        }
-      }, 300)
-    },
-    beforeDestroy () {
-      clearInterval(this.timer)
-    }
-  }
-
-</script>

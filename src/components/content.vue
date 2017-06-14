@@ -1,3 +1,11 @@
+<template>
+    <div class="content">
+        <slot></slot>
+    </div>
+</template>
+<script>
+
+</script>
 <style lang="less" scoped>
   @import "../less/config";
   .content {
@@ -11,11 +19,3 @@
     -webkit-overflow-scrolling : touch; 
   }
 </style>
-<template>
-    <div class="content">
-        <slot></slot>
-    </div>
-</template>
-<script>
-
-</script>

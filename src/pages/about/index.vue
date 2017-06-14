@@ -1,17 +1,3 @@
-<style lang="less" scoped>
-  .content {
-    bottom: 0
-  }
-
-  .about {
-    padding: 10px;
-    line-height: 22px;
-    dt {
-      line-height: 28px;
-      font-weight: bold;
-    }
-  }
-</style>
 <template>
   <div>
     <v-header title="关于">
@@ -56,3 +42,17 @@
 <script>
 
 </script>
+<style lang="less" scoped>
+  .content {
+    bottom: 0
+  }
+
+  .about {
+    padding: 10px;
+    line-height: 22px;
+    dt {
+      line-height: 28px;
+      font-weight: bold;
+    }
+  }
+</style>

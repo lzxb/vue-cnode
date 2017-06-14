@@ -3,6 +3,8 @@ import Vuet from 'vuet'
 
 Vue.use(Vuet)
 
+const API = 'https://cnodejs.org/api/v1'
+
 export default new Vuet({
   pathJoin: '-',
   modules: {
@@ -25,7 +27,7 @@ export default new Vuet({
           }
           // params.routeWatch 没有参数，则是上拉加载触发的调用
           const { tab = '' } = route.query
-          const res = await fetch(`https://cnodejs.org/api/v1/topics/?mdrender=false&limit=20&page=${state.page}&tab=${tab}`).then(response => response.json())
+          const res = await fetch(`${API}/topics/?mdrender=false&limit=20&page=${state.page}&tab=${tab}`).then(response => response.json())
           const data = params.routeWatch ? res.data : [...state.data, ...res.data]
           return {
             data,

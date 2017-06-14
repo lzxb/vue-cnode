@@ -58,7 +58,7 @@
           </router-link>
         </li>
       </ul>
-      <v-loading :done="list.done" :loading="list.loading" @seeing="$vuet.fetch('topic-list', { pull: true })"></v-loading>
+      <v-loading :done="list.done" :loading="list.loading" @seeing="$vuet.fetch('topic-list')"></v-loading>
     </v-content>
     <v-footer></v-footer>
   </div>

@@ -1,3 +1,35 @@
+<template>
+  <div>
+    <ul class="list" v-if="list.length">
+      <li flex="box:first" v-for="item in list" track-by="id">
+        <router-link class="head" :to="'/user/' + item.author.loginname">
+          <div class="pic">
+            <img :src="item.author.avatar_url" alt="">
+          </div>
+        </router-link>
+        <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
+          <div class="line" flex="box:last">
+            <div class="name">{{ item.author.loginname }}</div>
+            <time>{{ item.last_reply_at | formatDate }}</time>
+          </div>
+          <div class="con">{{ item.title }}</div>
+        </router-link>
+      </li>
+    </ul>
+    <div class="list-null" v-if="!list.length">没有记录</div>
+  </div>
+</template>
+<script>
+  export default {
+    props: {
+      list: {
+        type: Array,
+        default: () => []
+      }
+    }
+  }
+
+</script>
 <style lang="less" scoped>
   .list {
     overflow: hidden;
@@ -45,35 +77,3 @@
     text-align: center;
   }
 </style>
-<template>
-  <div>
-    <ul class="list" v-if="list.length">
-      <li flex="box:first" v-for="item in list" track-by="id">
-        <router-link class="head" :to="'/user/' + item.author.loginname">
-          <div class="pic">
-            <img :src="item.author.avatar_url" alt="">
-          </div>
-        </router-link>
-        <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
-          <div class="line" flex="box:last">
-            <div class="name">{{ item.author.loginname }}</div>
-            <time>{{ item.last_reply_at | formatDate }}</time>
-          </div>
-          <div class="con">{{ item.title }}</div>
-        </router-link>
-      </li>
-    </ul>
-    <div class="list-null" v-if="!list.length">没有记录</div>
-  </div>
-</template>
-<script>
-  export default {
-    props: {
-      list: {
-        type: Array,
-        default: () => []
-      }
-    }
-  }
-
-</script>

@@ -1,42 +1,3 @@
-<style lang="less" scoped>
-  @import '../../../less/config';
-  .reply-box {
-    .text {
-      padding: 5px 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #eee;
-      textarea {
-        box-sizing: border-box;
-        width: 100%;
-        line-height: 24px;
-        border: none;
-        font-size: 13px;
-        resize: none;
-        &:focus {
-          outline: none;
-        }
-      }
-    }
-    .btn {
-      padding: 5px 30px;
-      line-height: 24px;
-      border-radius: 5px;
-      border: 1px solid darken(@main, 3%);
-      font-size: 14px;
-      color: #fff;
-      background: @main;
-      &:focus {
-        outline: none;
-      }
-    }
-    .msg {
-      padding: 5px 10px;
-      line-height: 26px;
-      color: red;
-    }
-  }
-</style>
 <template>
   <div class="reply-box">
     <form @submit.prevent="submit">
@@ -96,3 +57,42 @@ source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`
   }
 
 </script>
+<style lang="less" scoped>
+  @import '../../../less/config';
+  .reply-box {
+    .text {
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #eee;
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        line-height: 24px;
+        border: none;
+        font-size: 13px;
+        resize: none;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .btn {
+      padding: 5px 30px;
+      line-height: 24px;
+      border-radius: 5px;
+      border: 1px solid darken(@main, 3%);
+      font-size: 14px;
+      color: #fff;
+      background: @main;
+      &:focus {
+        outline: none;
+      }
+    }
+    .msg {
+      padding: 5px 10px;
+      line-height: 26px;
+      color: red;
+    }
+  }
+</style>
