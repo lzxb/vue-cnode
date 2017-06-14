@@ -156,9 +156,9 @@
         </li>
       </ul>
     </nav>
-    <v-content v-scroll-record>
+    <v-content v-route-scroll="{ path: 'topic-list', name: 'list' }">
       <ul class="list">
-        <li v-for="item in list" key="item.id">
+        <li v-for="item in list.data" key="item.id">
           <router-link :to="'/topic/' + item.id">
             <div class="top" flex="box:first">
               <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
@@ -195,16 +195,21 @@
           </router-link>
         </li>
       </ul>
-      <v-loading :complete="complete" :loading="loading" @seeing="seeing"></v-loading>
+      <v-loading :done="list.done" :loading="list.loading" @seeing="$vuet.fetch('topic-list', { pull: true })"></v-loading>
     </v-content>
     <v-footer></v-footer>
   </div>
 </template>
 <script>
-  import pullList from 'pull-list'
+  import { mapModules, mapRules } from 'vuet'
+  // import pullList from 'pull-list'
 
   export default {
-    mixins: [pullList],
+    mixins: [
+      // pullList,
+      mapModules({ list: 'topic-list' }),
+      mapRules({ route: 'topic-list' })
+    ],
     methods: {
       _pullList () {
         var { page, $route } = this

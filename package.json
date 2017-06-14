@@ -51,12 +51,13 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "flex.css": "^1.1.6",
-    "github-markdown-css": "^2.4.1",
+    "flex.css": "^1.1.7",
+    "github-markdown-css": "^2.7.0",
     "is": "^3.2.1",
     "normalize.css": "^5.0.0",
-    "vue": "^2.2.1",
-    "vue-router": "^2.3.0",
+    "vue": "^2.3.4",
+    "vue-router": "^2.5.3",
+    "vuet": "^0.1.2",
     "vuex": "^2.2.1"
   }
 }

@@ -10,9 +10,10 @@ import VueRouter from 'vue-router'
 
 import routes from './config/routes'
 import stores from './stores/'
+import vuet from './vuet/'
 import * as filters from './filters/'
 import { scrollRecord } from 'route-data'
-import components from './components/' // 加载公共组件
+import components from './components/'
 import configs from 'configs'
 
 Object.keys(components).forEach((key) => {
@@ -38,4 +39,4 @@ router.beforeEach(({ meta, path }, from, next) => {
   next()
 })
 
-new Vue({ store: stores, router }).$mount('#app')
+new Vue({ store: stores, router, vuet }).$mount('#app')

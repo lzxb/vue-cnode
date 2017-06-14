@@ -34,8 +34,8 @@
 </style>
 <template>
   <div class="loading-box">
-    <div :class="!complete ? 'loading-start' : 'msg'">
-      {{ complete ? '没有了' : '' }}
+    <div :class="!done ? 'loading-start' : 'msg'">
+      {{ done ? '没有了' : '' }}
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@
   import isSeeing from 'is-seeing'
   export default {
     props: {
-      complete: { // 是否加载完成
+      done: { // 是否加载完成
         type: Boolean,
         default: false
       },
@@ -52,26 +52,15 @@
         default: false
       }
     },
-    data () {
-      return {
-        state: this.loading
-      }
-    },
     mounted () {
       this.timer = setInterval(() => {
-        if (isSeeing(this.$el) && !this.state) {
-          this.state = true
+        if (isSeeing(this.$el) && !this.loading) {
           this.$emit('seeing')
         }
       }, 300)
     },
     beforeDestroy () {
       clearInterval(this.timer)
-    },
-    watch: {
-      loading (to) {
-        this.state = to
-      }
     }
   }
 
