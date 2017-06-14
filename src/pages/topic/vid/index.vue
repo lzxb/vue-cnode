@@ -6,14 +6,14 @@
       </div>
     </v-header>
     <v-content style="bottom: 0;" v-scroll-record>
-      <v-loading v-if="!id && existence"></v-loading>
-      <v-data-null v-if="!existence" msg="话题不存在"></v-data-null>
-      <template v-if="id">
-        <div class="common-typeicon" flex v-if="top || good">
-          <div class="icon" v-if="good">
+      <v-loading v-if="detail.loading"></v-loading>
+      <v-data-null v-if="!detail.existence" msg="话题不存在"></v-data-null>
+      <template v-if="!detail.loading && detail.existence">
+        <div class="common-typeicon" flex v-if="data.top || data.good">
+          <div class="icon" v-if="data.good">
             <i class="iconfont icon-topic-good"></i>
           </div>
-          <div class="icon" v-if="top">
+          <div class="icon" v-if="data.top">
             <i class="iconfont icon-topic-top"></i>
           </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="bd">
               <div flex>
                 <router-link flex-box="0" :to="'/user/' + author.loginname">{{ author.loginname }}</router-link>
-                <time flex-box="1">{{ create_at | formatDate }}</time>
+                <time flex-box="1">{{ data.create_at | formatDate }}</time>
                 <div flex-box="0" class="num">#楼主</div>
               </div>
             </div>
@@ -36,19 +36,19 @@
           <!-- 主题信息 start -->
           <li>
             <div class="datas">
-              <div class="tit">{{ title }}</div>
+              <div class="tit">{{ data.title }}</div>
               <div class="bottom" flex="main:center">
                 <div class="item click" flex="main:center cross:center">
                   <i class="iconfont icon-click"></i>
-                  <div class="num">{{ visit_count }}</div>
+                  <div class="num">{{ data.visit_count }}</div>
                 </div>
                 <div class="item reply" flex="main:center cross:center">
                   <i class="iconfont icon-comment"></i>
-                  <div class="num">{{ reply_count }}</div>
+                  <div class="num">{{ data.reply_count }}</div>
                 </div>
               </div>
             </div>
-            <div class="markdown-body" v-html="content"></div>
+            <div class="markdown-body" v-html="data.content"></div>
           </li>
           <!-- 主题信息 end -->
           <li class="replies-count" v-if="replies.length">
@@ -78,13 +78,13 @@
                 </div>
               </div>
             </div>
-            <reply-box v-if="item.comment" :loginname="item.author.loginname" :replyId="item.id" @success="getData"></reply-box>
+            <reply-box v-if="detail.commentId === item.id" :loginname="item.author.loginname" :replyId="item.id" @success="$vuet.fetch('topic-detail')"></reply-box>
           </li>
           <!-- 主题评论 end -->
 
         </ul>
         <div class="reply" v-if="user.id">
-          <reply-box @success="getData"></reply-box>
+          <reply-box @success="$vuet.fetch('topic-detail')"></reply-box>
         </div>
         <div class="tip-login" v-if="!user.id">
           你还未登录，请先
@@ -97,47 +97,28 @@
 <script>
   import util from 'util'
   import { mapState } from 'vuex'
-  import routeData from 'route-data'
   import replyBox from './reply-box'
+  import { mapModules, mapRules } from 'vuet'
 
   export default {
-    mixins: [routeData],
+    mixins: [
+      mapModules({ detail: 'topic-detail' }),
+      mapRules({ route: 'topic-detail' })
+    ],
     components: { replyBox },
-    computed: mapState({ user: (state) => state.user }),
-    routeData () {
-      return {
-        existence: true,
-        id: '',
-        author_id: '',
-        tab: 'share',
-        content: '',
-        title: '',
-        last_reply_at: '',
-        good: false,
-        top: false,
-        reply_count: 0,
-        visit_count: 0,
-        create_at: '',
-        author: {},
-        replies: [],
-        is_collect: false
+    computed: {
+      ...mapState({ user: (state) => state.user }),
+      data () {
+        return this.detail.data
+      },
+      author () {
+        return this.detail.data.author
+      },
+      replies () {
+        return this.detail.data.replies
       }
     },
-    mounted () {
-      this.getData()
-    },
     methods: {
-      getData () {
-        var { vid } = this.$route.params
-        util.get(`topic/${vid}`, {}, ({ data }) => {
-          if (data && data.id) {
-            data.replies.forEach((item) => (item.comment = false))
-            Object.assign(this.$data, data)
-          } else {
-            this.existence = false
-          }
-        })
-      },
       testThing (ups) { // 验证是否点赞
         return ups.indexOf(this.user.id || '') > -1
       },
@@ -153,9 +134,7 @@
       },
       commentShow (item) { // 显示隐藏回复框
         if (!this.user.accesstoken) return this.$router.push('/login')
-        var { comment } = item
-        this.replies.forEach((item) => (item.comment = false))
-        item.comment = !comment
+        this.detail.commentId = this.detail.commentId === item.id ? null : item.id
       }
     }
   }

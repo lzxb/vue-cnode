@@ -11,6 +11,7 @@
 </template>
 <script>
   import util from 'util'
+
   export default {
     props: {
       replyId: { // 评论的评论id，如果没有则是对主题的评论

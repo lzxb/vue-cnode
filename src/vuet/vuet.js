@@ -36,6 +36,47 @@ export default new Vuet({
             done: res.data.length < 20
           }
         }
+      },
+      detail: {
+        data () {
+          return {
+            data: {
+              id: null,
+              author_id: null,
+              tab: null,
+              content: null,
+              title: null,
+              last_reply_at: null,
+              good: false,
+              top: false,
+              reply_count: 0,
+              visit_count: 0,
+              create_at: null,
+              author: {
+                loginname: null,
+                avatar_url: null
+              },
+              replies: [],
+              is_collect: false
+            },
+            existence: true,
+            loading: true,
+            commentId: null
+          }
+        },
+        async fetch ({ route }) {
+          const { data } = await fetch(`${API}/topic/${route.params.vid}`).then(response => response.json())
+          if (data) {
+            return {
+              data,
+              loading: false
+            }
+          }
+          return {
+            existence: false,
+            loading: false
+          }
+        }
       }
     }
   }
