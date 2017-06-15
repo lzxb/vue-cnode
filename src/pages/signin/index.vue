@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-  import util from 'util'
+  import utils from 'utils'
   import is from 'is'
   import { mapRules } from 'vuet'
 
@@ -37,22 +37,22 @@
     methods: {
       async submit () {
         if (this.status) return
-        if (!this.form.accesstoken) return util.toast('请输入accesstoken')
+        if (!this.form.accesstoken) return utils.toast('请输入accesstoken')
         this.status = true
         try {
           const res = await this.$self.login(this.form.accesstoken)
           if (is.object(res)) {
             if (res.success) {
-              util.toast('登录成功')
+              utils.toast('登录成功')
               this.$router.go(-1)
             } else {
-              util.toast(res.error_msg)
+              utils.toast(res.error_msg)
             }
           } else {
-            util.toast('登录失败')
+            utils.toast('登录失败')
           }
         } catch (e) {
-          util.toast('登录失败')
+          utils.toast('登录失败')
         }
         this.status = false
       }

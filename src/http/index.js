@@ -1,5 +1,7 @@
 const API = 'https://cnodejs.org/api/v1'
 
+let accesstoken = () => (localStorage.getItem('vue_cnode_accesstoken') || '')
+
 const filter = (str) => { // 特殊字符转义
   str += '' // 隐式转换
   str = str.replace(/%/g, '%25')
@@ -14,6 +16,7 @@ const filter = (str) => { // 特殊字符转义
 }
 const queryStr = (data) => {
   const query = []
+  data.accesstoken = accesstoken()
   Object.keys(data).forEach((k) => query.push(`${k}=${filter(data[k])}`))
   return query.join('&')
 }
@@ -30,9 +33,6 @@ export default {
   async post (url, data = {}) {
     const body = queryStr(data)
     const arr = [`${API}${url}`]
-    if (body) {
-      arr.push(body)
-    }
     return fetch(arr.join('?'), {
       body,
       method: 'POST',

@@ -12,7 +12,7 @@
   </footer>
 </template>
 <script>
-  import util from 'util'
+  import utils from 'utils'
   import { mapModules } from 'vuet'
 
   export default {
@@ -53,7 +53,7 @@
     methods: {
       getCount () {
         if (!this.user.id) return
-        util.get('message/count', {}, (res) => (this.count = res.data))
+        utils.get('message/count', {}, (res) => (this.count = res.data))
       }
     }
   }

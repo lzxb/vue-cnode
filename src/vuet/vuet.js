@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuet from 'vuet'
-import util from 'util'
+import utils from 'utils'
 import http from 'http'
 
 Vue.use(Vuet)
@@ -22,11 +22,11 @@ export default new Vuet({
         manuals: {
           async create ({ state }) {
             if (!state.title) {
-              return util.toast('标题不能为空')
+              return utils.toast('标题不能为空')
             } else if (!state.tab) {
-              return util.toast('选项不能为空')
+              return utils.toast('选项不能为空')
             } else if (!state.content) {
-              return util.toast('内容不能为空')
+              return utils.toast('内容不能为空')
             }
             const res = await http.post(`/topics`, {
               ...state,
@@ -35,7 +35,7 @@ export default new Vuet({
             if (res.success) {
               this.reset()
             } else {
-              util.toast(res.error_msg)
+              utils.toast(res.error_msg)
             }
             return res
           }
@@ -188,12 +188,9 @@ export default new Vuet({
           }
         },
         async fetch () {
-          const accesstoken = localStorage.getItem('vue_cnode_accesstoken')
-          if (!accesstoken) return
-          const { data } = await http.get(`/messages`, {
-            accesstoken,
-            mdrender: true
-          })
+          const user = this.getState('user-self')
+          if (!user.data.id) return
+          const { data } = await http.get(`/messages`, { mdrender: true })
           return {
             data
           }

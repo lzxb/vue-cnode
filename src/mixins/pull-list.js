@@ -1,5 +1,5 @@
 import is from 'is'
-import util from 'util'
+import utils from 'utils'
 import routeData from 'route-data'
 const { history, location } = window
 const getPageKey = () => {
@@ -53,7 +53,7 @@ export default {
       if (this.complete || this.loading) return
       this.loading = true
       var { url, data = {} } = this._pullList()
-      util.get(url, data, ({ data }) => {
+      utils.get(url, data, ({ data }) => {
         if (data.length > 0) {
           data.forEach((item) => this.list.push(item))
         } else {

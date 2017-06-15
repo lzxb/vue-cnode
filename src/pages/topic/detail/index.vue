@@ -71,14 +71,14 @@
                   <div class="icon" @click="commentShow(item, $index)">
                     <i class="iconfont icon-comment-topic"></i>
                   </div>
-                  <div class="icon" :class="{fabulous: testThing(item.ups)}" v-if="item.author.loginname !== user.loginname" @click="fabulousItem(item)">
+                  <div class="icon" :class="{ fabulous: testThing(item.ups) }" v-if="item.author.loginname !== user.data.loginname" @click="fabulousItem(item)">
                     <i class="iconfont icon-comment-fabulous"></i>
                     <em v-if="item.ups.length">{{ item.ups.length }}</em>
                   </div>
                 </div>
               </div>
             </div>
-            <reply-box v-if="detail.commentId === item.id" :loginname="item.author.loginname" :replyId="item.id" @success="$vuet.fetch('topic-detail')"></reply-box>
+            <reply-box v-if="detail.commentId === item.id" :loginname="item.author.loginname" :replyId="item.id"></reply-box>
           </li>
           <!-- 主题评论 end -->
         </ul>
@@ -94,7 +94,7 @@
   </div>
 </template>
 <script>
-  import util from 'util'
+  import http from 'http'
   import replyBox from './reply-box'
   import { mapModules, mapRules } from 'vuet'
 
@@ -120,17 +120,17 @@
         return ups.indexOf(this.user.data.id || '') > -1
       },
       fabulousItem ({ ups, id }) { // 点赞
-        if (!this.user.data.accesstoken) return this.$router.push('/login')
+        if (!this.user.data.id) return this.$router.push('/login')
         var index = ups.indexOf(this.user.data.id)
         if (index > -1) {
           ups.splice(index, 1)
         } else {
           ups.push(this.user.data.id)
         }
-        util.post(`reply/${id}/ups`)
+        http.post(`/reply/${id}/ups`)
       },
       commentShow (item) { // 显示隐藏回复框
-        if (!this.user.data.accesstoken) return this.$router.push('/login')
+        if (!this.user.data.id) return this.$router.push('/login')
         this.detail.commentId = this.detail.commentId === item.id ? null : item.id
       }
     }

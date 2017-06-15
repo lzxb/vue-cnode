@@ -92,7 +92,7 @@ github：[https://github.com/lzxb/vue-cnode](https://github.com/lzxb/vue-cnode)
 |       |-- user.js                  // 用户store
 |   |-- template                     // 各种html文件
 |       |-- index.html               // 程序入口html文件
-|   |-- util                         // 公共的js方法
+|   |-- utils                        // 公共的js方法
 |   |-- app.vue                      // 页面入口文件
 |   |-- main.js                      // 程序入口文件，加载各种公共组件
 |-- .babelrc                         // ES6语法编译配置

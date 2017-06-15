@@ -127,8 +127,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'util$': path.resolve(__dirname, 'src/util/index.js'), //常用工具方法
-      'is-seeing$': path.resolve(__dirname, 'src/util/is-seeing.js'),
+      'utils$': path.resolve(__dirname, 'src/utils/index.js'), //常用工具方法
+      'is-seeing$': path.resolve(__dirname, 'src/utils/is-seeing.js'),
       'http$': path.resolve(__dirname, 'src/http/index.js'),
     },
     extensions: ['.js', '.vue', '.json']

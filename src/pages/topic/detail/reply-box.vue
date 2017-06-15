@@ -10,9 +10,14 @@
   </div>
 </template>
 <script>
-  import util from 'util'
+  import utils from 'utils'
+  import http from 'http'
+  import { mapModules } from 'vuet'
 
   export default {
+    mixins: [
+      mapModules({ detail: 'topic-detail', user: 'user-self' })
+    ],
     props: {
       replyId: { // 评论的评论id，如果没有则是对主题的评论
         type: String,
@@ -30,8 +35,8 @@
       }
     },
     methods: {
-      submit () { // 提交
-        if (!this.content) return util.toast('请输入回复内容')
+      async submit () { // 提交
+        if (!this.content) return utils.toast('请输入回复内容')
         this.btnname = '回复中...'
         var { replyId, content, loginname } = this
         var { id } = this.$route.params
@@ -42,17 +47,21 @@
 
 
 source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`
-        util.post(`topic/${id}/replies`, { replyId, content }, ({ success, error_msg }) => {
+        try {
+          const { success, error_msg } = await http.post(`/topic/${id}/replies`, { replyId, content })
           this.btnname = '回复'
           if (success) {
             this.content = ''
             this.$emit('success')
+            this.detail.commentId = null
+            this.$vuet.fetch('topic-detail')
           } else {
-            util.toast(error_msg)
+            utils.toast(error_msg)
           }
-        }, () => {
+        } catch (e) {
+          console.dir(e)
           this.btnname = '回复失败'
-        })
+        }
       }
     }
   }
