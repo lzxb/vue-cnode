@@ -6,7 +6,7 @@
   "scripts": {
     "cross-env": "node_modules/.bin/cross-env",
     "dev": "node server",
-    "dist": "npm run cross-env NODE_ENV=production webpack -p"
+    "build": "npm run cross-env NODE_ENV=production webpack -p"
   },
   "repository": {
     "type": "git",
