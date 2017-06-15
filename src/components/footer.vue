@@ -1,11 +1,11 @@
 <template>
   <footer class="footer">
     <ul flex="box:mean">
-      <li :class="{ active: item.path == $route.path }"  v-for="item in list">
-        <router-link :to="item.path">
+      <li :class="{ active: item.name == $route.name }"  v-for="item in list">
+        <router-link :to="{ name: item.name }">
           <i class="iconfont" :class="[ item.icon ]"></i>
           <em>{{ item.title }}</em>
-          <div class="count" v-if="item.path == '/my/messages' && count > 0">{{ count }}</div>
+          <div class="count" v-if="item.name == 'self-messages' && count > 0">{{ count }}</div>
         </router-link>
       </li>
     </ul>
@@ -13,31 +13,35 @@
 </template>
 <script>
   import util from 'util'
-  import { mapState } from 'vuex'
+  import { mapModules } from 'vuet'
+
   export default {
-    computed: mapState({ user: (state) => state.user }),
+    mixins: [
+      mapModules({ user: 'user-self' })
+    ],
     data () {
       return {
         count: 0,
         list: [
           {
             title: '首页',
-            path: '/',
+            name: 'index',
             icon: 'icon-index'
           },
           {
             title: '发表',
-            path: '/topic/create',
+            name: 'topic-create',
             icon: 'icon-edit'
           },
           {
             title: '消息',
-            path: '/my/messages',
+            name: 'self-messages',
+
             icon: 'icon-msg'
           },
           {
             title: '我的',
-            path: '/my/home',
+            name: 'self-home',
             icon: 'icon-user'
           }
         ]

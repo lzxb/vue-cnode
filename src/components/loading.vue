@@ -7,6 +7,7 @@
 </template>
 <script>
   import isSeeing from 'is-seeing'
+
   export default {
     props: {
       done: { // 是否加载完成

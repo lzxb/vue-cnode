@@ -1,32 +1,4 @@
-import ajax from './ajax'
-import stores from 'stores'
-import configs from 'configs'
-
-ajax.beforeEach((res, next) => {
-  res.url = configs.target + 'api/v1/' + res.url
-  var { accesstoken } = stores.state.user
-  if (accesstoken) {
-    res.data.accesstoken = accesstoken
-  }
-
-  next()
-})
-
-ajax.afterEach((res, next) => {
-  if (res) {
-    next()
-  } else {
-    exports.default.toast('加载失败')
-  }
-})
-
 export default {
-  get (url, data = {}, success = () => { }, error = () => { }) {
-    ajax({ url, data, success, error, type: 'GET' })
-  },
-  post (url, data = {}, success = () => { }, error = () => { }) {
-    ajax({ url, data, success, error, type: 'POST' })
-  },
   /**
    * 消息消失框
    */

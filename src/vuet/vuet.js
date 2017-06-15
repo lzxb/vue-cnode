@@ -1,14 +1,46 @@
 import Vue from 'vue'
 import Vuet from 'vuet'
+import util from 'util'
+import http from 'http'
 
 Vue.use(Vuet)
 
-const API = 'https://cnodejs.org/api/v1'
+let accesstoken = () => (localStorage.getItem('vue_cnode_accesstoken') || '')
 
 export default new Vuet({
   pathJoin: '-',
   modules: {
     topic: {
+      create: {
+        data () {
+          return {
+            title: '', // 标题
+            tab: '', // 发表的板块
+            content: '' // 发表的内容
+          }
+        },
+        manuals: {
+          async create ({ state }) {
+            if (!state.title) {
+              return util.toast('标题不能为空')
+            } else if (!state.tab) {
+              return util.toast('选项不能为空')
+            } else if (!state.content) {
+              return util.toast('内容不能为空')
+            }
+            const res = await http.post(`/topics`, {
+              ...state,
+              accesstoken: accesstoken()
+            })
+            if (res.success) {
+              this.reset()
+            } else {
+              util.toast(res.error_msg)
+            }
+            return res
+          }
+        }
+      },
       list: {
         data () {
           return {
@@ -27,7 +59,13 @@ export default new Vuet({
           }
           // params.routeWatch 没有参数，则是上拉加载触发的调用
           const { tab = '' } = route.query
-          const res = await fetch(`${API}/topics/?mdrender=false&limit=20&page=${state.page}&tab=${tab}`).then(response => response.json())
+          const query = {
+            tab,
+            mdrender: false,
+            limit: 20,
+            page: state.page
+          }
+          const res = await http.get('/topics', query)
           const data = params.routeWatch ? res.data : [...state.data, ...res.data]
           return {
             data,
@@ -65,7 +103,7 @@ export default new Vuet({
           }
         },
         async fetch ({ route }) {
-          const { data } = await fetch(`${API}/topic/${route.params.vid}`).then(response => response.json())
+          const { data } = await http.get(`/topic/${route.params.id}`)
           if (data) {
             return {
               data,
@@ -93,13 +131,7 @@ export default new Vuet({
         },
         manuals: {
           async login ({ state }, accesstoken) {
-            const res = await fetch(`${API}/accesstoken`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: `accesstoken=${accesstoken}`
-            }).then(response => response.json())
+            const res = await http.post(`/accesstoken`, { accesstoken })
             if (typeof res === 'object' && res.success) {
               state.data = res
               localStorage.setItem('vue_cnode_self', JSON.stringify(res))
@@ -132,7 +164,7 @@ export default new Vuet({
           }
         },
         async fetch ({ route }) {
-          const { data } = await fetch(`${API}/user/${route.params.username}`).then(response => response.json())
+          const { data } = await http.get(`/user/${route.params.username}`)
           if (data) {
             return {
               data,
@@ -158,7 +190,10 @@ export default new Vuet({
         async fetch () {
           const accesstoken = localStorage.getItem('vue_cnode_accesstoken')
           if (!accesstoken) return
-          const { data } = await fetch(`${API}/messages?mdrender=true&accesstoken=${accesstoken}`).then(response => response.json())
+          const { data } = await http.get(`/messages`, {
+            accesstoken,
+            mdrender: true
+          })
           return {
             data
           }

@@ -22,11 +22,11 @@
           <!-- 楼主信息 start -->
           <li flex="box:first">
             <div class="headimg">
-              <router-link class="pic" :to="'/user/' + author.loginname" :style="{ backgroundImage: 'url(' + author.avatar_url + ')' }"></router-link>
+              <router-link class="pic" :to="{ name: 'user-detail', params: { username: author.loginname } }" :style="{ backgroundImage: 'url(' + author.avatar_url + ')' }"></router-link>
             </div>
             <div class="bd">
               <div flex>
-                <router-link flex-box="0" :to="'/user/' + author.loginname">{{ author.loginname }}</router-link>
+                <router-link flex-box="0" :to="{ name: 'user-detail', params: { username: author.loginname } }">{{ author.loginname }}</router-link>
                 <time flex-box="1">{{ data.create_at | formatDate }}</time>
                 <div flex-box="0" class="num">#楼主</div>
               </div>
@@ -58,11 +58,11 @@
           <li v-for="(item, $index) in replies">
             <div flex="box:first">
               <div class="headimg">
-                <router-link class="pic" :to="'/user/' + item.author.loginname" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></router-link>
+                <router-link class="pic" :to="{ name: 'user-detail', params: { username: item.author.loginname } }" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></router-link>
               </div>
               <div class="bd">
                 <div flex>
-                  <router-link flex-box="0" :to="'/user/' + item.author.loginname">{{ item.author.loginname }}</router-link>
+                  <router-link flex-box="0" :to="{ name: 'user-detail', params: { username: item.author.loginname } }">{{ item.author.loginname }}</router-link>
                   <time flex-box="1">{{ item.create_at | formatDate }}</time>
                   <div flex-box="0" class="num">#{{ $index + 1 }}</div>
                 </div>
@@ -81,12 +81,11 @@
             <reply-box v-if="detail.commentId === item.id" :loginname="item.author.loginname" :replyId="item.id" @success="$vuet.fetch('topic-detail')"></reply-box>
           </li>
           <!-- 主题评论 end -->
-
         </ul>
-        <div class="reply" v-if="user.id">
+        <div class="reply" v-if="user.data.id">
           <reply-box @success="$vuet.fetch('topic-detail')"></reply-box>
         </div>
-        <div class="tip-login" v-if="!user.id">
+        <div class="tip-login" v-if="!user.data.id">
           你还未登录，请先
           <router-link to="/login">登录</router-link>
         </div>
@@ -96,18 +95,16 @@
 </template>
 <script>
   import util from 'util'
-  import { mapState } from 'vuex'
   import replyBox from './reply-box'
   import { mapModules, mapRules } from 'vuet'
 
   export default {
     mixins: [
-      mapModules({ detail: 'topic-detail' }),
+      mapModules({ detail: 'topic-detail', user: 'user-self' }),
       mapRules({ route: 'topic-detail' })
     ],
     components: { replyBox },
     computed: {
-      ...mapState({ user: (state) => state.user }),
       data () {
         return this.detail.data
       },
@@ -120,20 +117,20 @@
     },
     methods: {
       testThing (ups) { // 验证是否点赞
-        return ups.indexOf(this.user.id || '') > -1
+        return ups.indexOf(this.user.data.id || '') > -1
       },
       fabulousItem ({ ups, id }) { // 点赞
-        if (!this.user.accesstoken) return this.$router.push('/login')
-        var index = ups.indexOf(this.user.id)
+        if (!this.user.data.accesstoken) return this.$router.push('/login')
+        var index = ups.indexOf(this.user.data.id)
         if (index > -1) {
           ups.splice(index, 1)
         } else {
-          ups.push(this.user.id)
+          ups.push(this.user.data.id)
         }
         util.post(`reply/${id}/ups`)
       },
       commentShow (item) { // 显示隐藏回复框
-        if (!this.user.accesstoken) return this.$router.push('/login')
+        if (!this.user.data.accesstoken) return this.$router.push('/login')
         this.detail.commentId = this.detail.commentId === item.id ? null : item.id
       }
     }

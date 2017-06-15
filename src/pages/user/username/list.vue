@@ -2,12 +2,12 @@
   <div>
     <ul class="list" v-if="list.length">
       <li flex="box:first" v-for="item in list" track-by="id">
-        <router-link class="head" :to="'/user/' + item.author.loginname">
+        <router-link class="head" :to="{ name: 'user-detail', params: { username: item.author.loginname } }">
           <div class="pic">
             <img :src="item.author.avatar_url" alt="">
           </div>
         </router-link>
-        <router-link :to="'/topic/' + item.id" class="main" flex="dir:top box:first">
+        <router-link :to="{ name: 'topic-detail',params: { id: item.id } }" class="main" flex="dir:top box:first">
           <div class="line" flex="box:last">
             <div class="name">{{ item.author.loginname }}</div>
             <time>{{ item.last_reply_at | formatDate }}</time>
@@ -34,6 +34,7 @@
   .list {
     overflow: hidden;
     li {
+      overflow: hidden;
       padding: 10px;
       height: 50px;
       border-bottom: 1px solid #eee;
@@ -55,7 +56,7 @@
         color: inherit;
         .con {
           padding: 0 5px;
-          line-height: 30px;
+          line-height: 34px;
           font-size: 14px;
         }
         .name {

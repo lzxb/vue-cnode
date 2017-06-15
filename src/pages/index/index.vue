@@ -2,27 +2,16 @@
   <div>
     <nav class="nav">
       <ul flex="box:mean">
-        <li :class="{ active: !this.$route.query.tab }">
-          <router-link to="/">全部</router-link>
-        </li>
-        <li :class="{ active: this.$route.query.tab == 'good' }">
-          <router-link to="/?tab=good">精华</router-link>
-        </li>
-        <li :class="{ active: this.$route.query.tab == 'share' }">
-          <router-link to="/?tab=share">分享</router-link>
-        </li>
-        <li :class="{ active: this.$route.query.tab == 'ask' }">
-          <router-link to="/?tab=ask">问答</router-link>
-        </li>
-        <li :class="{ active: this.$route.query.tab == 'job' }">
-          <router-link to="/?tab=job">招聘</router-link>
+
+        <li v-for="item in tabs" :class="{ active: item.tab === ($route.query.tab || '') }">
+          <router-link :to="{ name: 'index', query: { tab: item.tab } }">{{ item.title }}</router-link>
         </li>
       </ul>
     </nav>
     <v-content v-route-scroll="{ path: 'topic-list', name: 'content' }">
       <ul class="list">
         <li v-for="item in list.data" key="item.id">
-          <router-link :to="'/topic/' + item.id">
+          <router-link :to="{ name: 'topic-detail', params: { id: item.id } }">
             <div class="top" flex="box:first">
               <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
               <div class="box" flex="dir:top">
@@ -70,7 +59,33 @@
     mixins: [
       mapModules({ list: 'topic-list' }),
       mapRules({ route: 'topic-list' })
-    ]
+    ],
+    data () {
+      return {
+        tabs: [
+          {
+            title: '全部',
+            tab: ''
+          },
+          {
+            title: '精华',
+            tab: 'good'
+          },
+          {
+            title: '分享',
+            tab: 'share'
+          },
+          {
+            title: '问答',
+            tab: 'ask'
+          },
+          {
+            title: '招聘',
+            tab: 'job'
+          }
+        ]
+      }
+    }
   }
 </script>
 <style lang="less" scoped>

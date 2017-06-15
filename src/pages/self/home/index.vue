@@ -5,20 +5,20 @@
         <i class="iconfont icon-signout"></i>
       </div>
     </v-header>
-    <v-content class="con" v-scroll-record>
-      <router-link v-if="data.avatar_url" :to="'/user/' + data.loginname">
+    <v-content v-route-scroll="{ path: 'user-self', name: 'content' }">
+      <router-link v-if="data.avatar_url" :to="{ name: 'user-detail', params: { username: data.loginname } }">
         <div class="user"></div>
         <div class="headimg" :style="{backgroundImage: 'url(' + data.avatar_url + ')'}"></div>
         <div class="user-name">{{ data.loginname }}</div>
       </router-link>
-      <router-link v-if="!data.avatar_url" to="/login">
+      <router-link v-if="!data.avatar_url" :to="{ name: 'signin' }">
         <div class="user"></div>
         <div class="headimg"></div>
         <div class="user-name">你还未登录，请先登录！</div>
       </router-link>
       <nav class="nav">
         <li>
-          <router-link to="/topic/create" flex="box:justify">
+          <router-link :to="{ name: 'topic-create' }" flex="box:justify">
             <div class="icon" flex="cross:center">
               <i class="iconfont icon-edit" style="color: #14b11d"></i>
             </div>
@@ -29,7 +29,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/home/messages" flex="box:justify">
+          <router-link :to="{ name: 'self-messages' }" flex="box:justify">
             <div class="icon" flex="cross:center">
               <i class="iconfont icon-msg" style="color: #bd1616;"></i>
             </div>
@@ -43,7 +43,7 @@
       <div style="height: 50px;"></div>
       <nav class="nav">
         <li>
-          <router-link to="/about" flex="box:justify">
+          <router-link :to="{ name: 'about' }" flex="box:justify">
             <div class="icon" flex="cross:center">
               <i class="iconfont icon-about"></i>
             </div>

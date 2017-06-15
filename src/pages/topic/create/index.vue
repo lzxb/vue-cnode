@@ -12,11 +12,12 @@
         </div>
         <div class="select">
           <select v-model="form.tab">
-                    <option value="">请选择</option>
-                    <option value="share">分享</option>
-                    <option value="ask">问答</option>
-                    <option value="job">招聘</option>
-                </select>
+            <option value="">请选择</option>
+            <option value="share">分享</option>
+            <option value="ask">问答</option>
+            <option value="job">招聘</option>
+            <option value="dev">开发</option>
+          </select>
         </div>
         <div class="con" flex="dir:top" flex-box="1">
           <textarea flex-box="1" placeholder="内容..." v-model="form.content"></textarea>
@@ -27,44 +28,21 @@
   </div>
 </template>
 <script>
-  import util from 'util'
-  import routeData from 'route-data'
-  import { mapState } from 'vuex'
+  import { mapModules, mapRules } from 'vuet'
 
   export default {
-    mixins: [routeData],
-    computed: mapState({ user: (state) => state.user }),
-    routeData () {
-      return {
-        form: {
-          topic_id: '', // 新建主题
-          title: '', // 标题
-          tab: '', // 发表的板块
-          content: '' // 发表的内容
-        }
-      }
-    },
+    mixins: [
+      mapModules({ form: 'topic-create' }),
+      mapRules({ manual: 'topic-create' })
+    ],
     methods: {
-      submit () {
-        if (!this.user.id) return this.$router.push({ path: '/login' })
-        var { form } = this
-
-        if (!form.title) {
-          return util.toast('标题不能为空')
-        } else if (!form.tab) {
-          return util.toast('选项不能为空')
-        } else if (!form.content) {
-          return util.toast('内容不能为空')
+      async submit () {
+        const res = await this.$create.create()
+        if (res.success) {
+          this.$router.push({
+            path: `/topic/${res.topic_id}`
+          })
         }
-
-        util.post('topics', this.form, ({ success, topic_id: topicId, error_msg }) => {
-          if (success) {
-            Object.assign(this.$data, this.$options.routeData())
-            this.$router.push({ path: `/topic/${topicId}` })
-          } else {
-            util.toast(error_msg)
-          }
-        })
       }
     }
   }

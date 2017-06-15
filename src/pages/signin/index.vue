@@ -20,8 +20,6 @@
 <script>
   import util from 'util'
   import is from 'is'
-  import { mapActions } from 'vuex'
-  import { USER_SIGNIN } from 'stores/user'
   import { mapRules } from 'vuet'
 
   export default {
@@ -37,7 +35,6 @@
       }
     },
     methods: {
-      ...mapActions([USER_SIGNIN]),
       async submit () {
         if (this.status) return
         if (!this.form.accesstoken) return util.toast('请输入accesstoken')

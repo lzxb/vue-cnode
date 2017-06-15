@@ -127,12 +127,9 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'configs$': path.resolve(__dirname, 'configs/base.js'), //程序的一些基本配置
       'util$': path.resolve(__dirname, 'src/util/index.js'), //常用工具方法
       'is-seeing$': path.resolve(__dirname, 'src/util/is-seeing.js'),
-      'pull-list$': path.resolve(__dirname, 'src/mixins/pull-list.js'), //拉取列表
-      'route-data$': path.resolve(__dirname, 'src/libs/route-data/index.js'), //页面数据缓存
-      'stores': path.resolve(__dirname, 'src/stores/') //常用工具方法
+      'http$': path.resolve(__dirname, 'src/http/index.js'),
     },
     extensions: ['.js', '.vue', '.json']
   },

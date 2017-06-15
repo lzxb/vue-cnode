@@ -34,7 +34,7 @@
         if (!this.content) return util.toast('请输入回复内容')
         this.btnname = '回复中...'
         var { replyId, content, loginname } = this
-        var { vid } = this.$route.params
+        var { id } = this.$route.params
         if (replyId) {
           content = `[@${loginname}](/user/${loginname}) ${content}`
         }
@@ -42,7 +42,7 @@
 
 
 source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`
-        util.post(`topic/${vid}/replies`, { replyId, content }, ({ success, error_msg }) => {
+        util.post(`topic/${id}/replies`, { replyId, content }, ({ success, error_msg }) => {
           this.btnname = '回复'
           if (success) {
             this.content = ''
