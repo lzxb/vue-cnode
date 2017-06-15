@@ -31,7 +31,7 @@ const router = new VueRouter({
 })
 router.beforeEach(({ meta, path }, from, next) => {
   const { auth = true } = meta
-  const isLogin = Boolean(stores.state.user.accesstoken) // true用户已登录， false用户未登录
+  const isLogin = Boolean(localStorage.getItem('vue_cnode_accesstoken')) // true用户已登录， false用户未登录
   if (auth && !isLogin && path !== '/login') {
     let to = { path: '/login' }
     return next(to)

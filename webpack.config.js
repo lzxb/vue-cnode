@@ -136,5 +136,5 @@ module.exports = {
     },
     extensions: ['.js', '.vue', '.json']
   },
-  devtool: IS_ENV ? false : '#cheap-module-eval-source-map'
+  devtool: false
 }

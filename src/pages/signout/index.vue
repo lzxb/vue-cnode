@@ -2,15 +2,17 @@
   <div></div>
 </template>
 <script>
-  import { mapActions } from 'vuex'
-  import { USER_SIGNOUT } from 'stores/user'
+
+  import { mapRules } from 'vuet'
 
   export default {
+    mixins: [
+      mapRules({ manual: 'user-self' })
+    ],
     mounted () {
-      this.USER_SIGNOUT()
-      this.$router.push('/')
-    },
-    methods: mapActions([USER_SIGNOUT])
+      this.$self.signout()
+      this.$router.replace('/')
+    }
   }
 
 </script>

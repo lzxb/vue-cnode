@@ -80,6 +80,40 @@ export default new Vuet({
       }
     },
     user: {
+      self: {
+        data () {
+          return {
+            data: JSON.parse(localStorage.getItem('vue_cnode_self')) || {
+              avatar_url: null,
+              id: null,
+              loginname: null,
+              success: false
+            }
+          }
+        },
+        manuals: {
+          async login ({ state }, accesstoken) {
+            const res = await fetch(`${API}/accesstoken`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: `accesstoken=${accesstoken}`
+            }).then(response => response.json())
+            if (typeof res === 'object' && res.success) {
+              state.data = res
+              localStorage.setItem('vue_cnode_self', JSON.stringify(res))
+              localStorage.setItem('vue_cnode_accesstoken', accesstoken)
+            }
+            return res
+          },
+          signout () {
+            localStorage.removeItem('vue_cnode_self')
+            localStorage.removeItem('vue_cnode_accesstoken')
+            this.reset()
+          }
+        }
+      },
       detail: {
         data () {
           return {
@@ -108,6 +142,25 @@ export default new Vuet({
           return {
             existence: false,
             loading: false
+          }
+        }
+      },
+      messages: {
+        data () {
+          return {
+            data: {
+              has_read_messages: [],
+              hasnot_read_messages: []
+            },
+            loading: true
+          }
+        },
+        async fetch () {
+          const accesstoken = localStorage.getItem('vue_cnode_accesstoken')
+          if (!accesstoken) return
+          const { data } = await fetch(`${API}/messages?mdrender=true&accesstoken=${accesstoken}`).then(response => response.json())
+          return {
+            data
           }
         }
       }

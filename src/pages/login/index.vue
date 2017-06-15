@@ -22,8 +22,12 @@
   import is from 'is'
   import { mapActions } from 'vuex'
   import { USER_SIGNIN } from 'stores/user'
+  import { mapRules } from 'vuet'
 
   export default {
+    mixins: [
+      mapRules({ manual: 'user-self' })
+    ],
     data () {
       return {
         form: {
@@ -34,20 +38,15 @@
     },
     methods: {
       ...mapActions([USER_SIGNIN]),
-      submit () {
+      async submit () {
         if (this.status) return
         if (!this.form.accesstoken) return util.toast('请输入accesstoken')
         this.status = true
-        util.post('accesstoken', this.form, (res) => {
+        try {
+          const res = await this.$self.login(this.form.accesstoken)
           if (is.object(res)) {
             if (res.success) {
               util.toast('登录成功')
-              this.USER_SIGNIN({
-                avatar_url: res.avatar_url,
-                id: res.id,
-                loginname: res.loginname,
-                accesstoken: this.form.accesstoken
-              })
               this.$router.go(-1)
             } else {
               util.toast(res.error_msg)
@@ -55,12 +54,10 @@
           } else {
             util.toast('登录失败')
           }
-
-          this.status = false
-        }, () => {
+        } catch (e) {
           util.toast('登录失败')
-          this.status = false
-        })
+        }
+        this.status = false
       }
     }
   }

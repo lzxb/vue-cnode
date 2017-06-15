@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-header title="个人中心">
-      <div slot="right" class="item" flex="main:center cross:center" v-if="user.id" v-on:click="$router.push('/signout')">
+      <div slot="right" class="item" flex="main:center cross:center" v-if="data.id" v-on:click="$router.push('/signout')">
         <i class="iconfont icon-signout"></i>
       </div>
     </v-header>
     <v-content class="con" v-scroll-record>
-      <router-link v-if="user.avatar_url" :to="'/user/' + user.loginname">
+      <router-link v-if="data.avatar_url" :to="'/user/' + data.loginname">
         <div class="user"></div>
-        <div class="headimg" :style="{backgroundImage: 'url(' + user.avatar_url + ')'}"></div>
-        <div class="user-name">{{ user.loginname }}</div>
+        <div class="headimg" :style="{backgroundImage: 'url(' + data.avatar_url + ')'}"></div>
+        <div class="user-name">{{ data.loginname }}</div>
       </router-link>
-      <router-link v-if="!user.avatar_url" to="/login">
+      <router-link v-if="!data.avatar_url" to="/login">
         <div class="user"></div>
         <div class="headimg"></div>
         <div class="user-name">你还未登录，请先登录！</div>
@@ -60,14 +60,16 @@
   </div>
 </template>
 <script>
-  import { mapState } from 'vuex'
-  import routeData from 'route-data'
+  import { mapModules } from 'vuet'
 
   export default {
-    mixins: [routeData],
-    computed: mapState({ user: (state) => state.user }),
-    routeData () {
-      return {}
+    mixins: [
+      mapModules({ self: 'user-self' })
+    ],
+    computed: {
+      data () {
+        return this.self.data
+      }
     }
   }
 

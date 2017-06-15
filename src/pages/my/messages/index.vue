@@ -6,7 +6,7 @@
         <ul class="list">
           <li flex="box:first" v-for="(item, $index) in list">
             <router-link class="user" :to="'/user/' + item.author.loginname">
-              <div class="user-headimg" :style="{backgroundImage: 'url(' + item.author.avatar_url +')'}"></div>
+              <div class="user-headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url +')' }"></div>
             </router-link>
             <div>
               <div class="name">{{ item.author.loginname }}
@@ -35,30 +35,19 @@
   </div>
 </template>
 <script>
-  import { mapState } from 'vuex'
-  import util from 'util'
-  import routeData from 'route-data'
+  import { mapModules, mapRules } from 'vuet'
 
   export default {
-    mixins: [routeData],
-    computed: mapState({ user: (state) => state.user }),
-    routeData () {
-      return {
-        list: []
-      }
-    },
-    created () {
-      this.getList()
-    },
-    methods: {
-      getList () {
-        var { accesstoken } = this.user
-        if (!accesstoken) return false
-        util.get('messages', { mdrender: true }, ({ data }) => {
-          Array.prototype.push.apply(data.hasnot_read_messages, data.has_read_messages)
-          this.list = data.hasnot_read_messages
-        })
-        util.post('message/mark_all') // 标记全部为已读
+    mixins: [
+      mapModules({ self: 'user-self', messages: 'user-messages' }),
+      mapRules({ need: 'user-messages' })
+    ],
+    computed: {
+      list () {
+        return [...this.messages.data.has_read_messages, ...this.messages.data.hasnot_read_messages]
+      },
+      user () {
+        return this.self.data
       }
     }
   }
