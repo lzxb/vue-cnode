@@ -16,7 +16,9 @@ const filter = (str) => { // 特殊字符转义
 }
 const queryStr = (data) => {
   const query = []
-  data.accesstoken = accesstoken()
+  if (!data.accesstoken) {
+    data.accesstoken = accesstoken()
+  }
   Object.keys(data).forEach((k) => query.push(`${k}=${filter(data[k])}`))
   return query.join('&')
 }

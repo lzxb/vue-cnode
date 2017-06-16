@@ -18,4 +18,4 @@ Object.keys(components).forEach((key) => {
 })
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) // 注册过滤器
 
-new Vue({ router, vuet }).$mount('#app')
+export default new Vue({ router, vuet }).$mount('#app')

@@ -188,11 +188,25 @@ export default new Vuet({
           }
         },
         async fetch () {
-          const user = this.getState('user-self')
-          if (!user.data.id) return
+          if (!this.getState('user-self').data.id) return
           const { data } = await http.get(`/messages`, { mdrender: true })
           return {
             data
+          }
+        },
+        count: {
+          data () {
+            return {
+              data: 0
+            }
+          },
+          async fetch () {
+            if (!this.getState('user-self').data.id) return
+            const res = await http.get('/message/count')
+            if (!res.data) return
+            return {
+              data: res.data
+            }
           }
         }
       }

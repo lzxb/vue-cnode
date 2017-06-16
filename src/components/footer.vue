@@ -5,23 +5,22 @@
         <router-link :to="{ name: item.name }">
           <i class="iconfont" :class="[ item.icon ]"></i>
           <em>{{ item.title }}</em>
-          <div class="count" v-if="item.name == 'self-messages' && count > 0">{{ count }}</div>
+          <div class="count" v-if="item.name == 'self-messages' && count.data > 0">{{ count.data }}</div>
         </router-link>
       </li>
     </ul>
   </footer>
 </template>
 <script>
-  import utils from 'utils'
-  import { mapModules } from 'vuet'
+  import { mapModules, mapRules } from 'vuet'
 
   export default {
     mixins: [
-      mapModules({ user: 'user-self' })
+      mapModules({ user: 'user-self', count: 'user-messages-count' }),
+      mapRules({ need: 'user-messages-count' })
     ],
     data () {
       return {
-        count: 0,
         list: [
           {
             title: '首页',
@@ -45,15 +44,6 @@
             icon: 'icon-user'
           }
         ]
-      }
-    },
-    created () {
-      this.getCount()
-    },
-    methods: {
-      getCount () {
-        if (!this.user.id) return
-        utils.get('message/count', {}, (res) => (this.count = res.data))
       }
     }
   }

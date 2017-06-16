@@ -25,7 +25,7 @@ if (IS_ENV) {
 module.exports = {
   target: 'web',
   entry: {
-    main: ['babel-polyfill', './src/main.js']
+    main: ['babel-polyfill', 'whatwg-fetch', './src/main.js']
   },
   output: {
     filename: 'js/[name].[hash].js',
