@@ -5,8 +5,6 @@ import http from 'http'
 
 Vue.use(Vuet)
 
-let accesstoken = () => (localStorage.getItem('vue_cnode_accesstoken') || '')
-
 export default new Vuet({
   pathJoin: '-',
   modules: {
