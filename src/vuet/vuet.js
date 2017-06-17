@@ -29,8 +29,7 @@ export default new Vuet({
               return utils.toast('内容不能为空')
             }
             const res = await http.post(`/topics`, {
-              ...state,
-              accesstoken: accesstoken()
+              ...state
             })
             if (res.success) {
               this.reset()
