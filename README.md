@@ -21,7 +21,7 @@ github：[https://github.com/lzxb/vue-cnode](https://github.com/lzxb/vue-cnode)
 
 ### 技术栈
 ```
-基于vue2 + vue-router + vuex + ES6 + less + flex.css重写vue版cnode社区，使用webpack打包
+基于vue2 + vue-router + vuet + ES6 + less + flex.css重写vue版cnode社区，使用webpack打包
 ```
 
 ### 使用项目
