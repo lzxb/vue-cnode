@@ -104,10 +104,12 @@ export default new Vuet({
           if (data) {
             return {
               data,
+              existence: true,
               loading: false
             }
           }
           return {
+            data: [],
             existence: false,
             loading: false
           }
