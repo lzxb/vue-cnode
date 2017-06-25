@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-header title="消息"></v-header>
-    <v-content v-route-scroll="{ path: 'user-messages', name: 'content' }">
+    <v-content v-vuet-scroll="{ path: 'user-messages', name: 'content' }">
       <div class="msg-box" v-if="list.length">
         <ul class="list">
           <li flex="box:first" v-for="(item, $index) in list">

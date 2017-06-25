@@ -5,7 +5,7 @@
         <i class="iconfont icon-back"></i>
       </div>
     </v-header>
-    <v-content style="bottom: 0;" v-route-scroll="{ path: 'user-detail', name: 'content' }">
+    <v-content style="bottom: 0;" v-vuet-scroll="{ path: 'user-detail', name: 'content' }">
       <div class="user" flex="dir:top cross:center">
         <div class="user-bg">
           <img src="./headimg-bg.jpg" alt="">

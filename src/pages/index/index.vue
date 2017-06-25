@@ -8,7 +8,7 @@
         </li>
       </ul>
     </nav>
-    <v-content v-route-scroll="{ path: 'topic-list', name: 'content' }">
+    <v-content v-vuet-scroll="{ path: 'topic-list', name: 'content' }">
       <ul class="list">
         <li v-for="item in list.data" key="item.id">
           <router-link :to="{ name: 'topic-detail', params: { id: item.id } }">

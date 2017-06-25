@@ -5,7 +5,7 @@
         <i class="iconfont icon-signout"></i>
       </div>
     </v-header>
-    <v-content v-route-scroll="{ path: 'user-self', name: 'content' }">
+    <v-content v-vuet-scroll="{ path: 'user-self', name: 'content' }">
       <router-link v-if="data.avatar_url" :to="{ name: 'user-detail', params: { username: data.loginname } }">
         <div class="user"></div>
         <div class="headimg" :style="{backgroundImage: 'url(' + data.avatar_url + ')'}"></div>
