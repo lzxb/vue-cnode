@@ -1,3 +1,4 @@
-/dist
-/vue-cnode
-/node_modules
+dist
+npm-debug.log
+package-lock.json
+package-lock.json

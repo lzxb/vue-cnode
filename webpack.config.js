@@ -1,80 +1,137 @@
+const path = require('path')
+const configs = require('./configs/')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
-const ExtractTextPlugin = require('extract-text-webpack-plugin') //css单独打包
-const AppCachePlugin = require('appcache-webpack-plugin'); //生成离线缓存清单
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var publicPath = '/dist/' //服务器路径
-var path = __dirname + '/dist/'
-var loaders = []
-
-
-
-// 将ES6代码转换成ES5
-loaders.push({
-    test: /\.js$/,
-    exclude: 'node_modules',
-    loader: 'babel?presets=es2015'
-})
-//处理 vue 文件
-loaders.push({
-    test: /\.vue$/,
-    exclude: 'node_modules',
-    loader: 'vue'
-})
-//处理 less，css
-loaders.push({
-    test: /\.less|\.css/,
-    exclude: /^node_modules$/,
-    loader: 'style-loader!css-loader!postcss-loader!less-loader'
-})
-
-loaders.push({
-    test: /\.(png|jpg)$/,
-    exclude: /^node_modules$/,
-    loader: 'url?limit=20000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
-})
-
-loaders.push({
-    test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
-    exclude: /^node_modules$/,
-    loader: 'file-loader?name=[name].[ext]'
-})
-var plugins = []
-
-if (process.env.NODE_ENV == 'production') { //生产环境
-    plugins.push(new webpack.DefinePlugin({ //编译成生产版本
-        'process.env': {
-            NODE_ENV: JSON.stringify('production')
-        }
-    }))
-    publicPath = '/vue-cnode/dist/'
-    path = __dirname + '/vue-cnode/dist/'
-    plugins.push(new AppCachePlugin({ //自动生成app.appcache 离线缓存清单
-        output: 'main.appcache'
-    }))
+const extract = new ExtractTextPlugin('css/[name].[hash].css')
+const autoprefixer = require('autoprefixer')({ browsers: ['iOS >= 7', 'Android >= 4.1'] })
+const IS_ENV = process.env.NODE_ENV == 'production'
+const plugins = []
+if (IS_ENV) {
+  plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production')
+    }
+  }))
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    },
+    sourceMap: true
+  }))
 }
-plugins.push(new ExtractTextPlugin('[name].css')) //css单独打包
-
-plugins.push(new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-    filename: '../index.html', //生成的html存放路径，相对于 path
-    template: './src/template/index.html', //html模板路径
-    hash: process.env.NODE_ENV != 'production'    //生产版本时，会打包成离线应用程序，不需要添加hash，否则会造成无法离线缓存的bug
-}))
-
 
 module.exports = {
-    entry: './src/main.js',
-    output: {
-        publicPath, //服务器的路径
-        path, //编译到app目录
-        filename: '[name].js' //编译后的文件名
+  target: 'web',
+  entry: {
+    main: ['babel-polyfill', 'whatwg-fetch', './src/main.js']
+  },
+  output: {
+    filename: 'js/[name].[hash].js',
+    path: path.resolve(__dirname, `${configs.dest}static`),
+    publicPath: configs.publicPath
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['babel-loader', 'eslint-loader']
+      },
+      {
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              loaders: {
+                css: ExtractTextPlugin.extract({
+                  use: ['css-loader'],
+                  fallback: 'vue-style-loader'
+                }),
+                less: ExtractTextPlugin.extract({
+                  use: ['css-loader', 'less-loader'],
+                  fallback: 'vue-style-loader'
+                })
+              },
+              postcss: [autoprefixer]
+            }
+          },
+          'eslint-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: extract.extract([
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer]
+            }
+          }
+        ])
+      },
+      {
+        test: /\.less$/,
+        use: extract.extract([
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer]
+            }
+          },
+          'less-loader'
+        ])
+      },
+      {
+        test: /\.(eot|woff|svg|ttf|woff2|)(\?|$)/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'iconfont/[name].[hash].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 2000,
+              name: 'images/[name].[hash].[ext]'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/template/index.html'),
+      filename: '../index.html',
+      title: configs.title,
+      hash: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    }),
+    extract
+  ].concat(plugins),
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      'utils$': path.resolve(__dirname, 'src/utils/index.js'), //常用工具方法
+      'is-seeing$': path.resolve(__dirname, 'src/utils/is-seeing.js'),
+      'http$': path.resolve(__dirname, 'src/http/index.js'),
     },
-    module: {
-        loaders: loaders
-    },
-    plugins: plugins,
-    resolve: {
-        extensions: ['', '.js', '.vue'], //后缀名自动补全
-    }
+    extensions: ['.js', '.vue', '.json']
+  },
+  devtool: false
 }
-

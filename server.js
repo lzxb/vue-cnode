@@ -1,22 +1,22 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
-var config = require('./webpack.config')
+const configs = require('./configs/')
+const express = require('express')
+const webpack = require('webpack')
+const webpackConfig = require('./webpack.config')
 
-// 相当于通过本地node服务代理请求到了http://cnodejs.org/api
-var proxy = [{
-    path: '/api/*',
-    target: 'https://cnodejs.org',
-    host: 'cnodejs.org'
-}]
+const app = express()
+const compiler = webpack(webpackConfig)
 
-//启动服务
-var server = new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
-    proxy: proxy
+var devMiddleware = require('webpack-dev-middleware')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  stats: 'minimal'
 })
 
-//将其他路由，全部返回index.html
-server.app.get('*', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
+app.use(require('connect-history-api-fallback')({
+  index: `${configs.publicPath}../index.html`
+}))
+app.use(devMiddleware)
+
+app.listen(3000, (err) => {
+  if (err) return console.log(err)
+  console.log('http://localhost:3000/')
 })
-server.listen(3000)

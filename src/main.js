@@ -1,36 +1,21 @@
+import 'normalize.css'
+import 'flex.css'
+import './iconfont/iconfont.css'
+import 'github-markdown-css'
+import './css/common.css'
+import './less/common.less'
+
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import route from './config/route' //路由配置
-import * as filter from './filter' //自定义过滤器
-import app from './app'
 
-import 'normalize.css' //重置浏览器默认样式
-import 'flex.css' //flex布局
-import 'github-markdown-css' //markdown样式
-import './less/common.less' //公共样式
-import './iconfont/iconfont.css' //web字体图标
+import router from './router/'
+import vuet from './vuet/'
+import * as filters from './filters/'
+import components from './components/'
 
-Vue.use(VueRouter)
-Object.keys(filter).forEach(k => Vue.filter(k, filter[k])) //注册过滤器
-
-var router = new VueRouter({ //配置路由
-    history: process.env.NODE_ENV !== 'production'
+Object.keys(components).forEach((key) => {
+  var name = key.replace(/(\w)/, (v) => v.toUpperCase()) // 首字母大写
+  Vue.component(`v${name}`, components[key])
 })
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) // 注册过滤器
 
-router.map(route)
-router.beforeEach(({to, next}) => {
-    if (to.auth && !app.store.state.user.id) { //验证用户是否登录，用户没有登录则强制跳转到登录页面
-        router.replace('/signin')
-    } else {
-        next()
-    }
-})
-router.start(Vue.extend({}), '#main')
-
-applicationCache.onupdateready = () => {
-    setTimeout(() => {
-        if (confirm('更新已经完成，是否要切换到最新版本')) {
-            location.reload()
-        }
-    }, 1000)
-}
+export default new Vue({ router, vuet }).$mount('#app')
