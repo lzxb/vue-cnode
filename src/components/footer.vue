@@ -52,7 +52,8 @@
 <style lang="less" scoped>
   @import "../less/config";
   .footer {
-    position: absolute;
+    position: fixed;
+    background: #fff;
     right: 0;
     bottom: 0;
     left: 0;
