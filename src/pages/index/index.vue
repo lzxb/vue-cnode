@@ -91,7 +91,8 @@
 <style lang="less" scoped>
   @import "../../less/config";
   .nav {
-    position: absolute;
+    position: fixed;
+    background: #fff;
     top: 0;
     right: 0;
     left: 0;
