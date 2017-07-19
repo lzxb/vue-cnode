@@ -10,7 +10,7 @@
   @import "../less/config";
   .content {
     overflow: auto;
-    position: fixed;
+    position: absolute;
     top: 50px;
     right: 0;
     bottom: 50px;
