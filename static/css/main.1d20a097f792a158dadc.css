@@ -1749,7 +1749,7 @@ textarea[data-v-d5fdf118] {
 }
 
 .nav[data-v-01fb4290] {
-  position: fixed;
+  position: absolute;
   background: #fff;
   top: 0;
   right: 0;
@@ -1902,7 +1902,7 @@ textarea[data-v-d5fdf118] {
 
 .content[data-v-02b89d2c] {
   overflow: auto;
-  position: fixed;
+  position: absolute;
   top: 50px;
   right: 0;
   bottom: 50px;
@@ -1912,7 +1912,7 @@ textarea[data-v-d5fdf118] {
 }
 
 .footer[data-v-9fb2968c] {
-  position: fixed;
+  position: absolute;
   background: #fff;
   right: 0;
   bottom: 0;
