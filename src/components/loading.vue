@@ -21,7 +21,7 @@
     },
     mounted () {
       this.timer = setInterval(() => {
-        if (isSeeing(this.$el) && !this.loading) {
+        if (isSeeing(this.$el) && !this.loading && !this.done) {
           this.$emit('seeing')
         }
       }, 300)
