@@ -30,7 +30,7 @@ github：[https://github.com/lzxb/vue-cnode](https://github.com/lzxb/vue-cnode)
 2.安装nodejs
 3.安装依赖：      npm install
 4.启动服务：      npm run dev
-5.发布代码：      npm run dist
+5.发布代码：      npm run build
 ```
 
 ### 功能
