@@ -16,7 +16,7 @@
 
   export default {
     mixins: [
-      mapModules({ detail: 'topic-detail', user: 'user-self' })
+      mapModules({ topic: 'topic-detail' })
     ],
     props: {
       replyId: { // 评论的评论id，如果没有则是对主题的评论
@@ -53,8 +53,7 @@ source [vue-cnode mobile 2.0](http://lzxb.name/vue-cnode/)`
           if (success) {
             this.content = ''
             this.$emit('success')
-            this.detail.commentId = null
-            this.$vuet.fetch('topic-detail')
+            this.topic.commentId = null
           } else {
             utils.toast(error_msg)
           }

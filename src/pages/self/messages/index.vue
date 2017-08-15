@@ -2,9 +2,9 @@
   <div>
     <v-header title="消息"></v-header>
     <v-content v-vuet-scroll="{ path: 'user-messages', name: 'content' }">
-      <div class="msg-box" v-if="list.length">
+      <div class="msg-box" v-if="messages.list.length">
         <ul class="list">
-          <li flex="box:first" v-for="(item, $index) in list">
+          <li flex="box:first" v-for="(item, $index) in messages.list">
             <router-link class="user" :to="{ name: 'user-detail',params: { username: item.author.loginname } }">
               <div class="user-headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url +')' }"></div>
             </router-link>
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </div>
-      <v-data-null v-if="!list.length"></v-data-null>
+      <v-data-null v-if="!messages.list.length"></v-data-null>
     </v-content>
     <v-footer></v-footer>
   </div>
@@ -41,15 +41,7 @@
     mixins: [
       mapModules({ self: 'user-self', messages: 'user-messages' }),
       mapRules({ need: 'user-messages' })
-    ],
-    computed: {
-      list () {
-        return [...this.messages.data.has_read_messages, ...this.messages.data.hasnot_read_messages]
-      },
-      user () {
-        return this.self.data
-      }
-    }
+    ]
   }
 
 </script>

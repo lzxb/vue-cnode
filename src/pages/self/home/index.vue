@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-header title="个人中心">
-      <div slot="right" class="item" flex="main:center cross:center" v-if="data.id" v-on:click="$router.push('/signout')">
+      <div slot="right" class="item" flex="main:center cross:center" v-if="self.id" v-on:click="$router.push('/signout')">
         <i class="iconfont icon-signout"></i>
       </div>
     </v-header>
     <v-content v-vuet-scroll="{ path: 'user-self', name: 'content' }">
-      <router-link v-if="data.avatar_url" :to="{ name: 'user-detail', params: { username: data.loginname } }">
+      <router-link v-if="self.avatar_url" :to="{ name: 'user-detail', params: { username: self.loginname } }">
         <div class="user"></div>
-        <div class="headimg" :style="{backgroundImage: 'url(' + data.avatar_url + ')'}"></div>
-        <div class="user-name">{{ data.loginname }}</div>
+        <div class="headimg" :style="{backgroundImage: 'url(' + self.avatar_url + ')'}"></div>
+        <div class="user-name">{{ self.loginname }}</div>
       </router-link>
-      <router-link v-if="!data.avatar_url" :to="{ name: 'signin' }">
+      <router-link v-if="!self.avatar_url" :to="{ name: 'signin' }">
         <div class="user"></div>
         <div class="headimg"></div>
         <div class="user-name">你还未登录，请先登录！</div>
@@ -65,12 +65,7 @@
   export default {
     mixins: [
       mapModules({ self: 'user-self' })
-    ],
-    computed: {
-      data () {
-        return this.self.data
-      }
-    }
+    ]
   }
 
 </script>

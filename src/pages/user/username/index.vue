@@ -12,21 +12,21 @@
         </div>
         <div class="headimg">
           <div class="pic">
-            <img v-if="data.avatar_url" :src="data.avatar_url" alt="">
+            <img v-if="user.avatar_url" :src="user.avatar_url" alt="">
           </div>
         </div>
-        <div class="name">{{ data.loginname }}</div>
+        <div class="name">{{ user.loginname }}</div>
         <div class="score" flex="main:justify">
-          <div>积分：{{ data.score }}</div>
-          <div>注册于：{{ data.create_at | formatDate }}</div>
+          <div>积分：{{ user.score }}</div>
+          <div>注册于：{{ user.create_at | formatDate }}</div>
         </div>
       </div>
       <ul class="tab-nav" flex="box:mean">
-        <li :class="{on: detail.tabIndex == 0}" @click="detail.tabIndex = 0">回复</li>
-        <li :class="{on: detail.tabIndex == 1}" @click="detail.tabIndex = 1">主题</li>
+        <li :class="{on: data.tabIndex == 0}" @click="data.tabIndex = 0">回复</li>
+        <li :class="{on: data.tabIndex == 1}" @click="data.tabIndex = 1">主题</li>
       </ul>
-      <list v-show="detail.tabIndex == 0" :list="data.recent_replies"></list>
-      <list v-show="detail.tabIndex == 1" :list="data.recent_topics"></list>
+      <list v-show="data.tabIndex == 0" :list="user.recent_replies"></list>
+      <list v-show="data.tabIndex == 1" :list="user.recent_topics"></list>
     </v-content>
   </div>
 </template>
@@ -36,13 +36,13 @@
 
   export default {
     mixins: [
-      mapModules({ detail: 'user-detail' }),
+      mapModules({ data: 'user-detail' }),
       mapRules({ route: 'user-detail' })
     ],
     components: { list },
     computed: {
-      data () {
-        return this.detail.data
+      user () {
+        return this.data.user
       }
     }
   }

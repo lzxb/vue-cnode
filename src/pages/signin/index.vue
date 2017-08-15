@@ -20,11 +20,11 @@
 <script>
   import utils from 'utils'
   import is from 'is'
-  import { mapRules } from 'vuet'
+  import { mapModules } from 'vuet'
 
   export default {
     mixins: [
-      mapRules({ manual: 'user-self' })
+      mapModules({ self: 'user-self' })
     ],
     data () {
       return {
@@ -40,7 +40,7 @@
         if (!this.form.accesstoken) return utils.toast('请输入accesstoken')
         this.status = true
         try {
-          const res = await this.$self.login(this.form.accesstoken)
+          const res = await this.self.login(this.form.accesstoken)
           if (is.object(res)) {
             if (res.success) {
               utils.toast('登录成功')

@@ -3,15 +3,14 @@
 </template>
 <script>
 
-  import { mapRules } from 'vuet'
+  import { mapModules } from 'vuet'
 
   export default {
     mixins: [
-      mapRules({ manual: 'user-self' })
+      mapModules({ self: 'user-self' })
     ],
     mounted () {
-      this.$self.signout()
-      this.$router.replace('/')
+      this.self.signout()
     }
   }
 

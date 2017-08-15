@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-header title="发表">
-      <a class="item" flex="main:center cross:center" slot="right" @click="submit">
+      <a class="item" flex="main:center cross:center" slot="right" @click="form.create()">
         <i class="iconfont icon-edit"></i>
       </a>
     </v-header>
     <v-content>
-      <form flex="dir:top" @submit.prevent="submit">
+      <form flex="dir:top" @submit.prevent="form.create()">
         <div class="title">
           <input type="text" placeholder="标题..." v-model="form.title">
         </div>
@@ -28,23 +28,22 @@
   </div>
 </template>
 <script>
-  import { mapModules, mapRules } from 'vuet'
+  import { mapModules } from 'vuet'
 
   export default {
     mixins: [
-      mapModules({ form: 'topic-create' }),
-      mapRules({ manual: 'topic-create' })
-    ],
-    methods: {
-      async submit () {
-        const res = await this.$create.create()
-        if (res.success) {
-          this.$router.push({
-            path: `/topic/${res.topic_id}`
-          })
-        }
-      }
-    }
+      mapModules({ form: 'topic-create' })
+    ]
+    // methods: {
+    //   async submit () {
+    //     const res = await this.form.create()
+    //     if (res && res.success) {
+    //       this.$router.push({
+    //         path: `/topic/${res.topic_id}`
+    //       })
+    //     }
+    //   }
+    // }
   }
 
 </script>

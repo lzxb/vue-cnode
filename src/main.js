@@ -7,8 +7,8 @@ import './less/common.less'
 
 import Vue from 'vue'
 
+import vuet from './vuet/' // 注意：Vuet要在所有组件初始化前执行，避免第三方插件无法使用
 import router from './router/'
-import vuet from './vuet/'
 import * as filters from './filters/'
 import components from './components/'
 

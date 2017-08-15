@@ -10,7 +10,7 @@
     </nav>
     <v-content v-vuet-scroll="{ path: 'topic-list', name: 'content' }">
       <ul class="list">
-        <li v-for="item in list.data" key="item.id">
+        <li v-for="item in data.list" key="item.id">
           <router-link :to="{ name: 'topic-detail', params: { id: item.id } }">
             <div class="top" flex="box:first">
               <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
@@ -47,7 +47,7 @@
           </router-link>
         </li>
       </ul>
-      <v-loading :done="list.done" :loading="list.loading" @seeing="$vuet.fetch('topic-list')"></v-loading>
+      <v-loading :done="data.done" :loading="data.loading" @seeing="data.fetch()"></v-loading>
     </v-content>
     <v-footer></v-footer>
   </div>
@@ -57,7 +57,7 @@
 
   export default {
     mixins: [
-      mapModules({ list: 'topic-list' }),
+      mapModules({ data: 'topic-list' }),
       mapRules({ route: 'topic-list' })
     ],
     data () {

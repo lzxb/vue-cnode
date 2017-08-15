@@ -6,14 +6,14 @@
       </div>
     </v-header>
     <v-content style="bottom: 0;" v-vuet-scroll="{ path: 'topic-detail', name: 'content' }">
-      <v-loading v-if="detail.loading"></v-loading>
-      <v-data-null v-if="!detail.existence" msg="话题不存在"></v-data-null>
-      <template v-if="!detail.loading && detail.existence">
-        <div class="common-typeicon" flex v-if="data.top || data.good">
-          <div class="icon" v-if="data.good">
+      <v-loading v-if="data.loading"></v-loading>
+      <v-data-null v-if="!data.existence" msg="话题不存在"></v-data-null>
+      <template v-if="!data.loading && data.existence">
+        <div class="common-typeicon" flex v-if="topic.top || topic.good">
+          <div class="icon" v-if="topic.good">
             <i class="iconfont icon-topic-good"></i>
           </div>
-          <div class="icon" v-if="data.top">
+          <div class="icon" v-if="topic.top">
             <i class="iconfont icon-topic-top"></i>
           </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="bd">
               <div flex>
                 <router-link flex-box="0" :to="{ name: 'user-detail', params: { username: author.loginname } }">{{ author.loginname }}</router-link>
-                <time flex-box="1">{{ data.create_at | formatDate }}</time>
+                <time flex-box="1">{{ topic.create_at | formatDate }}</time>
                 <div flex-box="0" class="num">#楼主</div>
               </div>
             </div>
@@ -36,19 +36,19 @@
           <!-- 主题信息 start -->
           <li>
             <div class="datas">
-              <div class="tit">{{ data.title }}</div>
+              <div class="tit">{{ topic.title }}</div>
               <div class="bottom" flex="main:center">
                 <div class="item click" flex="main:center cross:center">
                   <i class="iconfont icon-click"></i>
-                  <div class="num">{{ data.visit_count }}</div>
+                  <div class="num">{{ topic.visit_count }}</div>
                 </div>
                 <div class="item reply" flex="main:center cross:center">
                   <i class="iconfont icon-comment"></i>
-                  <div class="num">{{ data.reply_count }}</div>
+                  <div class="num">{{ topic.reply_count }}</div>
                 </div>
               </div>
             </div>
-            <div class="markdown-body" v-html="data.content"></div>
+            <div class="markdown-body" v-html="topic.content"></div>
           </li>
           <!-- 主题信息 end -->
           <li class="replies-count" v-if="replies.length">
@@ -71,21 +71,26 @@
                   <div class="icon" @click="commentShow(item, $index)">
                     <i class="iconfont icon-comment-topic"></i>
                   </div>
-                  <div class="icon" :class="{ fabulous: testThing(item.ups) }" v-if="item.author.loginname !== user.data.loginname" @click="fabulousItem(item)">
+                  <div class="icon" :class="{ fabulous: testThing(item.ups) }" v-if="item.author.loginname !== self.loginname" @click="fabulousItem(item)">
                     <i class="iconfont icon-comment-fabulous"></i>
                     <em v-if="item.ups.length">{{ item.ups.length }}</em>
                   </div>
                 </div>
               </div>
             </div>
-            <reply-box v-if="detail.commentId === item.id" :loginname="item.author.loginname" :replyId="item.id"></reply-box>
+            <reply-box
+              v-if="data.commentId === item.id"
+              :loginname="item.author.loginname"
+              :replyId="item.id"
+              @success="data.fetch()"
+            ></reply-box>
           </li>
           <!-- 主题评论 end -->
         </ul>
-        <div class="reply" v-if="user.data.id">
-          <reply-box @success="$vuet.fetch('topic-detail')"></reply-box>
+        <div class="reply" v-if="self.id">
+          <reply-box @success="data.fetch()"></reply-box>
         </div>
-        <div class="tip-login" v-if="!user.data.id">
+        <div class="tip-login" v-if="!self.id">
           你还未登录，请先
           <router-link to="/login">登录</router-link>
         </div>
@@ -100,38 +105,38 @@
 
   export default {
     mixins: [
-      mapModules({ detail: 'topic-detail', user: 'user-self' }),
+      mapModules({ data: 'topic-detail', self: 'user-self' }),
       mapRules({ route: 'topic-detail' })
     ],
     components: { replyBox },
     computed: {
-      data () {
-        return this.detail.data
+      topic () {
+        return this.data.topic
       },
       author () {
-        return this.detail.data.author
+        return this.data.topic.author
       },
       replies () {
-        return this.detail.data.replies
+        return this.data.topic.replies
       }
     },
     methods: {
       testThing (ups) { // 验证是否点赞
-        return ups.indexOf(this.user.data.id || '') > -1
+        return ups.indexOf(this.self.id || '') > -1
       },
       fabulousItem ({ ups, id }) { // 点赞
-        if (!this.user.data.id) return this.$router.push('/login')
-        var index = ups.indexOf(this.user.data.id)
+        if (!this.self.id) return this.$router.push('/login')
+        var index = ups.indexOf(this.self.id)
         if (index > -1) {
           ups.splice(index, 1)
         } else {
-          ups.push(this.user.data.id)
+          ups.push(this.self.id)
         }
         http.post(`/reply/${id}/ups`)
       },
       commentShow (item) { // 显示隐藏回复框
-        if (!this.user.data.id) return this.$router.push('/login')
-        this.detail.commentId = this.detail.commentId === item.id ? null : item.id
+        if (!this.self.id) return this.$router.push('/login')
+        this.data.commentId = this.data.commentId === item.id ? null : item.id
       }
     }
   }
