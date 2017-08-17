@@ -57,7 +57,7 @@ export default new Vuet({
             }
           },
           route: {
-            once: false // 当前页面，只加载一次，这样我们就可以做上拉加载了
+            once: true // 当前页面，只加载一次，这样我们就可以做上拉加载了
           },
           async fetch () {
             const { tab = '' } = this.app.$route.query
