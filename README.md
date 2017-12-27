@@ -1,4 +1,4 @@
-**强烈推荐**：[vuet是一个跨页面、跨组件的状态管理插件](https://github.com/medevicex/vuet)
+## 近期正在重构，支持SSR服务器端渲染，敬请关注！
 
 ### 前言
 
