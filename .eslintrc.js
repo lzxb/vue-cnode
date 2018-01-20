@@ -1,10 +1,14 @@
 module.exports = {
   root: true,
-  extends: ['standard'],
+  parser: 'babel-eslint',
   env: {
-    browser: true,
+    es6: true,
+    node: true,
+    browser: true
   },
-  plugins: [
-    'html'
-  ]
+  plugins: ['html'],
+  extends: ['standard'],
+  rules: {
+    'prefer-promise-reject-errors': [0, { allowEmptyReject: false }]
+  }
 }

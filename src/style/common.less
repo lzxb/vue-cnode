@@ -1,0 +1,106 @@
+@import "./var.less";
+
+/*
+    初始化页面布局
+*/
+
+#app {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    max-width: 640px;
+    margin: auto;
+    font-size: 13px;
+    background: #fff;
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    outline: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: @main;
+}
+
+.common-typeicon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 80px;
+    .icon {
+        padding: 20px 5px;
+    }
+    .iconfont {
+        display: block;
+        font-size: 34px;
+        transform: rotate(35deg);
+    }
+    .icon-topic-top {
+        color: red;
+    }
+    .icon-topic-good {
+        color: green;
+    }
+}
+
+.common-toast {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11000;
+    width: auto;
+    padding: 0 8px;
+    line-height: 34px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+.common-toast-show {
+    animation: commonToastShow ease 300ms;
+}
+
+.common-toast-hide {
+    animation: commonToastHide ease 500ms;
+}
+
+@keyframes commonToastShow {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes commonToastHide {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0);
+    }
+}
