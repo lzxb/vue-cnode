@@ -2,17 +2,55 @@
   <div>
     <nav class="nav">
       <ul flex="box:mean">
-
         <li v-for="item in tabs" :class="{ active: item.tab === ($route.query.tab || '') }">
-          <router-link :to="{ name: 'index', query: { tab: item.tab } }">{{ item.title }}</router-link>
+          <router-link :to="{ name: 'topic-list', query: { tab: item.tab } }">{{ item.title }}</router-link>
         </li>
       </ul>
     </nav>
-    首页？
+    <v-content>
+        <ul class="list" :data-time="Date.now()">
+          <li v-for="item in $index.list" :key="item.id">
+            <router-link :to="{ name: 'topic-detail', params: { id: item.id } }">
+              <div class="top" flex="box:first">
+                <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
+                <div class="box" flex="dir:top">
+                  <strong>{{ item.author.loginname }}</strong>
+                  <div flex>
+                    <time>{{ formatDate(item.create_at) }}</time>
+                    <span class="tag">#分享#</span>
+                  </div>
+                </div>
+              </div>
+              <div class="common-typeicon" flex v-if="item.top || item.good">
+                <div class="icon" v-if="item.good">
+                  <i class="iconfont icon-topic-good"></i>
+                </div>
+                <div class="icon" v-if="item.top">
+                  <i class="iconfont icon-topic-top"></i>
+                </div>
+              </div>
+              <div class="tit">{{ item.title }}</div>
+              <div class="expand" flex="box:mean">
+                <div class="item click" flex="main:center cross:center">
+                  <i class="iconfont icon-click"></i>
+                  <div class="num">{{ item.visit_count > 0 ? item.visit_count : '暂无阅读' }}</div>
+                </div>
+                <div class="item reply" flex="main:center cross:center">
+                  <i class="iconfont icon-comment"></i>
+                  <div class="num">{{ item.reply_count > 0 ? item.reply_count : '暂无评论' }}</div>
+                </div>
+                <div class="item last-reply" flex="main:center cross:center">
+                  <time class="time">{{ formatDate(item.last_reply_at) }}</time>
+                </div>
+              </div>
+            </router-link>
+          </li>
+        </ul>
+      </v-content>
   </div>
 </template>
 <script>
-  import topic from '@/api/topic'
+  import { formatDate } from '@/util/index'
 
   export default {
     data () {
@@ -41,14 +79,22 @@
         ]
       }
     },
-    async created () {
-      const res = await topic.getTopics()
-      console.log(res)
+    computed: {
+      $index () {
+        return this.$vuet.getModule('topic/index')
+      }
+    },
+    async asyncData ({ vuet, route }) {
+      const $index = vuet.getModule('topic/index')
+      await $index.getTopics(route.query)
+    },
+    methods: {
+      formatDate
     }
   }
 </script>
 <style lang="less" scoped>
-  @import "../../style/var.less";
+  @import "../../../style/var.less";
   .nav {
     position: absolute;
     background: #fff;

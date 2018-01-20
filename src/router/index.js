@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from '@/views/index/index'
+import TopicList from '@/views/topic/list/index'
+import TopicDetail from '@/views/topic/detail/index'
 
 Vue.use(Router)
 
@@ -13,8 +14,13 @@ export function createRouter () {
     routes: [
       {
         path: '/',
-        name: 'index',
-        component: Index
+        name: 'topic-list',
+        component: TopicList
+      },
+      {
+        path: '/:id',
+        name: 'topic-detail',
+        component: TopicDetail
       },
       { path: '/', redirect: '/404' }
     ]

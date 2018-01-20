@@ -6,19 +6,18 @@ Vue.mixin({
     const { asyncData } = this.$options
     if (asyncData) {
       asyncData({
-        store: this.$store,
+        vuet: this.$vuet,
         route: to
-      }).then(next).catch(next)
-    } else {
-      next()
+      })
     }
+    next()
   }
 })
 
-const { app, router, store } = createApp()
+const { app, router, vuet } = createApp()
 
 if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__)
+  vuet.replaceStore(window.__INITIAL_STATE__)
 }
 
 router.onReady(() => {
@@ -33,7 +32,7 @@ router.onReady(() => {
     if (!asyncDataHooks.length) {
       return next()
     }
-    Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+    Promise.all(asyncDataHooks.map(hook => hook({ vuet, route: to })))
       .then(() => {
         next()
       })

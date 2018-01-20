@@ -5,8 +5,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default context => {
   return new Promise((resolve, reject) => {
     const s = isDev && Date.now()
-    const { app, router, store } = createApp()
-
+    const { app, router, vuet } = createApp()
     const { url } = context
     const { fullPath } = router.resolve(url).route
 
@@ -22,11 +21,11 @@ export default context => {
         return reject({ code: 404 })
       }
       Promise.all(matchedComponents.map(({ asyncData }) => asyncData && asyncData({
-        store,
+        vuet,
         route: router.currentRoute
       }))).then(() => {
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
-        context.state = store.state
+        context.state = vuet.store
         resolve(app)
       }).catch(reject)
     }, reject)
