@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import isSeeing from 'is-seeing'
+  import { isSeeing } from '@/util/index'
 
   export default {
     props: {
@@ -19,21 +19,29 @@
         default: false
       }
     },
-    mounted () {
-      this.timer = setInterval(() => {
-        if (isSeeing(this.$el) && !this.loading && !this.done) {
-          this.$emit('seeing')
+    watch: {
+      loading: {
+        immediate: true,
+        async handler (loading) {
+          if (loading === true || process.env.VUE_ENV !== 'client') return
+          clearInterval(this.timer)
+          await this.$nextTick()
+          this.timer = setInterval(() => {
+            if (isSeeing(this.$el) && !this.loading && !this.done) {
+              this.$emit('seeing')
+              clearInterval(this.timer)
+            }
+          }, 300)
         }
-      }, 300)
+      }
     },
     beforeDestroy () {
       clearInterval(this.timer)
     }
   }
-
 </script>
 <style lang="less" scoped>
-  @import "../less/config";
+  @import "../style/var.less";
   .loading-box {
     .msg {
       line-height: 70px;

@@ -18,7 +18,7 @@ export function createRouter () {
         component: TopicList
       },
       {
-        path: '/:id',
+        path: '/topic/:id',
         name: 'topic-detail',
         component: TopicDetail
       },

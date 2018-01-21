@@ -7,9 +7,9 @@
         </li>
       </ul>
     </nav>
-    <v-content>
-        <ul class="list" :data-time="Date.now()">
-          <li v-for="item in $index.list" :key="item.id">
+    <view-content>
+        <ul class="list">
+          <li v-for="item in $list.list">
             <router-link :to="{ name: 'topic-detail', params: { id: item.id } }">
               <div class="top" flex="box:first">
                 <div class="headimg" :style="{ backgroundImage: 'url(' + item.author.avatar_url + ')' }"></div>
@@ -46,13 +46,20 @@
             </router-link>
           </li>
         </ul>
-      </v-content>
+        <loading @seeing="$list.pullGetTopics" :loading="$list.loading" />
+      </view-content>
   </div>
 </template>
 <script>
   import { formatDate } from '@/util/index'
+  import ViewContent from '@/components/view-content'
+  import Loading from '@/components/loading'
 
   export default {
+    components: {
+      ViewContent,
+      Loading
+    },
     data () {
       return {
         tabs: [
@@ -80,13 +87,13 @@
       }
     },
     computed: {
-      $index () {
+      $list () {
         return this.$vuet.getModule('topic/index')
       }
     },
     async asyncData ({ vuet, route }) {
-      const $index = vuet.getModule('topic/index')
-      await $index.getTopics(route.query)
+      const $list = vuet.getModule('topic/index')
+      await $list.getTopics(route.query)
     },
     methods: {
       formatDate

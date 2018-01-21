@@ -9,11 +9,6 @@ import { createStore } from './store'
 import { createRouter } from './router'
 import { createVuet } from './vuet/index'
 import { sync } from 'vuex-router-sync'
-import components from './components/'
-Object.keys(components).forEach((key) => {
-  var name = key.replace(/(\w)/, (v) => v.toUpperCase()) // 首字母大写
-  Vue.component(`v${name}`, components[key])
-})
 
 export function createApp () {
   const store = createStore()

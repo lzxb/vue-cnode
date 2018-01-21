@@ -1,14 +1,16 @@
 <template>
-    <div class="content">
+    <div class="view-content">
         <slot></slot>
     </div>
 </template>
 <script>
-
+  export default {
+    name: 'view-content'
+  }
 </script>
 <style lang="less" scoped>
   @import "../style/var.less";
-  .content {
+  .view-content {
     overflow: auto;
     position: absolute;
     top: 50px;
