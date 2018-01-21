@@ -54,8 +54,24 @@
   import { formatDate } from '@/util/index'
   import ViewContent from '@/components/view-content'
   import Loading from '@/components/loading'
+  import WatchComponent from '@/util/watch-component'
+
+  const watchComponent = new WatchComponent()
+
+  // 设置页面状态重置规则
+  watchComponent.add({
+    watch () {
+      return this.$route.query.tab
+    },
+    handler () {
+      this.$list.reset()
+    }
+  })
 
   export default {
+    watchComponents: [
+      watchComponent
+    ],
     components: {
       ViewContent,
       Loading

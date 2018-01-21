@@ -9,6 +9,9 @@ import { createStore } from './store'
 import { createRouter } from './router'
 import { createVuet } from './vuet/index'
 import { sync } from 'vuex-router-sync'
+import WatchComponent from '@/util/watch-component'
+
+Vue.use(WatchComponent)
 
 export function createApp () {
   const store = createStore()

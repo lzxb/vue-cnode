@@ -22,6 +22,7 @@ export default {
         return {
           list: [],
           loading: false,
+          // scroll: { x: 0, y: 0 },
           query: {
             tab: 'all',
             limit: 20,
@@ -39,7 +40,7 @@ export default {
       @loading
       async pullGetTopics (query) {
         this.query.page++
-        const res = await api.getTopics({ ...this.query, ...query })
+        const res = await api.getTopics(this.query)
         this.list = [...this.list, ...res.data]
       }
     }
